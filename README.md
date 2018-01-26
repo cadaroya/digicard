@@ -13,6 +13,12 @@ To check if successful, `npm -v`, `node -v`.
 global install: `npm install electron -g`
 
 3. Install git
+If in Linux-based systems:
+Type `sudo add-apt-repository ppa:git-core/ppa`
+Type `sudo apt-get update`
+Type `sudo apt-get install -y git`
+
+Otherwise:
 Follow steps here: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
 
 Setup:
