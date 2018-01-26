@@ -19,8 +19,9 @@ Setup:
 
 1. Create folder named "CS 192" (or any other name)
 2. Open cmd/terminal in ~/CS 192 then type `git clone https://github.com/cadaroya/digicard.git`
-3. Type `npm start` to start the desktop app.
-4. For more information, watch this tutorial: https://www.youtube.com/watch?v=kN1Czs0m1SU&t=327s
+3. Type `npm install` to install dependencies.
+4. Type `npm start` to start the desktop app.
+5. For more information, watch this tutorial: https://www.youtube.com/watch?v=kN1Czs0m1SU&t=327s
 
 Additional:
 1. If `npm start` doesn't work, try running `npm install electron --save` to install electron locally in the directory. (not sure if already included in git download)
