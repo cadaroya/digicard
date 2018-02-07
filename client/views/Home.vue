@@ -1,5 +1,7 @@
 <template>
+
   <div class="page">
+    <h1>HOME</h1>
     <counter></counter>
     <p>
       To get started, edit files in <code>./client</code> and save!!!.
@@ -8,6 +10,11 @@
     <button> 
       <router-link to="/register">
        Register 
+      </router-link>
+    </button>
+    <button>
+    <router-link to="/reports">
+        Reports
       </router-link>
     </button>
   </div>
