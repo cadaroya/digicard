@@ -8,12 +8,12 @@ import SignUp from '../views/SignUp'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'hash',
-  routes: [
-    { path: '/', component: Login },
-    { path: '/home', component: Home},
-    { path: '/register', component: Register },
-    { path: '/reports', component: Reports },
-    { path: '/signup', component: SignUp }
-  ]
+     mode: 'hash',
+     routes: [
+          { path: '/', component: Login },
+          { path: '/home', component: Home},
+          { path: '/register', component: Register },
+          { path: '/reports', component: Reports },
+          { path: '/signup', component: SignUp }
+     ]
 })
