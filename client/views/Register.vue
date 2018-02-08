@@ -19,16 +19,24 @@ export default{
      data () {
           return {
                email: 'abc',
-               password: '123'
+               password: '123',
+               error: null
           }
      },
      methods:{
           async register () {
+              try {
                const response = await AuthenticationService.register({
                     email: this.email,
                     password: this.password
                })
                console.log(response.data)
+              }
+              catch (error){
+                  this.error = error.response.data.error
+                  console.log("yep,error")
+                  console.log(this.error)
+              }
           }
      }
 }
