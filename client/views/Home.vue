@@ -1,23 +1,17 @@
 <template>
      <div class="page">
-          <h1>HOME</h1>
-          <counter></counter>
-          <p>
-               To get started, edit files in <code>./client</code> and save!!!.
-          </p>
-
-          <button> 
-               <router-link to="/register"> Register </router-link>
-          </button>
-          <button>
-               <router-link to="/reports"> Reports </router-link>
-          </button>
+          <h1> Home Page </h1>
+          <p> Search a student. </p>
+          <search-bar></search-bar>
+          <br />
+          <p> Or log out: </p>
+          <button><router-link to='/'>Log out</router-link></button>
      </div>
 </template>
 
 <script>
-import Counter from 'components/Counter'
-export default {
-     components: { Counter }
-}
+    import SearchBar from 'components/SearchBar'
+    export default {
+        components: { SearchBar }
+    }
 </script>
