@@ -1,10 +1,11 @@
 import Api from './Api'
 
 export default {
-  index (search) {
-    return Api().get('songs', {
+  index (search, sno) {
+    console.log("im still working")
+    return Api().get(`student`, {
       params: {
-        search: search
+        search: sno
       }
     })
   },
@@ -15,7 +16,7 @@ export default {
     return Api().post('student', student)
   },
   put (student) {
-    return Api().put(`student/${student.sno}`, song)
+    return Api().put(`student/${student.sno}`, student)
   }
 }
 
