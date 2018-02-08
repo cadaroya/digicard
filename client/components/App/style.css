@@ -1,6 +1,6 @@
 :global {
   body {
-    margin: 0;
+    margin: 0px;
     font-size: 2rem;
     font-family: -apple-system, BlinkMacSystemFont,
                 'avenir next', avenir,
@@ -13,7 +13,7 @@
     text-align: center;
   }
   code {
-    background-color: #f0f0f0;
+    background-color: #ffffff;
     padding: 3px 5px;
     border-radius: 2px;
   }

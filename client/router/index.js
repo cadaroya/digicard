@@ -5,6 +5,7 @@ import Home from '../views/Home'
 import Register from '../views/Register'
 import Reports from '../views/Reports'
 import SignUp from '../views/SignUp'
+import Student from '../views/Student'
 Vue.use(Router)
 
 export default new Router({
@@ -14,6 +15,7 @@ export default new Router({
           { path: '/home', component: Home},
           { path: '/register', component: Register },
           { path: '/reports', component: Reports },
-          { path: '/signup', component: SignUp }
+          { path: '/signup', component: SignUp },
+          { path: '/student/:studNo', component: Student}
      ]
 })

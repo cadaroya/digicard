@@ -1,12 +1,15 @@
-import './style.css'
+import style from './style.css'
+import NavBar from '../NavBar'
 
 export default {
+  components: { 'app-navbar': NavBar },
   render(h) {
     return (
-      <div id="app">
-        <h1> Digital Pink Card (Librarian Interface) </h1>
-        <hr />
-        <router-view></router-view>
+      <div id="app" class="app-wrapper">
+        <div class={ style.app }>
+          <app-navbar></app-navbar>
+          <router-view></router-view>
+        </div>
       </div>
     )
   }
