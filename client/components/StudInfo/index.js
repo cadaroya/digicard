@@ -1,13 +1,15 @@
 import style from './style.css'
 
 export default {
-     props: ['studNo'],
+     props: ['studObj'],
      data: function() {
           return {
-               lastName: 'placeholderLast',
-               firstName: 'mcplaceholderyFirst',
-               college: 'engg boiz',
-               isValidated: 'pffft validation'
+               studNo: this.studObj.sno,
+               lastName: this.studObj.last_name,
+               firstName: this.studObj.first_name,
+               college: this.studObj.college,
+               isValidated: this.studObj.validated,
+               remHours: this.studObj.freehours
           }
      },
      render(h) {
@@ -34,6 +36,10 @@ export default {
                               <tr>
                                    <th>VALIDATED</th>
                                    <td>{ this.isValidated }</td>
+                              </tr>
+                              <tr>
+                                   <th>FREE HOURS</th>
+                                   <td>{ this.remHours}</td>
                               </tr>
                          </table>
                     </div>

@@ -7,7 +7,8 @@ module.exports = (app) => {
   app.post('/register', AuthenticationControllerPolicy.register,
     AuthenticationController.register)
 
-  app.get('/student', StudentController.index)
+  app.get('/student/:studNo', StudentController.index)
+  //app.get('/student', StudentController.index)
 
   app.get('/reports', ReportController.index)
 

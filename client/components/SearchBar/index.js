@@ -9,8 +9,10 @@ export default {
      },
      methods: {
           async goToStudent() {
-            try {
-                //this.$router.push('/student/' + this.searchStr);
+            //try {
+                this.$router.push('/student/' + this.searchStr);
+
+                /*
                 // this.$router.push('/student');
                 const response = (await StudentService.index({
                     search: this.searchStr
@@ -32,6 +34,7 @@ export default {
                 // console.log(error)
                 console.log("An error occurred when searching the student " + this.searchStr + ". Please try again.")
             }
+            */
                
           }
      },

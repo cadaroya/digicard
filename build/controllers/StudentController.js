@@ -4,17 +4,23 @@ const {report} = require('../models')
 module.exports = {
   async index (req, res) {
     try {
+        console.log("hello bakcss")
+
         search = req.query.search
         const stud = await student.findAll({
             where: {
                 sno: search
             }
         })
+        /*
+        const log = await report.findAll({
+            where: {
+                sno: search
+            }
+        }) */
 
-        const log = await report.find({ where: {sno: search}})
-
-        const response = [stud,log]
-        //console.log(response)
+        const response = [stud]
+        console.log(response[0])
 
         res.send(response)
     } catch (err){

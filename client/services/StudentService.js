@@ -2,7 +2,7 @@ import Api from './Api'
 
 export default {
   index (search, sno) {
-    return Api().get(`student`, {
+    return Api().get(`student/${sno}`, {
       params: {
         search: sno
       }
