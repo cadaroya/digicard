@@ -5,15 +5,18 @@
                 <div
                     v-for="report in reports"
                     :key="report.rid">
-                    {{report.rid}}
-                    {{report.sno}}
-                    {{report.freehours}}
-                    {{report.timein}}
-                    {{report.timeout}}
-                    {{report.amountdue}}
-                    {{report.seatno}}
+                  <h4> Report ID:  {{report.rid}} <br> </h4>
+                  <h4> StudentNo:  {{report.sno}}  <br></h4>
+                  <h4> Freehours: {{report.freehours}}  <br></h4>
+                  <h4> Timein:  {{report.timein}}  <br></h4>
+                  <h4> Timeout: {{report.timeout}}  <br></h4>
+                 <h4> Amount Due: 
+                    <input v-model="report.amountdue" placeholder="Type the amount here" />
+                  </h4>
+                   <h4> SeatNo:  {{report.seatno}}  <br></h4>
 
                 </div>
+                
 
             <button> 
                 <router-link to="/home"> Home </router-link>
@@ -28,6 +31,7 @@ import AuthenticationService from '../services/AuthenticationService'
 export default{
     data () {
         return {
+           // hoursDisp: this.reports.amountdue,
             reports: null
         }
     },
