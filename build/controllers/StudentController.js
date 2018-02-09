@@ -3,9 +3,14 @@ const {student} = require('../models')
 module.exports = {
   async index (req, res) {
     try {
-        console.log("BOOOM!")
-        //const stud = await student.find(req.body)
-        //res.send(stud.toJSON())
+        search = req.query.search
+        const stud = await student.findAll({
+            where: {
+                sno: search
+            }
+        })
+        console.log(stud.dataValues)
+        res.send(stud)
     } catch (err){
         console.log("PIUTAA!")
         res.status(400).send({
