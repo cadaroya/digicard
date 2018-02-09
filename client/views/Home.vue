@@ -5,7 +5,7 @@
                   <router-link to="/reports"> Reports </router-link>
             </button>
           <p> Search a student. </p>
-          <search-bar></search-bar>
+          <search-bar @foundStud="goToStud($event)"></search-bar>
      </div>
 </template>
 
@@ -14,6 +14,11 @@
     export default {
         components: {
             SearchBar
+        },
+        methods: {
+            goToStud(stud) {
+                this.$router.push('/student/' + stud.sno)
+            }
         }
     }
 </script>

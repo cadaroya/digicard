@@ -18,6 +18,8 @@ export default {
 
                 // You can call stud.sno, stud.first_name, etc
                 const stud = response[0]
+                console.log('sending stud')
+                this.$emit('foundStud', stud)
                 
             } catch(error){
                 // console.log(error)
