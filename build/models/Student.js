@@ -21,6 +21,7 @@ module.exports = (sequelize, Sequelize) => {
   })
 
   Student.associate = function (models) {
+    Student.hasMany(models.report, {foreignKey: 'sno'})
   }
 
   return Student

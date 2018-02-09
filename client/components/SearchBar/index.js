@@ -15,11 +15,18 @@ export default {
                 const response = (await StudentService.index({
                     search: this.searchStr
                 }, this.searchStr)).data
+                console.log(response)
 
                 // You can call stud.sno, stud.first_name, etc
-                const stud = response[0]
+                const stud = response[0][0]
+                const log = response[1]
+
+                console.log(stud)
+                console.log(log)
+
                 console.log('sending stud')
                 this.$emit('foundStud', stud)
+
                 
             } catch(error){
                 // console.log(error)
