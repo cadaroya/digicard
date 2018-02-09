@@ -17,9 +17,10 @@ export default {
                 }, this.searchStr)).data
 
                 // You can call stud.sno, stud.first_name, etc
-                stud = response[0]
+                const stud = response[0]
+                
             } catch(error){
-                console.log(error)
+                // console.log(error)
                 console.log("An error occurred when searching the student " + this.searchStr + ". Please try again.")
             }
                

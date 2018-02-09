@@ -9,13 +9,15 @@ module.exports = {
                 sno: search
             }
         })
-        console.log(stud.dataValues)
+        //console.log(stud.dataValues)
         res.send(stud)
     } catch (err){
         console.log("PIUTAA!")
         res.status(400).send({
             error: 'No such student found.'
         })
+
+        console.log(error)
     }
   }
 }

@@ -11,6 +11,8 @@ module.exports = (app) => {
 
   app.get('/reports', ReportController.index)
 
+  //app.get('/reports', ReportController.log)
+
   app.post('/reports', ReportController.post)
 }
 //

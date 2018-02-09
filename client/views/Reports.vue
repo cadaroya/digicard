@@ -33,10 +33,11 @@ export default{
     },
     // The moment it's mounted, you do a request for all the reports
     async mounted () {
-       
-            this.reports = (await ReportService.index()).data
-        
-        
+       try{
+           this.reports = (await ReportService.index()).data
+       } catch (error) {
+           console.error(error)
+       }
     }
 }
 </script>
