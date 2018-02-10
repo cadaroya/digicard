@@ -4,16 +4,16 @@ const StudentController = require('./controllers/StudentController')
 const ReportController = require('./controllers/ReportController')
 
 module.exports = (app) => {
-  app.post('/register', AuthenticationControllerPolicy.register,
-    AuthenticationController.register)
+  	app.post('/register', AuthenticationControllerPolicy.register,
+     	AuthenticationController.register)
 
-  app.get('/student/:studNo', StudentController.index)
-  //app.get('/student', StudentController.index)
+  	app.get('/student/:studNo', StudentController.index)
+  	//app.get('/student', StudentController.index)
 
-  app.get('/reports', ReportController.index)
+  	app.get('/reports', ReportController.index)
 
-  //app.get('/reports', ReportController.log)
+  	//app.get('/reports', ReportController.log)
 
-  app.post('/reports', ReportController.post)
+  	app.post('/reports', ReportController.post)
 }
 //
