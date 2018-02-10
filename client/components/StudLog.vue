@@ -1,27 +1,27 @@
 <template>
      <div>
           <table>
-          <thead>
-               <tr>
-                    <th>Date</th>
-                    <th>Seat</th>
-                    <th>Timein</th>
-                    <th>Timeout</th>
-                    <th>Free Hours</th>
-               </tr>
-          </thead>
-          <tbody>
-               <!-- Key is supposed to be a unique identifier, 
-               I just added an arbitrary value to silence the warning. :)
-               Replace the value with the primary key once db is set up-->
-               <tr v-for="row in log" :key="row.date">
-                    <th>{{row.date}}</th>
-                    <th>{{row.seat}}</th>
-                    <th>{{row.timein}}</th>
-                    <th>{{row.timeout}}</th>
-                    <th>{{row.freehours}}</th>
-               </tr>
-          </tbody>
+               <thead>
+                    <tr>
+                         <th>Date</th>
+                         <th>Seat</th>
+                         <th>Timein</th>
+                         <th>Timeout</th>
+                         <th>Free Hours</th>
+                    </tr>
+               </thead>
+               <tbody>
+                    <!-- Key is supposed to be a unique identifier, 
+                    I just added an arbitrary value to silence the warning. :)
+                    Replace the value with the primary key once db is set up-->
+                    <tr v-for="row in log" :key="row.date">
+                         <th>{{row.date}}</th>
+                         <th>{{row.seat}}</th>
+                         <th>{{row.timein}}</th>
+                         <th>{{row.timeout}}</th>
+                         <th>{{row.freehours}}</th>
+                    </tr>
+               </tbody>
           </table>
      </div>
 </template>
@@ -40,14 +40,14 @@ export default{
           }
      },
 
-    // Stud log
-    async mounted () {
-       try{
-           //this.log = (await ReportService.log()).data
-           //console.log(this.log)
-       } catch (error) {
-           console.error(error)
-       }
-    }
+     // Stud log
+     async mounted () {
+          try{
+               //this.log = (await ReportService.log()).data
+               //console.log(this.log)
+          } catch (error) {
+               console.error(error)
+          }
+     }
 }
 </script>

@@ -9,33 +9,31 @@ export default {
      },
      methods: {
           async goToStudent() {
-            //try {
-                this.$router.push('/student/' + this.searchStr);
+               //try {
+                    this.$router.push('/student/' + this.searchStr);
 
-                /*
-                // this.$router.push('/student');
-                const response = (await StudentService.index({
-                    search: this.searchStr
-                }, this.searchStr)).data
-                console.log(response)
+                    /*
+                    // this.$router.push('/student');
+                    const response = (await StudentService.index({
+                              search: this.searchStr
+                    }, this.searchStr)).data
+                    console.log(response)
 
-                // You can call stud.sno, stud.first_name, etc
-                const stud = response[0]
-                // const log = response[1]
+                    // You can call stud.sno, stud.first_name, etc
+                    const stud = response[0]
+                    // const log = response[1]
 
-                console.log(stud)
-                // console.log(log)
+                    console.log(stud)
+                    // console.log(log)
 
-                console.log('sending stud')
-                this.$emit('foundStud', stud)
-
-                
-            } catch(error){
-                // console.log(error)
-                console.log("An error occurred when searching the student " + this.searchStr + ". Please try again.")
-            }
-            */
-               
+                    console.log('sending stud')
+                    this.$emit('foundStud', stud)
+                         
+               } catch(error){
+                    // console.log(error)
+                    console.log("An error occurred when searching the student " + this.searchStr + ". Please try again.")
+               }
+               */  
           }
      },
      render(h) {
@@ -46,7 +44,7 @@ export default {
                          <p> Looking for: {this.searchStr} </p>
                          <button on-click={this.goToStudent} > Search </button>
                     </div>
-            </div>
-        )
-    }
+               </div>
+          )
+     }
 }
