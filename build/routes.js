@@ -31,6 +31,7 @@
 *     05/02/2018:   Modified after creating controllers    	Daroya, Carlos Adrian A.
 *     08/02/2018:   Added register POST	    	 			Daroya, Carlos Adrian A.
 *     08/02/2018:   Added student and report GET/POST	  	Daroya, Carlos Adrian A.
+*     16/02/2018:   TimeInOut POST route					  	Daroya, Carlos Adrian A.
 
 *   
 *

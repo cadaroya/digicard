@@ -26,13 +26,11 @@
 
 
 *     Code history:
-*     06/02/2018: 	File Created	                    Daroya, Carlos Adrian A.
-*     08/02/2018: 	Routes structured                  	Daroya, Carlos Adrian A.
-*     08/02/2018: 	Search student fxn              	Daroya, Carlos Adrian A.
+*     16/02/2018: 	File Created	                            Daroya, Carlos Adrian A.
+*     16/02/2018: 	TimeIn,Timeout cases	                    Daroya, Carlos Adrian A.
 *
 *
-*
-*     Date created: 6 February 2018
+*     Date created: 16 February 2018
 *     Development Group: Cai, Daroya, Ocampo
 *    1
 
@@ -58,7 +56,12 @@ module.exports = {
             if(stud.session == 0){
               // Update student timein and session
               await sequelize.query("UPDATE student SET session = 1, timein = NOW(), timeout = NULL WHERE sno = ?" , { replacements: [search], type: sequelize.QueryTypes.UPDATE})
-              res.send(stud)
+              const studReport = await student.find({
+                where: {
+                     sno: search
+                }
+              })
+              res.send(studReport)
             // If session == 1, time out
             } else{
               // Update student: session, seatno, timeout, freehours
