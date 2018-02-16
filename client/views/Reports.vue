@@ -55,7 +55,8 @@
                     <h4> Timein:  {{report.timein}}  <br></h4>
                     <h4> Timeout: {{report.timeout}}  <br></h4>
                     <h4> Amount Due: 
-                         <input v-model="report.amountdue" placeholder="Type the amount here" />
+                         <!--<input v-model="report.amountdue" placeholder="Type the amount here" /> -->
+                         <change-credits :amountdue = "report.amountdue"></change-credits>
                     </h4>
                     <h4> SeatNo:  {{report.seatno}}  <br></h4>
 
@@ -71,7 +72,12 @@
 <script>
 import ReportService from '../services/ReportService'
 import AuthenticationService from '../services/AuthenticationService'
+import ChangeCredits from 'components/ChangeCredits'
+
 export default{
+     components: {
+          ChangeCredits
+     },
      data () {
           return {
                // hoursDisp: this.reports.amountdue,
