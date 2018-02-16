@@ -58,7 +58,7 @@ const AuthenticationController = require('./controllers/AuthenticationController
 const AuthenticationControllerPolicy = require('./policies/AuthenticationcontrollerPolicy')
 const StudentController = require('./controllers/StudentController')
 const ReportController = require('./controllers/ReportController')
-
+const TimeInController = require('./controllers/TimeInController')
 module.exports = (app) => {
   	app.post('/register', AuthenticationControllerPolicy.register,
      	AuthenticationController.register)
@@ -68,7 +68,9 @@ module.exports = (app) => {
 
   	app.get('/reports', ReportController.index)
 
-  	//app.get('/reports', ReportController.log)
+	//app.get('/reports', ReportController.log)
+	  
+	app.post('/timein', TimeInController.post)
 
   	app.post('/reports', ReportController.post)
 }

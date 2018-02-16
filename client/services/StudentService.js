@@ -39,7 +39,8 @@
 *    
 
 *     File purpose:
-*     Vue app.js main file for initializing Vue
+*     Service that connects the frontend functionality to the backend (express server)
+*     Administers Student related services
 */
 
 import Api from './Api'

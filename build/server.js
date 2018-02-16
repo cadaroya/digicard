@@ -104,7 +104,10 @@ const server = new Server(compiler, Object.assign({
 
 sequelize.sync({ force: false })
      .then(() => {
+          // Express Server starts in port 8000
           app.listen(process.env.port || 8000)
+
+          // Webpack server starts in port 4000 (?) Not sure if this is Vue
           server.listen(port, host)
           console.log(`Server started on port ${port}`)
      })

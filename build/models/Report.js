@@ -29,7 +29,7 @@
 *     06/02/2018: 	File Created	                    Daroya, Carlos Adrian A.
 *     06/02/2018: 	Schema created                   	Daroya, Carlos Adrian A.
 *     06/02/2018: 	Association (foreign key)        	Daroya, Carlos Adrian A.
-*
+*     16/02/2018: 	Added autoincrement to rid        	Daroya, Carlos Adrian A.
 *
 *
 *     Date created: 6 February 2018
@@ -43,7 +43,7 @@
 module.exports = (sequelize, Sequelize) => {
      const TIMESTAMP = require('sequelize-mysql-timestamp')(sequelize)
      const Report = sequelize.define('report', {
-          rid:          {type: Sequelize.INTEGER(12), primaryKey: true, allowNull: false},
+          rid:          {type: Sequelize.INTEGER(12), primaryKey: true, autoIncrement: true, allowNull: false},
           sno:          Sequelize.STRING(20),
           freehours:    Sequelize.TIME(2),
           timein:       TIMESTAMP,

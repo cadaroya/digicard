@@ -1,0 +1,104 @@
+/*     Digital Pink Card - All rights reserved
+*     Copyright (C) 2018
+*     Written by:  
+*     Cai, Jann Willem
+*     Daroya, Carlos Adrian 
+*     Ocampo, Pauline                   
+*
+*     This program is free software: you can redistribute it and/or modify
+*     it under the terms of the GNU General Public License as published by
+*     the Free Software Foundation, either version 3 of the License, or
+*     (at your option) any later version.
+*
+*     This program is distributed in the hope that it will be useful,
+*     but WITHOUT ANY WARRANTY; without even the implied warranty of
+*     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*     GNU General Public License for more details.
+*
+*     You should have received a copy of the GNU General Public License
+*     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*     This is a course requirement for CS 192
+*     Software Engineering II under the
+*     supervision of Asst. Prof. Ma. Rowena C.
+*     Solamo of the Department of Computer
+*     Science, College of Engineering, University
+*     of the Philippines, Diliman for the AY 2017-2018
+
+
+*     Code history:
+*     06/02/2018: 	File Created	                    Daroya, Carlos Adrian A.
+*     08/02/2018: 	Routes structured                  	Daroya, Carlos Adrian A.
+*     08/02/2018: 	Search student fxn              	Daroya, Carlos Adrian A.
+*
+*
+*
+*     Date created: 6 February 2018
+*     Development Group: Cai, Daroya, Ocampo
+*    1
+
+*     File purpose:
+*     Student controller
+*/
+const {sequelize} = require('../models')
+const {student} = require('../models')
+const {report} = require('../models')
+
+module.exports = {
+    async post (req, res) {
+          try {
+            const search = req.body.studNo
+            const stud = await student.find({
+              where: {
+                   sno: search
+              }
+            })
+            // const stud2 = (await sequelize.query("SELECT * FROM student WHERE sno = ?", {replacements: [search], type: sequelize.QueryTypes.SELECT }))[0]
+
+            // If session == 0, time in
+            if(stud.session == 0){
+              // Update student timein and session
+              await sequelize.query("UPDATE student SET session = 1, timein = NOW(), timeout = NULL WHERE sno = ?" , { replacements: [search], type: sequelize.QueryTypes.UPDATE})
+              res.send(stud)
+            // If session == 1, time out
+            } else{
+              // Update student: session, seatno, timeout, freehours
+              await sequelize.query("UPDATE student SET session = 0, timeout = NOW() WHERE sno = ?" , { replacements: [search], type: sequelize.QueryTypes.UPDATE})
+              // Calculate timediff in hours
+              const resp = (await sequelize.query("SELECT TIMESTAMPDIFF(SECOND,timein,timeout) AS timediff,freehours FROM student WHERE sno = ?", {replacements: [search], type: sequelize.QueryTypes.SELECT }))[0]
+              const timediff = resp.timediff
+              const freehours = resp.freehours
+
+              // Subtract timediff from freehours
+              await sequelize.query("UPDATE student SET freehours = TIMEDIFF(?,?) WHERE sno = ?" , { replacements: [freehours,timediff,search], type: sequelize.QueryTypes.UPDATE})
+              
+              // Find Student
+              const studReport = await student.find({
+                where: {
+                     sno: search
+                }
+              })
+
+              // Generate Report
+              const timed = timediff/60/60 * 20
+              const data = {
+                rid: null,
+                sno: studReport.sno,
+                freehours: studReport.freehours,
+                timein: studReport.timein,
+                timeout: studReport.timeout,
+                amountdue: timed,
+                seatNo: null
+              }
+
+              // Generate Report
+              report.create(data)
+              
+              res.send(studReport)
+            }
+
+          } catch (error){
+            res.send(error)
+            console.log(error)
+          }
+     }
+}
