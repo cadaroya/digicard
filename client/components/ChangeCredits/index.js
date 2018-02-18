@@ -5,15 +5,16 @@ import ReportService from '../../services/ReportService'
 export default {
      data: function() {
           return {
-               amountdue: this.amountdue
+               report: this.report,
+               amountdue: this.report.amountdue
           }
      },
      methods: {
           async changeamountdue() {     
-               console.log(amountdue)
+               console.log(this.amountdue)
           }
      },
-     props: ['amountdue'],
+     props: ['report'],
      render(h) {
 
           return (

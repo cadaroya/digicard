@@ -56,7 +56,7 @@
                     <h4> Timeout: {{report.timeout}}  <br></h4>
                     <h4> Amount Due: 
                          <!--<input v-model="report.amountdue" placeholder="Type the amount here" /> -->
-                         <change-credits :amountdue = "report.amountdue"></change-credits>
+                         <change-credits :report = "report"></change-credits>
                     </h4>
                     <h4> SeatNo:  {{report.seatno}}  <br></h4>
 
