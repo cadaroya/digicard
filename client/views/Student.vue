@@ -44,13 +44,9 @@
 <template>
      <div>
           <button><router-link to='/home'> (back to home) </router-link></button>
-          <h1> Some Student's Page </h1>
-          <p> His student number is {{ $route.params.studNo }} </p>
+          <h1> Student Information </h1>
           <stud-info :studObj="stud"></stud-info>
           <stud-log :studNo="$route.params.studNo"></stud-log>
-
-          <!-- Removing below line breaks everything and I don't know why (sorry) -->
-          <div><p> Panglan: {{ stud.first_name }} </p></div>
      </div>
 </template>
 
