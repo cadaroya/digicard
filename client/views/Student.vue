@@ -55,7 +55,7 @@
 </template>
 
 <script>
-     import StudInfo from 'components/StudInfo'
+     import StudInfo from 'components/StudInfo.vue'
      import StudLog from 'components/StudLog.vue'
      import StudentService from '../services/StudentService'
 

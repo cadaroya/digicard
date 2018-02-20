@@ -72,7 +72,7 @@
 <script>
 import ReportService from '../services/ReportService'
 import AuthenticationService from '../services/AuthenticationService'
-import ChangeCredits from 'components/ChangeCredits'
+import ChangeCredits from 'components/ChangeCredits.vue'
 
 export default{
      components: {
