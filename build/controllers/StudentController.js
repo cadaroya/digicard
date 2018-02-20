@@ -29,7 +29,7 @@
 *     06/02/2018: 	File Created	                    Daroya, Carlos Adrian A.
 *     08/02/2018: 	Routes structured                  	Daroya, Carlos Adrian A.
 *     08/02/2018: 	Search student fxn              	Daroya, Carlos Adrian A.
-*
+*     20/02/2018:   Added studlog response              Daroya, Carlos Adrian A.
 *
 *
 *     Date created: 6 February 2018
@@ -48,21 +48,22 @@ module.exports = {
           try {
                console.log("hello bakcss")
                search = req.query.search
-               const stud = await student.findAll({
+               const stud = await student.find({
                     where: {
                          sno: search
                     }
                })
-               /*
-               const log = await report.findAll({
+               
+               const studlog = await report.find({
                     where: {
                          sno: search
                     }
-               }) */
-               const response = [stud]
-               console.log(response[0])
+               })
+               const response = [stud,studlog]
+               console.log(response[0].sno)
+               console.log(response[1].rid)
                res.send(response)
-          } catch (err){
+          } catch (error){
                console.log("PIUTAA!")
                res.status(400).send({
                     error: 'No such student found.'

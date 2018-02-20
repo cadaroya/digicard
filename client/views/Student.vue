@@ -30,6 +30,7 @@
 *     08/02/2018: 	File was created                    Ocampo, Pauline
 *     08/02/2018: 	Added UI components                 Ocampo, Pauline
 *     08/02/2018: 	Connected to backend            	Daroya, Carlos Adrian A.
+*     21/02/2018: 	Changed response to 1D             	Daroya, Carlos Adrian A.
 *
 * 
 *
@@ -74,10 +75,9 @@
                          const response = (await StudentService.index({
                              search: this.searchStr
                          }, this.searchStr)).data
-                         console.log(response)
 
                          // You can call stud.sno, stud.first_name, etc
-                         this.stud = response[0][0]
+                         this.stud = response[0]
                          // this.log = response[1]
 
                          console.log('hello')
