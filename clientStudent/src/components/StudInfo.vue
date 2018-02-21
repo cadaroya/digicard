@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="stud-info-wrapper">
     <table>
       <tr>
         <th>STUDENT NUMBER</th>
@@ -19,7 +19,10 @@
       </tr>
       <tr>
         <th>STATUS</th>
-        <td>{{isInSession}}</td>
+        <td>
+          <p v-if="isInSession" class="active-marker">Active</p>
+          <p v-else class="inactive-marker">Inactive</p>
+        </td>
       </tr>
     </table>
   </div>
@@ -41,4 +44,23 @@ export default {
 </script>
 
 <style scoped>
+  #stud-info-wrapper {
+    margin: 10px;
+    padding: 10px;
+  }
+  table, th, td {
+    padding: 20px 10px;
+    border-collapse: collapse;
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    text-align: center;
+    color: black;
+  }
+  p.active-marker {
+    color: green;
+  }
+  p.inactive-marker {
+    color: grey;
+  }
 </style>
