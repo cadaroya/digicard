@@ -24,20 +24,17 @@
 *     Solamo of the Department of Computer
 *     Science, College of Engineering, University
 *     of the Philippines, Diliman for the AY 2017-2018
-
-
 *     Code history:
-*     08/02/2018: 	File was created                    Ocampo, Pauline
-*     08/02/2018: 	Added UI components                 Ocampo, Pauline
-*     08/02/2018: 	Connected to backend            	Daroya, Carlos Adrian A.
-*     21/02/2018: 	Changed response to 1D             	Daroya, Carlos Adrian A.
+*     08/02/2018:   File was created                    Ocampo, Pauline
+*     08/02/2018:   Added UI components                 Ocampo, Pauline
+*     08/02/2018:   Connected to backend               Daroya, Carlos Adrian A.
+*     21/02/2018:   Changed response to 1D                  Daroya, Carlos Adrian A.
 *
 * 
 *
 *     Date created: 1 February 2018
 *     Development Group: Cai, Daroya, Ocampo
 *    
-
 *     File purpose:
 *     The HTML view for /student/{sno} route
 -->
@@ -46,7 +43,7 @@
      <div>
           <button><router-link to='/home'> (back to home) </router-link></button>
           <h1> Student Information </h1>
-          <span v-if="stud"><stud-info :stud="stud"></stud-info></span>
+          <span v-if="stud"><stud-info :studObj="stud"></stud-info></span>
           <stud-log :studNo="$route.params.studNo"></stud-log>
      </div>
 </template>
@@ -55,7 +52,6 @@
      import StudInfo from 'components/StudInfo.vue'
      import StudLog from 'components/StudLog.vue'
      import StudentService from '../services/StudentService'
-
      export default {
           data() {
                return {
@@ -69,21 +65,17 @@
                async loadStudent() {
                     try {
                          this.searchStr = this.$route.params.studNo
-
                          //this.$router.push('/student/' + this.searchStr);
                          // this.$router.push('/student');
                          const response = (await StudentService.index({
                              search: this.searchStr
                          }, this.searchStr)).data
-
                          // You can call stud.sno, stud.first_name, etc
                          this.stud = response[0]
                          // this.log = response[1]
-
                          console.log('hello')
                          console.log(this.stud.first_name)
                          // console.log(this.log)
-
                          // console.log('sending stud')
                          // this.$emit('foundStud', stud)
                     } catch(error){
