@@ -61,12 +61,12 @@ module.exports = {
                     }
                })
                
-               studlog = await report.find({
+               studLog = await report.find({
                     where: {
                          sno: search
                     }
                })
-
+               
                response = [stud,studLog]
                res.send(response)
           } catch (error){
