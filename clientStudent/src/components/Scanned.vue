@@ -24,8 +24,10 @@
 *     Solamo of the Department of Computer
 *     Science, College of Engineering, University
 *     of the Philippines, Diliman for the AY 2017-2018
+*
 *     Code history:
 *     21/02/2018:   File was created                    Ocampo, Pauline
+*     22/02/2018:   Added "student not found" msg       Ocampo, Pauline
 *
 *
 *     Date created: 21 February 2018
