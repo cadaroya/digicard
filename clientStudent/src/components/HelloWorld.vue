@@ -1,4 +1,3 @@
-
 <template>
   <div>
     <h1> TimeIn </h1>
@@ -6,26 +5,31 @@
     <input type="text" name="studNo" v-model="studNo" placeholder="studNo" />
     <br>
     <button @click="timein"> TimeIn/TimeOut </button>
+    <span v-if="studReturned"><stud-info :studObj="studReturned"></stud-info></span>
 
   </div>
 
 </template>
 
 <script>
+import StudInfo from './StudInfo.vue'
 import TimeInService from '../services/TimeInService'
 export default {
   name: 'HelloWorld',
   data () {
     return {
-      studNo: '201507397'
+      studNo: '201507397',
+      studReturned: null
     }
   },
+  components: { StudInfo },
   methods: {
     async timein () {
       const response = await TimeInService.timein({
         studNo: this.studNo
       })
       console.log(response.data)
+      this.studReturned = response.data
     }
   }
 }
