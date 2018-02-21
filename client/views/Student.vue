@@ -46,7 +46,7 @@
      <div>
           <button><router-link to='/home'> (back to home) </router-link></button>
           <h1> Student Information </h1>
-          <stud-info :studObj="stud"></stud-info>
+          <span v-if="stud"><stud-info :stud="stud"></stud-info></span>
           <stud-log :studNo="$route.params.studNo"></stud-log>
      </div>
 </template>
