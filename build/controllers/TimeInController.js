@@ -28,11 +28,12 @@
 *     Code history:
 *     16/02/2018: 	File Created	                            Daroya, Carlos Adrian A.
 *     16/02/2018: 	TimeIn,Timeout cases	                    Daroya, Carlos Adrian A.
+*     21/02/2018: 	Null Checking       	                    Daroya, Carlos Adrian A.
 *
 *
 *     Date created: 16 February 2018
 *     Development Group: Cai, Daroya, Ocampo
-*    1
+*    
 
 *     File purpose:
 *     Student controller
@@ -44,61 +45,65 @@ const {report} = require('../models')
 module.exports = {
     async post (req, res) {
           try {
+            // Initialize null variables
             const search = req.body.studNo
-            const stud = await student.find({
+            var stud = null
+            var studReport = null
+
+            stud = await student.find({
               where: {
                    sno: search
               }
             })
-            // const stud2 = (await sequelize.query("SELECT * FROM student WHERE sno = ?", {replacements: [search], type: sequelize.QueryTypes.SELECT }))[0]
 
-            // If session == 0, time in
-            if(stud.session == 0){
-              // Update student timein and session
-              await sequelize.query("UPDATE student SET session = 1, timein = NOW(), timeout = NULL WHERE sno = ?" , { replacements: [search], type: sequelize.QueryTypes.UPDATE})
-              const studReport = await student.find({
-                where: {
-                     sno: search
+            if(stud != null){
+              // If session == 0, time in
+              if(stud.session == 0){
+                // Update student timein and session
+                await sequelize.query("UPDATE student SET session = 1, timein = NOW(), timeout = NULL WHERE sno = ?" , { replacements: [search], type: sequelize.QueryTypes.UPDATE})
+                studReport = await student.find({
+                  where: {
+                      sno: search
+                  }
+                })
+              // If session == 1, time out
+              } else{
+                // Update student: session, seatno, timeout, freehours
+                await sequelize.query("UPDATE student SET session = 0, timeout = NOW() WHERE sno = ?" , { replacements: [search], type: sequelize.QueryTypes.UPDATE})
+                
+                // Calculate timediff in hours
+                const resp = (await sequelize.query("SELECT TIMESTAMPDIFF(SECOND,timein,timeout) AS timediff,freehours FROM student WHERE sno = ?", {replacements: [search], type: sequelize.QueryTypes.SELECT }))[0]
+                const timediff = resp.timediff
+                const freehours = resp.freehours
+
+                // Subtract timediff from freehours
+                await sequelize.query("UPDATE student SET freehours = TIMEDIFF(?,?) WHERE sno = ?" , { replacements: [freehours,timediff,search], type: sequelize.QueryTypes.UPDATE})
+                
+                // Find Student
+                studReport = await student.find({
+                  where: {
+                      sno: search
+                  }
+                })
+
+                // Generate Report
+                const timed = timediff/60/60 * 20
+                const data = {
+                  rid: null,
+                  sno: studReport.sno,
+                  freehours: studReport.freehours,
+                  timein: studReport.timein,
+                  timeout: studReport.timeout,
+                  amountdue: timed,
+                  seatNo: null
                 }
-              })
-              res.send(studReport)
-            // If session == 1, time out
-            } else{
-              // Update student: session, seatno, timeout, freehours
-              await sequelize.query("UPDATE student SET session = 0, timeout = NOW() WHERE sno = ?" , { replacements: [search], type: sequelize.QueryTypes.UPDATE})
-              // Calculate timediff in hours
-              const resp = (await sequelize.query("SELECT TIMESTAMPDIFF(SECOND,timein,timeout) AS timediff,freehours FROM student WHERE sno = ?", {replacements: [search], type: sequelize.QueryTypes.SELECT }))[0]
-              const timediff = resp.timediff
-              const freehours = resp.freehours
 
-              // Subtract timediff from freehours
-              await sequelize.query("UPDATE student SET freehours = TIMEDIFF(?,?) WHERE sno = ?" , { replacements: [freehours,timediff,search], type: sequelize.QueryTypes.UPDATE})
-              
-              // Find Student
-              const studReport = await student.find({
-                where: {
-                     sno: search
-                }
-              })
-
-              // Generate Report
-              const timed = timediff/60/60 * 20
-              const data = {
-                rid: null,
-                sno: studReport.sno,
-                freehours: studReport.freehours,
-                timein: studReport.timein,
-                timeout: studReport.timeout,
-                amountdue: timed,
-                seatNo: null
+                // Generate Report
+                report.create(data)
               }
-
-              // Generate Report
-              report.create(data)
-              
-              res.send(studReport)
             }
 
+            res.send(studReport)
           } catch (error){
             res.send(error)
             console.log(error)
