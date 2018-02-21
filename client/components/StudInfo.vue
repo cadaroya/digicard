@@ -31,18 +31,18 @@
 
 <script>
 	export default {
-     props: ['studObj'],
-     data: function() {
-          return {
-               studNo: this.studObj.sno,
-               lastName: this.studObj.last_name,
-               firstName: this.studObj.first_name,
-               college: this.studObj.college,
-               isValidated: this.studObj.validated,
-               remHours: this.studObj.freehours
+          props: ['studObj'],
+          data: function() {
+               return {
+                    studNo: this.studObj.sno,
+                    lastName: this.studObj.last_name,
+                    firstName: this.studObj.first_name,
+                    college: this.studObj.college,
+                    isValidated: this.studObj.validated,
+                    remHours: this.studObj.freehours
+               }
           }
      }
-}
 </script>
 
 <style scoped>
