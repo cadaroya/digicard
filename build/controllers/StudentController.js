@@ -67,17 +67,7 @@ module.exports = {
                     }
                })
 
-               // Error checking
-               if(stud && studLog){
-                    response = [stud,studLog]
-               }
-               else if(stud && !studLog){
-                    response = [stud]
-               }
-               else{
-                    response = "The student you're looking wasn't found in the database."
-               }
-               
+               response[stud,studLog]
                res.send(response)
           } catch (error){
                res.status(400).send({
