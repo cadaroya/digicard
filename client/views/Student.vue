@@ -44,7 +44,9 @@
           <button><router-link to='/home'> (back to home) </router-link></button>
           <h1> Student Information </h1>
           <span v-if="stud"><stud-info :studObj="stud"></stud-info></span>
-          <stud-log :studNo="$route.params.studNo"></stud-log>
+          <span v-else><p> Student information not found </p></span>
+          <span v-if="studLog"><stud-log :studNo="$route.params.studNo"></stud-log></span>
+          <span v-else><p> No logs available </p></span>
      </div>
 </template>
 
@@ -56,6 +58,7 @@
           data() {
                return {
                     stud: null,
+                    studLog: null,
                     log: null,
                     searchStr: null
                }
@@ -72,9 +75,12 @@
                          }, this.searchStr)).data
                          // You can call stud.sno, stud.first_name, etc
                          this.stud = response[0]
+                         this.studLog = response[1]
                          // this.log = response[1]
                          console.log('hello')
                          console.log(this.stud.first_name)
+                         console.log('student log:')
+                         console.log(this.studLog)
                          // console.log(this.log)
                          // console.log('sending stud')
                          // this.$emit('foundStud', stud)

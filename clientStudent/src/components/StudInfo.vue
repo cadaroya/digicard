@@ -34,7 +34,7 @@ export default {
       lastName: this.studObj.last_name,
       firstName: this.studObj.first_name,
       college: this.studObj.college,
-      isInSession: this.studObj.session,
+      isInSession: this.studObj.session
     }
   }
 }
