@@ -30,6 +30,7 @@
 *     08/02/2018: 	Routes structured                  	Daroya, Carlos Adrian A.
 *     08/02/2018: 	Search student fxn              	Daroya, Carlos Adrian A.
 *     20/02/2018:   Added studlog response              Daroya, Carlos Adrian A.
+*     21/02/2018:   Error checking for null             Daroya, Carlos Adrian A.
 *
 *
 *     Date created: 6 February 2018
@@ -46,27 +47,41 @@ const {report} = require('../models')
 module.exports = {
      async index (req, res) {
           try {
-               console.log("hello bakcss")
                search = req.query.search
-               const stud = await student.find({
+
+               // Initialize as null variables
+               var studLog = null
+               var stud = null
+               var response = null
+
+               // Query student and report
+               stud = await student.find({
                     where: {
                          sno: search
                     }
                })
                
-               const studlog = await report.find({
+               studlog = await report.find({
                     where: {
                          sno: search
                     }
                })
-               const response = [stud,studlog]
-               console.log(response[0].sno)
-               console.log(response[1].rid)
+
+               // Error checking
+               if(stud && studLog){
+                    response = [stud,studLog]
+               }
+               else if(stud && !studLog){
+                    response = [stud]
+               }
+               else{
+                    response = "The student you're looking wasn't found in the database."
+               }
+               
                res.send(response)
           } catch (error){
-               console.log("PIUTAA!")
                res.status(400).send({
-                    error: 'No such student found.'
+                    error: 'An error occurred while searching. Please try again.'
                })
                console.error(error)
           }
