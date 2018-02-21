@@ -67,7 +67,7 @@ module.exports = {
                     }
                })
 
-               response[stud,studLog]
+               response = [stud,studLog]
                res.send(response)
           } catch (error){
                res.status(400).send({
