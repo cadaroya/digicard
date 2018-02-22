@@ -6,17 +6,17 @@ import Scanned from '@/components/Scanned'
 Vue.use(Router)
 
 export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'Instruct',
-      component: Instruct
-    },
-    {
-      path: '/scanned/:studNo',
-      name: 'Scanned',
-      component: Scanned,
-      props: true
-    }
-  ]
+     routes: [
+          {
+               path: '/',
+               name: 'Instruct',
+               component: Instruct
+          },
+          {
+               path: '/scanned/:studNo',
+               name: 'Scanned',
+               component: Scanned,
+               props: true
+          }
+     ]
 })
