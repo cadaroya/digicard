@@ -38,35 +38,35 @@
 -->
 
 <template>
-  <div>
-    <h1> Time In </h1>
-    <p> Scan your ID with the provided barcode scanner! </p>
-    <br>
-    <input type="text" @keyup.enter="goToScanned" name="studNo" ref="scanInput" v-model="studNo" placeholder="(Enter student number)" />
-    <br>
-  </div>
+     <div>
+          <h1> Time In </h1>
+          <p> Scan your ID with the provided barcode scanner! </p>
+          <br>
+          <input type="text" @keyup.enter="goToScanned" name="studNo" ref="scanInput" v-model="studNo" placeholder="(Enter student number)" />
+          <br>
+     </div>
 
 </template>
 
 <script>
 export default {
-  name: 'Instruct',
-  data () {
-    return {
-      studNo: '',
-      studReturned: null
-    }
-  },
-  methods: {
-    goToScanned () {
-      /* Remove the dash, if any, in the scanned studNo before pushing */
-      this.studNo = this.studNo.replace('-', '')
-      this.$router.push('/scanned/' + this.studNo)
-    }
-  },
-  mounted () {
-    this.$refs.scanInput.focus();
-  }
+     name: 'Instruct',
+     data () {
+          return {
+               studNo: '',
+               studReturned: null
+          }
+     },
+     methods: {
+          goToScanned () {
+               /* Remove the dash, if any, in the scanned studNo before pushing */
+               this.studNo = this.studNo.replace('-', '')
+               this.$router.push('/scanned/' + this.studNo)
+          }
+     },
+     mounted () {
+          this.$refs.scanInput.focus();
+     }
 }
 </script>
 

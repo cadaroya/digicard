@@ -37,42 +37,42 @@
 *     The view displayed once a student has scanned their ID (either time in or out)
 -->
 <template>
-  <div>
-    <h1> Successfully Scanned ID </h1>
-    <span v-if="studReturned"><stud-info :studObj="studReturned"></stud-info></span>
-    <span v-else><p>Student not found.</p></span>
-    <li><router-link to='/'>(back to instruct screen)</router-link></li>
-  </div>
+     <div>
+          <h1> Successfully Scanned ID </h1>
+          <span v-if="studReturned"><stud-info :studObj="studReturned"></stud-info></span>
+          <span v-else><p>Student not found.</p></span>
+          <li><router-link to='/'>(back to instruct screen)</router-link></li>
+     </div>
 </template>
 
 <script>
 import StudInfo from './StudInfo.vue'
 import TimeInService from '../services/TimeInService'
 export default {
-  name: 'Scanned',
-  props: ['studNo'],
-  data () {
-    return {
-      studReturned: null
-    }
-  },
-  components: { StudInfo },
-  methods: {
-    async timein () {
-      const response = await TimeInService.timein({
-        studNo: this.studNo
-      })
-      console.log(response.data)
-      this.studReturned = response.data
-    }
-  },
-  async mounted () {
-    try {
-      this.timein()
-    } catch (error) {
-      console.error(error)
-    }
-  }
+     name: 'Scanned',
+     props: ['studNo'],
+     data () {
+          return {
+               studReturned: null
+          }
+     },
+     components: { StudInfo },
+     methods: {
+          async timein () {
+               const response = await TimeInService.timein({
+                    studNo: this.studNo
+               })
+               console.log(response.data)
+               this.studReturned = response.data
+          }
+     },
+     async mounted () {
+          try {
+               this.timein()
+          } catch (error) {
+               console.error(error)
+          }
+     }
 }
 </script>
 
