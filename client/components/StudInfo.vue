@@ -26,9 +26,9 @@
 
 
 *     Code history:
-*     08/02/2018:   File Created                       Ocampo, Pauline
-*     08/02/2018:   Passing of student info to views    Ocampo, Pauline
-      20/02/2018:   Changed to .vue file              Cai, Jann Willem B.
+*     08/02/2018:   File Created                            Ocampo, Pauline
+*     08/02/2018:   Passing of student info to views        Ocampo, Pauline
+      20/02/2018:   Changed to .vue file                    Cai, Jann Willem B.
 *
 *
 *
