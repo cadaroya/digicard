@@ -30,6 +30,7 @@
 *     08/02/2018: 	File was created                    Ocampo, Pauline
 *     08/02/2018: 	Initial layout                      Daroya, Carlos Adrian A.
 *     08/02/2018: 	Load reports from DB            	Daroya, Carlos Adrian A.
+*     22/02/2018:   Added <hr> line 63                	Daroya, Carlos Adrian A.
 *
 * 
 *
@@ -59,6 +60,7 @@
                          <change-credits :report = "report"></change-credits>
                     </h4>
                     <h4> SeatNo:  {{report.seatno}}  <br></h4>
+                    <hr>
 
                </div>
                 
