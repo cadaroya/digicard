@@ -39,7 +39,7 @@
 
 <template>
      <div>
-          <h1> Time In </h1>
+          <h1> Digital Pink Card System </h1>
           <p> Scan your ID with the provided barcode scanner! </p>
           <br>
           <input type="text" @keyup.enter="goToScanned" name="studNo" ref="scanInput" v-model="studNo" placeholder="(Enter student number)" />
@@ -49,6 +49,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 export default {
      name: 'Instruct',
      data () {
@@ -65,7 +66,7 @@ export default {
           }
      },
      mounted () {
-          this.$refs.scanInput.focus();
+          this.$refs.scanInput.focus()
      }
 }
 </script>

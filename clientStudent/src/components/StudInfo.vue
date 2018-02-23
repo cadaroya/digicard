@@ -67,6 +67,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 export default {
      props: ['studObj'],
      data () {

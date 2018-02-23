@@ -46,6 +46,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 import StudInfo from './StudInfo.vue'
 import TimeInService from '../services/TimeInService'
 export default {
