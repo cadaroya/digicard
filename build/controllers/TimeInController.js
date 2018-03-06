@@ -29,6 +29,7 @@
 *     16/02/2018: 	File Created	                            Daroya, Carlos Adrian A.
 *     16/02/2018: 	TimeIn,Timeout cases	                    Daroya, Carlos Adrian A.
 *     21/02/2018: 	Null Checking       	                    Daroya, Carlos Adrian A.
+*     06/03/2018: 	Reflect change from student model         Daroya, Carlos Adrian A.
 *
 *
 *     Date created: 16 February 2018
@@ -59,47 +60,63 @@ module.exports = {
             if(stud != null){
               // If session == 0, time in
               if(stud.session == 0){
-                // Update student timein and session
-                await sequelize.query("UPDATE student SET session = 1, timein = NOW(), timeout = NULL WHERE sno = ?" , { replacements: [search], type: sequelize.QueryTypes.UPDATE})
-                studReport = await student.find({
-                  where: {
-                      sno: search
-                  }
-                })
-              // If session == 1, time out
-              } else{
-                // Update student: session, seatno, timeout, freehours
-                await sequelize.query("UPDATE student SET session = 0, timeout = NOW() WHERE sno = ?" , { replacements: [search], type: sequelize.QueryTypes.UPDATE})
-                
-                // Calculate timediff in hours
-                const resp = (await sequelize.query("SELECT TIMESTAMPDIFF(SECOND,timein,timeout) AS timediff,freehours FROM student WHERE sno = ?", {replacements: [search], type: sequelize.QueryTypes.SELECT }))[0]
-                const timediff = resp.timediff
-                const freehours = resp.freehours
+                // Select timestamp
+                const timeIN = (await sequelize.query("SELECT NOW() AS time" , {type: sequelize.QueryTypes.SELECT}))[0].time
 
-                // Subtract timediff from freehours
-                await sequelize.query("UPDATE student SET freehours = TIMEDIFF(?,?) WHERE sno = ?" , { replacements: [freehours,timediff,search], type: sequelize.QueryTypes.UPDATE})
-                
-                // Find Student
-                studReport = await student.find({
-                  where: {
-                      sno: search
-                  }
-                })
-
-                // Generate Report
-                const timed = timediff/60/60 * 20
+                // Create Report (timein only)
                 const data = {
                   rid: null,
-                  sno: studReport.sno,
-                  freehours: studReport.freehours,
-                  timein: studReport.timein,
-                  timeout: studReport.timeout,
-                  amountdue: timed,
+                  sno: stud.sno,
+                  freehours: stud.freehours,
+                  timein: timeIN,
+                  timeout: null,
+                  amountdue: null,
                   seatNo: null
                 }
 
-                // Generate Report
                 report.create(data)
+
+                // Update student session to 1
+                await sequelize.query("UPDATE student SET session = 1 WHERE sno = ?" , { replacements: [search], type: sequelize.QueryTypes.UPDATE})
+
+                studReport = (await sequelize.query("SELECT * FROM student A JOIN report B ON A.sno = ? WHERE rid = (SELECT max(rid) FROM report WHERE sno = ?)" , { replacements: [search,search], type: sequelize.QueryTypes.SELECT}))
+                studReport = studReport[0]
+              // If session == 1, time out
+              } else{
+                
+                // Update student session, seatno, freehours
+                await sequelize.query("UPDATE student SET session = 0 WHERE sno = ?" , { replacements: [search], type: sequelize.QueryTypes.UPDATE})
+
+                // Retrieve Latest (Report!) of student
+                studReport = await sequelize.query("SELECT * FROM report WHERE rid = (SELECT max(rid) FROM report WHERE sno = ?)" , { replacements: [search], type: sequelize.QueryTypes.SELECT})
+                studReport = studReport[0]
+
+                // Student
+                studLog = await student.find({
+                  where: {
+                       sno: search
+                  }
+                })
+
+                console.log(studLog.last_name)
+               
+                // Update Report: timeout
+                await sequelize.query("UPDATE report SET timeout = NOW() WHERE rid = ?" , { replacements: [studReport.rid], type: sequelize.QueryTypes.UPDATE})
+
+                // Calculate timediff in hours
+                const resp = (await sequelize.query("SELECT TIMESTAMPDIFF(SECOND,timein,timeout) AS timediff FROM report WHERE rid = ?", {replacements: [studReport.rid], type: sequelize.QueryTypes.SELECT }))[0]
+                const timediff = resp.timediff
+                const freehours = studLog.freehours
+                const amountdue = timediff/60/60*20
+                // Update timediff, amountdue, (seatno) for REPORT
+                await sequelize.query("UPDATE report SET amountdue = ? WHERE rid = ?" , { replacements: [amountdue,studReport.rid], type: sequelize.QueryTypes.UPDATE})
+
+                // Update timediff, (seatno) for STUDENT 
+                await sequelize.query("UPDATE student SET freehours = TIMEDIFF(?,?) WHERE sno = ?" , { replacements: [freehours,timediff,search], type: sequelize.QueryTypes.UPDATE})
+                              
+                // Find Student
+                studReport = await sequelize.query("SELECT * FROM student A JOIN report B ON A.sno = ? WHERE rid = ?" , { replacements: [search,studReport.rid], type: sequelize.QueryTypes.SELECT})
+                studReport = studReport[0]
               }
             }
 

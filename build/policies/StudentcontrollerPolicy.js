@@ -84,9 +84,10 @@ module.exports = {
                               error: 'Invalid Registration Information'
                          })
                }
-               else {
-                    next()
-               }
+               
           }
+          else {
+            next()
+        }
      }
 }

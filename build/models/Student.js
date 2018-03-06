@@ -29,6 +29,7 @@
 *     06/02/2018: 	File Created	                    Daroya, Carlos Adrian A.
 *     06/02/2018: 	Schema created                   	Daroya, Carlos Adrian A.
 *     06/02/2018: 	Association (foreign key)        	Daroya, Carlos Adrian A.
+*     06/03/2018: 	Removed timein/timeout,seatno      	Daroya, Carlos Adrian A.
 *
 *
 *
@@ -41,7 +42,6 @@
 */
 
 module.exports = (sequelize, Sequelize) => {
-     const TIMESTAMP = require('sequelize-mysql-timestamp')(sequelize)
      const Student = sequelize.define('student', {
           sno:          {type: Sequelize.STRING(20), primaryKey: true, allowNull: false},
           last_name:    Sequelize.STRING(50),
@@ -49,12 +49,9 @@ module.exports = (sequelize, Sequelize) => {
           middle_name:  Sequelize.STRING(50),
           course:       Sequelize.STRING(50),
           college:      Sequelize.STRING(50),
-          timein:       TIMESTAMP,
-          timeout:      TIMESTAMP,
           validated:    Sequelize.BOOLEAN,
           session:      Sequelize.BOOLEAN,
           freehours:    Sequelize.TIME(2),
-          seatno:       Sequelize.INTEGER(10),
           credits:      Sequelize.FLOAT(7,2)
      },
      {
