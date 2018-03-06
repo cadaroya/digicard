@@ -1,9 +1,9 @@
 <!--  Digital Pink Card - All rights reserved
 *     Copyright (C) 2018
-*     Written by:  
+*     Written by:
 *     Cai, Jann Willem
-*     Daroya, Carlos Adrian 
-*     Ocampo, Pauline                   
+*     Daroya, Carlos Adrian
+*     Ocampo, Pauline
 *
 *     This program is free software: you can redistribute it and/or modify
 *     it under the terms of the GNU General Public License as published by
@@ -23,26 +23,27 @@
 *     Solamo of the Department of Computer
 *     Science, College of Engineering, University
 *     of the Philippines, Diliman for the AY 2017-2018
-
-
+*
+*
 *     Code history:
 *     08/02/2018:   File Created                            Ocampo, Pauline
 *     08/02/2018:   Passing of student info to views        Ocampo, Pauline
-      20/02/2018:   Changed to .vue file                    Cai, Jann Willem B.
+*     20/02/2018:   Changed to .vue file                    Cai, Jann Willem B.
+*     07/03/2018:   Added basic styling                     Ocampo, Pauline L.
 *
 *
 *
 *
 *     Date created: 1 February 2018
 *     Development Group: Cai, Daroya, Ocampo
-*    
-
+*
+*
 *     File purpose:
 *     For passing variables from one .vue file to another
 *-->
 
 <template>
-     <div class='studinfo-wrapper'>
+     <div id='studinfo-wrapper'>
           <table>
                <tr>
                     <th>STUDENT NUMBER</th>
@@ -62,7 +63,10 @@
                </tr>
                <tr>
                     <th>VALIDATED</th>
-                    <td>{{isValidated}}</td>
+                    <td>
+                         <p v-if="isValidated">Yes</p>
+                         <p v-else>No</p>
+                    </td>
                </tr>
                <tr>
                     <th>FREE HOURS</th>
@@ -73,7 +77,7 @@
 </template>
 
 <script>
-	export default {
+     export default {
           props: ['studObj'],
           data: function() {
                return {
@@ -89,4 +93,26 @@
 </script>
 
 <style scoped>
+     #studinfo-wrapper table {
+          background-color: #f3f8fe;
+          color: #4179f7;
+          margin-bottom: 0px;
+          margin-left: auto;
+          margin-right: auto;
+          margin-top: 0px;
+          padding: 5px;
+     }
+     #studinfo-wrapper p {
+          margin: 0px;
+     }
+     #studinfo-wrapper th {
+          font-weight: normal;
+          text-align: left;
+          width: 70%;
+     }
+     #studinfo-wrapper td {
+          text-align: right;
+          padding: 5px;
+          width: 30%;
+     }
 </style>

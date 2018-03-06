@@ -1,10 +1,10 @@
 <!--
 *     Digital Pink Card - All rights reserved
 *     Copyright (C) 2018
-*     Written by:  
+*     Written by:
 *     Cai, Jann Willem
-*     Daroya, Carlos Adrian 
-*     Ocampo, Pauline                   
+*     Daroya, Carlos Adrian
+*     Ocampo, Pauline
 *
 *     This program is free software: you can redistribute it and/or modify
 *     it under the terms of the GNU General Public License as published by
@@ -27,24 +27,24 @@
 *     Code history:
 *     08/02/2018:   File was created                    Ocampo, Pauline
 *     08/02/2018:   Added UI components                 Ocampo, Pauline
-*     08/02/2018:   Connected to backend               Daroya, Carlos Adrian A.
-*     21/02/2018:   Changed response to 1D                  Daroya, Carlos Adrian A.
+*     08/02/2018:   Connected to backend                Daroya, Carlos Adrian A.
+*     21/02/2018:   Changed response to 1D              Daroya, Carlos Adrian A.
+*     07/03/2018:   Added basic styling                 Ocampo, Pauline L.
 *
-* 
 *
 *     Date created: 1 February 2018
 *     Development Group: Cai, Daroya, Ocampo
-*    
+*
 *     File purpose:
 *     The HTML view for /student/{sno} route
 -->
 
 <template>
      <div>
-          <button><router-link to='/home'> (back to home) </router-link></button>
-          <h1> Student Information </h1>
           <span v-if="stud"><stud-info :studObj="stud"></stud-info></span>
           <span v-else><p> Student information not found </p></span>
+          <br>
+          <hr>
           <span v-if="studLog"><stud-log :studNo="$route.params.studNo"></stud-log></span>
           <span v-else><p> No logs available </p></span>
      </div>

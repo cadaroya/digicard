@@ -1,9 +1,9 @@
 <!--  Digital Pink Card - All rights reserved
 *     Copyright (C) 2018
-*     Written by:  
+*     Written by:
 *     Cai, Jann Willem
-*     Daroya, Carlos Adrian 
-*     Ocampo, Pauline                   
+*     Daroya, Carlos Adrian
+*     Ocampo, Pauline
 *
 *     This program is free software: you can redistribute it and/or modify
 *     it under the terms of the GNU General Public License as published by
@@ -23,30 +23,27 @@
 *     Solamo of the Department of Computer
 *     Science, College of Engineering, University
 *     of the Philippines, Diliman for the AY 2017-2018
-
-
+*
+*
 *     Code history:
 *     08/02/2018:   File Created                       Ocampo, Pauline
-      20/02/2018:   Changed to .vue file               Cai, Jann Willem B.
-*
+*     20/02/2018:   Changed to .vue file               Cai, Jann Willem B.
+*     07/03/2018:   Added basic styling                Ocampo, Pauline L.
 *
 *
 *
 *     Date created: 1 February 2018
 *     Development Group: Cai, Daroya, Ocampo
-*    
-
+*
+*
 *     File purpose:
 *     Holds the search bar render function
 *-->
 
 <template>
-     <div class='searchbar-wrapper'>
-     	<div class='searchbar'>
-	          <input v-model="searchStr" placeholder="Type the student number here" />
-	          <p> Looking for: {{searchStr}} </p>
-	          <button v-on:click="goToStudent" > Search </button>
-     	</div>
+     <div id='searchbar-wrapper'>
+          <input v-model="searchStr" placeholder="Enter Student Number" />
+          <button v-on:click="goToStudent" > Search </button>
      </div>
 </template>
 
@@ -93,8 +90,39 @@ export default {
 </script>
 
 <style scoped>
-.searchbar {
-     text-align: center;
-     background-color: blue;
-}
+     #searchbar-wrapper {
+          margin-bottom: 0px;
+          margin-left: auto;
+          margin-right: auto;
+          margin-top: 0px;
+          padding: 50px 0px;
+          text-align: center;
+     }
+     #searchbar-wrapper button {
+          background-color: #4179f7;
+          border: none;
+          border-radius: 50%;
+          color: #e9f1f7;
+          font-size: 17px;
+          height: 80px;
+          padding: 5px;
+          position: relative;
+          right: 30px;
+          width: 80px;
+     }
+     #searchbar-wrapper button:hover {
+          background-color: #2660e8
+     }
+     #searchbar-wrapper input {
+          border: #f9f9f9;
+          box-shadow: 0px 0px 30px 6px #eaeaea;
+          font-size: 17px;
+          height: 40px;
+          outline: none;
+          padding-left: 3%;
+          width: 55%;
+     }
+     #searchbar-wrapper ::placeholder{
+          color: #78aeee;
+     }
 </style>

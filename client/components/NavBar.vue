@@ -1,9 +1,9 @@
 <!--  Digital Pink Card - All rights reserved
 *     Copyright (C) 2018
-*     Written by:  
+*     Written by:
 *     Cai, Jann Willem
-*     Daroya, Carlos Adrian 
-*     Ocampo, Pauline                   
+*     Daroya, Carlos Adrian
+*     Ocampo, Pauline
 *
 *     This program is free software: you can redistribute it and/or modify
 *     it under the terms of the GNU General Public License as published by
@@ -23,29 +23,30 @@
 *     Solamo of the Department of Computer
 *     Science, College of Engineering, University
 *     of the Philippines, Diliman for the AY 2017-2018
-
-
+*
+*
 *     Code history:
 *     08/02/2018:   File Created                        Ocampo, Pauline
-*     20/02/2018:   Changed to .vue file                Cai, Jann Willem B.   
-*
+*     20/02/2018:   Changed to .vue file                Cai, Jann Willem B.
+*     07/03/2018:   Added basic styling                 Ocampo, Pauline L.
 *
 *
 *
 *     Date created: 1 February 2018
 *     Development Group: Cai, Daroya, Ocampo
-*    
-
+*
+*
 *     File purpose:
 *     HTML view component for navbar
 *-->
 
 <template>
-     <div class="navbar-wrapper">
-          <h1>Digital Pink Card (Librarian Interface)</h1>
-          <button><router-link to='/home'>Home</router-link></button>
-          <button><router-link to='/'>"Log out"</router-link></button>
-          <hr/>
+     <div id="navbar-wrapper">
+          <ul class="navbar-list">
+               <li><router-link to='/home'>Home</router-link></li>
+               <li><router-link to="/reports"> Reports </router-link></li>
+               <li><router-link to='/'>"Log Out"</router-link></li>
+          </ul>
      </div>
 </template>
 
@@ -53,4 +54,30 @@
 </script>
 
 <style scoped>
+     #navbar-wrapper {
+          background-color: #4179f7;
+          box-shadow: 5px 18px 18px 1px #eaeaea;
+          height: 71px;
+          margin: 40px 0px;
+          padding: 0px;
+     }
+     #navbar-wrapper .navbar-list {
+          list-style-type: none;
+          margin: 0px;
+          padding: 0px;
+     }
+     #navbar-wrapper .navbar-list a {
+          color: #e9f1f7;
+          background-color: #4179f7;
+          float: left;
+          font-family: Arial, Helvetica, sans-serif;
+          font-weight: lighter;
+          font-size: 20px;
+          /* Padding value following was essentially trial and error w/ height... */
+          padding: 24px 17px;
+          text-decoration: none;
+     }
+     #navbar-wrapper .navbar-list a:hover {
+          background-color: #2660e8
+     }
 </style>

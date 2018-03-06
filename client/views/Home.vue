@@ -1,10 +1,10 @@
 <!--
 *     Digital Pink Card - All rights reserved
 *     Copyright (C) 2018
-*     Written by:  
+*     Written by:
 *     Cai, Jann Willem
-*     Daroya, Carlos Adrian 
-*     Ocampo, Pauline                   
+*     Daroya, Carlos Adrian
+*     Ocampo, Pauline
 *
 *     This program is free software: you can redistribute it and/or modify
 *     it under the terms of the GNU General Public License as published by
@@ -24,30 +24,26 @@
 *     Solamo of the Department of Computer
 *     Science, College of Engineering, University
 *     of the Philippines, Diliman for the AY 2017-2018
-
-
+*
+*
 *     Code history:
 *     08/02/2018: 	File was created                    Ocampo, Pauline
 *     08/02/2018: 	Routes                              Ocampo, Pauline
 *     08/02/2018: 	Added SearchBar comp                Ocampo, Pauline
+*     07/03/2018:   Added basic styling                 Ocampo, Pauline L.
 *
-* 
+*
 *
 *     Date created: 1 February 2018
 *     Development Group: Cai, Daroya, Ocampo
-*    
-
+*
+*
 *     File purpose:
 *     HTML view for home page
 -->
 
 <template>
      <div class="page">
-          <h1> Home Page </h1>
-               <button> 
-                    <router-link to="/reports"> Reports </router-link>
-               </button>
-          <p> Search a student. </p>
           <!-- <search-bar @foundStud="goToStud($event)"></search-bar> -->
           <search-bar></search-bar>
      </div>
@@ -69,3 +65,5 @@
      }
 </script>
 
+<style scoped>
+</style>
