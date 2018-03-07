@@ -1,10 +1,9 @@
-/*
-*     Digital Pink Card - All rights reserved
+/*     Digital Pink Card - All rights reserved
 *     Copyright (C) 2018
-*     Written by:
+*     Written by:  
 *     Cai, Jann Willem
-*     Daroya, Carlos Adrian
-*     Ocampo, Pauline
+*     Daroya, Carlos Adrian 
+*     Ocampo, Pauline                   
 *
 *     This program is free software: you can redistribute it and/or modify
 *     it under the terms of the GNU General Public License as published by
@@ -24,24 +23,34 @@
 *     Solamo of the Department of Computer
 *     Science, College of Engineering, University
 *     of the Philippines, Diliman for the AY 2017-2018
-*
+
+
 *     Code history:
-*     21/02/2018:   File was created                    Daroya, Carlos
-*     
+*     07/03/2018: 	File Created	                    Daroya, Carlos Adrian A.
+*     07/03/2018: 	Schema created                   	Daroya, Carlos Adrian A.
 *
 *
-*     Date created: 23 February 2018
+*
+*     Date created: 7 March 2018
 *     Development Group: Cai, Daroya, Ocampo
-*
+*    
+
 *     File purpose:
-*     Time in Service
+*     Database model for Seat entity
 */
 
-/* eslint-disable */
-import Api from '@/services/Api'
+module.exports = (sequelize, Sequelize) => {
+    const Seat = sequelize.define('seat', {
+         seatno:        {type: Sequelize.INTEGER(3), unique: true, primaryKey: true, allowNull: false},
+         os:     Sequelize.STRING(20)
+    },
+    {
+         timestamps: false,
+         freezeTableName: true
+    })
 
-export default {
-     timein (studNo,seatNo) {
-          return Api().post('timein', studNo, seatNo)
-     }
+    Seat.associate = function (models) {
+    }
+
+    return Seat
 }

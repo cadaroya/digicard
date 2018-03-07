@@ -42,14 +42,19 @@
 const {sequelize} = require('../models')
 const {student} = require('../models')
 const {report} = require('../models')
+const {seat} = require('../models')
 
 module.exports = {
     async post (req, res) {
           try {
             // Initialize null variables
+            const windows = "windows"
+            const mac = "mac"
             const search = req.body.studNo
+            var seat = req.body.seatNo
             var stud = null
             var studReport = null
+
 
             stud = await student.find({
               where: {
@@ -62,8 +67,63 @@ module.exports = {
               if(stud.session == 0){
                 // Select timestamp
                 const timeIN = (await sequelize.query("SELECT NOW() AS time" , {type: sequelize.QueryTypes.SELECT}))[0].time
+                
+                /*
+                if(seat != null){
+                  // Create Report (timein only)
+                  const data = {
+                    rid: null,
+                    sno: stud.sno,
+                    freehours: stud.freehours,
+                    timein: timeIN,
+                    timeout: null,
+                    amountdue: null,
+                    seatNo: seat
+                  }
+                }
+                else{
+                  // Create Report (timein only)
+                  // Randomize if seat == null
+                  if(stud.preference.localeCompare(windows) == 0){
+                    // Retrieve seats with windows os && AVAILABLE
+                    const seat_windows = await sequelize.query("SELECT * FROM seat LEFT JOIN USING seatno report WHERE os = ? AND timeout IS NOT NULL" , {replacements: [windows],type: sequelize.QueryTypes.SELECT})
 
-                // Create Report (timein only)
+                    // Randomize from AVAILABLE windows computers
+                    const max = seat_windows.length - 1
+                    const min = 0
+
+                    seat = Math.floor(Math.random() * (max - min + 1)) + min
+                      
+                    // Get the i*th element (seat) from seat_windows
+                    seat = seat_windows[seat].seatno
+                  }
+                  else{
+                    // Retrieve seats with mac os && AVAILABLE
+                    const seat_mac = await sequelize.query("SELECT * FROM seat LEFT JOIN USING seatno report WHERE os = ? AND timeout IS NOT NULL" , {replacements: [mac],type: sequelize.QueryTypes.SELECT})
+
+                    // Randomize from AVAILABLE mac computers
+                    const max = seat_mac.length - 1
+                    const min = 0
+
+                    seat = Math.floor(Math.random() * (max - min + 1)) + min
+                      
+                    // Get the i*th element (seat) from seat_mac
+                    seat = seat_mac[seat].seatno
+                    
+                  }
+
+                  // Create report with random seatno
+                  const data = {
+                    rid: null,
+                    sno: stud.sno,
+                    freehours: stud.freehours,
+                    timein: timeIN,
+                    timeout: null,
+                    amountdue: null,
+                    seatNo: seat
+                  }                  
+                }
+                */
                 const data = {
                   rid: null,
                   sno: stud.sno,
@@ -72,7 +132,7 @@ module.exports = {
                   timeout: null,
                   amountdue: null,
                   seatNo: null
-                }
+                }    
 
                 report.create(data)
 
