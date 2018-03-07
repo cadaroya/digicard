@@ -63,23 +63,27 @@
                     </td>
                </tr>
           </table>
+          
      </div>
 </template>
 
 <script>
-/* eslint-disable */
-export default {
-     props: ['studObj'],
-     data () {
-          return {
-               studNo: this.studObj.sno,
-               lastName: this.studObj.last_name,
-               firstName: this.studObj.first_name,
-               college: this.studObj.college,
-               isInSession: this.studObj.session
+     
+     /* eslint-disable */
+     export default {
+          
+          props: ['studObj'],
+          data () {
+               return {
+                    studNo: this.studObj.sno,
+                    lastName: this.studObj.last_name,
+                    firstName: this.studObj.first_name,
+                    college: this.studObj.college,
+                    isInSession: this.studObj.session,
+                    
+               }
           }
      }
-}
 </script>
 
 <style scoped>
@@ -102,4 +106,7 @@ export default {
      p.inactive-marker {
           color: grey;
      }
+
+     
+
 </style>

@@ -1,3 +1,4 @@
+/* eslint-disable */
 /*
 *     Digital Pink Card - All rights reserved
 *     Copyright (C) 2018
@@ -37,7 +38,7 @@
 *     listen on port 8000 (backend)
 */
 
-/* eslint-disable */
+
 import axios from 'axios'
 
 export default () => {

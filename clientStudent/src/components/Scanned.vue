@@ -39,7 +39,9 @@
 <template>
      <div>
           <h1> Successfully Scanned ID </h1>
-          <span v-if="studReturned"><stud-info :studObj="studReturned"></stud-info></span>
+          <span v-if="studReturned">
+               <stud-info :studObj="studReturned"></stud-info>
+          </span>
           <span v-else><p>Student not found.</p></span>
           <li><router-link to='/'>(back to instruct screen)</router-link></li>
      </div>
@@ -49,6 +51,8 @@
 /* eslint-disable */
 import StudInfo from './StudInfo.vue'
 import TimeInService from '../services/TimeInService'
+/* import Seats from './Seats.vue' */
+
 export default {
      name: 'Scanned',
      props: ['studNo'],
@@ -57,7 +61,7 @@ export default {
                studReturned: null
           }
      },
-     components: { StudInfo },
+     components: { StudInfo /*, Seats*/ },
      methods: {
           async timein () {
                const response = await TimeInService.timein({

@@ -53,7 +53,7 @@ export default new Router({
                component: Instruct
           },
           {
-               path: '/scanned/:studNo',
+               path: '/scanned/:studNo/:seat',
                name: 'Scanned',
                component: Scanned,
                props: true

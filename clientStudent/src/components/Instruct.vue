@@ -43,6 +43,9 @@
           <p> Scan your ID with the provided barcode scanner! </p>
           <br>
           <input type="text" @keyup.enter="goToScanned" name="studNo" ref="scanInput" v-model="studNo" placeholder="(Enter student number)" />
+          <br><br>
+          <seats :seat.sync="seat"></seats>
+          <see-seats></see-seats>
           <br>
      </div>
 
@@ -50,19 +53,24 @@
 
 <script>
 /* eslint-disable */
+import Seats from './Seats.vue'
+import SeeSeats from './SeeSeats.vue'
 export default {
      name: 'Instruct',
      data () {
           return {
                studNo: '',
-               studReturned: null
+               studReturned: null,
+               seat: '',
+               seatReturned: null
           }
      },
+     components: { Seats, SeeSeats },
      methods: {
           goToScanned () {
                /* Remove the dash, if any, in the scanned studNo before pushing */
                this.studNo = this.studNo.replace('-', '')
-               this.$router.push('/scanned/' + this.studNo)
+               this.$router.push('/scanned/' + this.studNo + '/' + this.seat)
           }
      },
      mounted () {
