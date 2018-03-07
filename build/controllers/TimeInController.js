@@ -115,6 +115,7 @@ module.exports = {
                 }
                 */
 
+              // timeIN = null, then create method for confirm seat sa frontend (send rid). remove timeIN select sa taas
                const data = {
                 rid: null,
                 sno: stud.sno,

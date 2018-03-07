@@ -31,7 +31,8 @@
 *     05/02/2018:   Modified after creating controllers    	Daroya, Carlos Adrian A.
 *     08/02/2018:   Added register POST	    	 			Daroya, Carlos Adrian A.
 *     08/02/2018:   Added student and report GET/POST	  	Daroya, Carlos Adrian A.
-*     16/02/2018:   TimeInOut POST route					  	Daroya, Carlos Adrian A.
+*     16/02/2018:   TimeInOut POST route					Daroya, Carlos Adrian A.
+*     16/02/2018:   pickSeat route						  	Daroya, Carlos Adrian A.
 
 *   
 *
@@ -60,6 +61,7 @@ const AuthenticationControllerPolicy = require('./policies/Authenticationcontrol
 const StudentController = require('./controllers/StudentController')
 const ReportController = require('./controllers/ReportController')
 const TimeInController = require('./controllers/TimeInController')
+const SeatController = require('./controllers/SeatController')
 module.exports = (app) => {
   	app.post('/register', AuthenticationControllerPolicy.register,
      	AuthenticationController.register)
@@ -72,6 +74,8 @@ module.exports = (app) => {
 	//app.get('/reports', ReportController.log)
 	  
 	app.post('/timein', TimeInController.post)
+
+	app.post('/pickSeat', SeatController.post)
 
   	app.post('/reports', ReportController.post)
 }
