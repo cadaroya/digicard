@@ -1,3 +1,4 @@
+/* eslint-disable */
 /*
 *     Digital Pink Card - All rights reserved
 *     Copyright (C) 2018
@@ -37,7 +38,7 @@
 *     main
 */
 
-/* eslint-disable */
+
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'

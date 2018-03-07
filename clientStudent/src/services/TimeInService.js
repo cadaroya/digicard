@@ -1,3 +1,4 @@
+/* eslint-disable */
 /*
 *     Digital Pink Card - All rights reserved
 *     Copyright (C) 2018
@@ -37,11 +38,10 @@
 *     Time in Service
 */
 
-/* eslint-disable */
 import Api from '@/services/Api'
 
 export default {
-     timein (studNo) {
-          return Api().post('timein', studNo)
+     timein (studNo,seatNo) {
+          return Api().post('timein', studNo, seatNo)
      }
 }
