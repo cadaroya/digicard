@@ -63,13 +63,11 @@
                     </td>
                </tr>
           </table>
-          
      </div>
 </template>
 
 <script>
-     
-     /* eslint-disable */
+/* eslint-disable */
      export default {
           
           props: ['studObj'],

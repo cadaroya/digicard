@@ -1,8 +1,9 @@
+
 <template>
      <div id="seats-wrapper">
           <select :value="seat" @change="$emit('update:seat', $event.target.value)">
                <option disabled value="">Please select one</option>
-               <option v-for="seat in seats"  v-bind:value="seat">
+               <option v-for="seat in seats"  v-bind:key="seat">
                     {{seat}}
                </option>
           </select>
@@ -10,6 +11,7 @@
 </template>
 
 <script>
+/* eslint-disable */
      export default{
           props: ['selected'],
           data () {
