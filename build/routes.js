@@ -61,6 +61,7 @@ const AuthenticationControllerPolicy = require('./policies/Authenticationcontrol
 const StudentController = require('./controllers/StudentController')
 const ReportController = require('./controllers/ReportController')
 const TimeInController = require('./controllers/TimeInController')
+const SeatController = require('./controllers/SeatController')
 module.exports = (app) => {
   	app.post('/register', AuthenticationControllerPolicy.register,
      	AuthenticationController.register)

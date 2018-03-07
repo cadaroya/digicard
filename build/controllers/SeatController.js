@@ -46,9 +46,9 @@ module.exports = {
     async post (req, res) {
           try {
 
-            function getAvailable(os){
+            async function getAvailable(os){
               var seat = null
-              var seat_os= await sequelize.query("SELECT * FROM seat WHERE os = ? AND seatno NOT IN (SELECT seatno FROM report WHERE timeout IS NULL)" , {replacements: [os],type: sequelize.QueryTypes.SELECT})
+              var seat_os = await sequelize.query("SELECT * FROM seat WHERE os = ? AND seatno NOT IN (SELECT seatno FROM report WHERE timeout IS NULL)" , {replacements: [os],type: sequelize.QueryTypes.SELECT})
 
               // If preferred seats are available
               if(seat_os != null){
