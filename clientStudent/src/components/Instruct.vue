@@ -45,6 +45,7 @@
           <input type="text" @keyup.enter="goToScanned" name="studNo" ref="scanInput" v-model="studNo" placeholder="(Enter student number)" />
           <br><br>
           <seats :seat.sync="seat"></seats>
+          <see-seats></see-seats>
           <br>
      </div>
 
@@ -53,6 +54,7 @@
 <script>
 /* eslint-disable */
 import Seats from './Seats.vue'
+import SeeSeats from './SeeSeats.vue'
 export default {
      name: 'Instruct',
      data () {
@@ -63,7 +65,7 @@ export default {
                seatReturned: null
           }
      },
-     components: { Seats },
+     components: { Seats, SeeSeats },
      methods: {
           goToScanned () {
                /* Remove the dash, if any, in the scanned studNo before pushing */
