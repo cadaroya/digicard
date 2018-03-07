@@ -40,84 +40,71 @@ const {sequelize} = require('../models')
 const {student} = require('../models')
 const {report} = require('../models')
 
+
 module.exports = {
+  
     async post (req, res) {
           try {
-            // Initialize null variables
+
+            function getAvailable(os){
+              var seat = null
+              var seat_os= await sequelize.query("SELECT * FROM seat WHERE os = ? AND seatno NOT IN (SELECT seatno FROM report WHERE timeout IS NULL)" , {replacements: [os],type: sequelize.QueryTypes.SELECT})
+
+              // If preferred seats are available
+              if(seat_os != null){
+                // Randomize from AVAILABLE computers
+                const max = seat_os.length - 1
+                const min = 0
+                seat = Math.floor(Math.random() * (max - min + 1)) + min
+                  
+                // Get the i*th element (seat) from seat_os
+                seat = seat_os[seat].seatno
+                return seat
+              }else{
+                return null
+              }
+            }
+            ////////////////////////////////////////////////////////////////////////////////
+            // Initialize search variables
             const search = req.body.studNo
-            var stud = null
+            var seat = req.body.seatNo
+            var rid = req.body.rid
             var studReport = null
 
-            stud = await student.find({
-              where: {
-                   sno: search
+            // Constant OS strings
+            const windows = "windows"
+            const mac = "mac"
+
+            // If student didn't pick a seat
+            if(seat == null){
+              // Get (studReport.preferred to be edited)
+              var seat_preferred = getAvailable(windows)
+              var seat_other = getAvailable(mac)
+
+              if(seat_preferred != null){
+                seat = seat_preferred
               }
-            })
-
-            if(stud != null){
-              // If session == 0, time in
-              if(stud.session == 0){
-                // Select timestamp
-                const timeIN = (await sequelize.query("SELECT NOW() AS time" , {type: sequelize.QueryTypes.SELECT}))[0].time
-
-                // Create Report (timein only)
-                const data = {
-                  rid: null,
-                  sno: stud.sno,
-                  freehours: stud.freehours,
-                  timein: timeIN,
-                  timeout: null,
-                  amountdue: null,
-                  seatNo: null
-                }
-
-                report.create(data)
-
-                // Update student session to 1
-                await sequelize.query("UPDATE student SET session = 1 WHERE sno = ?" , { replacements: [search], type: sequelize.QueryTypes.UPDATE})
-
-                studReport = (await sequelize.query("SELECT * FROM student A JOIN report B ON A.sno = ? WHERE rid = (SELECT max(rid) FROM report WHERE sno = ?)" , { replacements: [search,search], type: sequelize.QueryTypes.SELECT}))
-                studReport = studReport[0]
-              // If session == 1, time out
-              } else{
-                
-                // Update student session, seatno, freehours
-                await sequelize.query("UPDATE student SET session = 0 WHERE sno = ?" , { replacements: [search], type: sequelize.QueryTypes.UPDATE})
-
-                // Retrieve Latest (Report!) of student
-                studReport = await sequelize.query("SELECT * FROM report WHERE rid = (SELECT max(rid) FROM report WHERE sno = ?)" , { replacements: [search], type: sequelize.QueryTypes.SELECT})
-                studReport = studReport[0]
-
-                // Student
-                studLog = await student.find({
-                  where: {
-                       sno: search
-                  }
-                })
-
-                
-               
-                // Update Report: timeout
-                await sequelize.query("UPDATE report SET timeout = NOW() WHERE rid = ?" , { replacements: [studReport.rid], type: sequelize.QueryTypes.UPDATE})
-
-                // Calculate timediff in hours
-                const resp = (await sequelize.query("SELECT TIMESTAMPDIFF(SECOND,timein,timeout) AS timediff FROM report WHERE rid = ?", {replacements: [studReport.rid], type: sequelize.QueryTypes.SELECT }))[0]
-                const timediff = resp.timediff
-                const freehours = studLog.freehours
-                const amountdue = timediff/60/60*20
-                // Update timediff, amountdue, (seatno) for REPORT
-                await sequelize.query("UPDATE report SET amountdue = ? WHERE rid = ?" , { replacements: [amountdue,studReport.rid], type: sequelize.QueryTypes.UPDATE})
-
-                // Update timediff, (seatno) for STUDENT 
-                await sequelize.query("UPDATE student SET freehours = TIMEDIFF(?,?) WHERE sno = ?" , { replacements: [freehours,timediff,search], type: sequelize.QueryTypes.UPDATE})
-                              
-                // Find Student
-                studReport = await sequelize.query("SELECT * FROM student A JOIN report B ON A.sno = ? WHERE rid = ?" , { replacements: [search,studReport.rid], type: sequelize.QueryTypes.SELECT})
-                studReport = studReport[0]
+              else if(seat_preferred == null && seat_other != null){
+                seat = seat_other
+              }
+              else{
+                seat = null
               }
             }
 
-            res.send(studReport)
+            // Check if seat is still null
+            if(seat != null){
+              // Update Timein timestamp and seatno 
+              await sequelize.query("UPDATE report SET timein = NOW(), seatno = ? WHERE rid = ?" , { replacements: [rid,seat], type: sequelize.QueryTypes.UPDATE})
+              
+              // Search report with seatno (to be edited because of integration with timein[rid])
+              studReport = await sequelize.query("SELECT * FROM student NATURAL JOIN report WHERE rid = ?" , {replacements: [rid],type: sequelize.QueryTypes.SELECT})
+              studReport = studReport[0]
+              res.send(studReport)
+            }else{
+              res.send(null)
+            }
+
           } catch (error){
             res.send(error)
             console.log(error)

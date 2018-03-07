@@ -31,7 +31,8 @@
 *     05/02/2018:   Modified after creating controllers    	Daroya, Carlos Adrian A.
 *     08/02/2018:   Added register POST	    	 			Daroya, Carlos Adrian A.
 *     08/02/2018:   Added student and report GET/POST	  	Daroya, Carlos Adrian A.
-*     16/02/2018:   TimeInOut POST route					  	Daroya, Carlos Adrian A.
+*     16/02/2018:   TimeInOut POST route					Daroya, Carlos Adrian A.
+*     16/02/2018:   pickSeat route						  	Daroya, Carlos Adrian A.
 
 *   
 *
@@ -72,6 +73,8 @@ module.exports = (app) => {
 	//app.get('/reports', ReportController.log)
 	  
 	app.post('/timein', TimeInController.post)
+
+	app.post('/pickSeat', SeatController.post)
 
   	app.post('/reports', ReportController.post)
 }
