@@ -37,18 +37,33 @@
 *     The view displayed once a student has scanned their ID (either time in or out)
 -->
 <template>
-     <div>
-          <h1> Successfully Scanned ID </h1>
+     <div id="scanned-wrapper">
           <span v-if="studReturned">
-               <stud-info :studObj="studReturned"></stud-info>
+               <span v-if="studReturned.session === 1">
+                    <h1> Time In </h1>
+                    <stud-info :studObj="studReturned"></stud-info>
+                    
+                         <seats :seat.sync="seat"></seats>
+                    
+                    <!--{{seat}}-->
+               </span>
+               <span v-else-if="studReturned.session === 0">
+                    <h1> Time Out </h1>
+                    <stud-info :studObj="studReturned"></stud-info>
+                    <h1> Cost: </h1>
+               </span>
           </span>
-          <span v-else><p>Student not found.</p></span>
+          <span v-else>
+               <h1> Successfully Scanned ID </h1>
+               <p>Student not found.</p>
+          </span>
           <li><router-link to='/'>(back to instruct screen)</router-link></li>
      </div>
 </template>
 
 <script>
 /* eslint-disable */
+import Seats from './Seats.vue'
 import StudInfo from './StudInfo.vue'
 import TimeInService from '../services/TimeInService'
 /* import Seats from './Seats.vue' */
@@ -58,10 +73,11 @@ export default {
      props: ['studNo'],
      data () {
           return {
-               studReturned: null
+               studReturned: null,
+               seat: ''
           }
      },
-     components: { StudInfo /*, Seats*/ },
+     components: { StudInfo , Seats },
      methods: {
           async timein () {
                const response = await TimeInService.timein({
@@ -82,4 +98,11 @@ export default {
 </script>
 
 <style scoped>
+#scanned-wrapper {
+
+}
+
+#scanned-wrapper .seatpicker {
+     float: right;
+}
 </style>

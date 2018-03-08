@@ -62,6 +62,10 @@
                          <p v-else class="inactive-marker">Inactive</p>
                     </td>
                </tr>
+               <tr>
+                    <th>FREE HRS</th>
+                    <td>{{freehrs}}</td>
+               </tr>
           </table>
      </div>
 </template>
@@ -78,7 +82,7 @@
                     firstName: this.studObj.first_name,
                     college: this.studObj.college,
                     isInSession: this.studObj.session,
-                    
+                    freehrs: this.studObj.freehours
                }
           }
      }

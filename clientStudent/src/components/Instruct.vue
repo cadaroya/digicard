@@ -38,39 +38,38 @@
 -->
 
 <template>
-     <div>
+     <div id ="instruct-wrapper">
+          <div class = "photo" >
+               <img src="../images/engglib.png"/>
+          </div>
+          <br><br>
           <h1> Digital Pink Card System </h1>
           <p> Scan your ID with the provided barcode scanner! </p>
-          <br>
-          <input type="text" @keyup.enter="goToScanned" name="studNo" ref="scanInput" v-model="studNo" placeholder="(Enter student number)" />
-          <br><br>
-          <seats :seat.sync="seat"></seats>
+          <input type="text" @keyup.enter="goToScanned" name="studNo" ref="scanInput" v-model="studNo" placeholder="(Enter student number)"/>
+          <br><br><br><br>
           <see-seats></see-seats>
           <br>
      </div>
-
 </template>
 
 <script>
 /* eslint-disable */
-import Seats from './Seats.vue'
 import SeeSeats from './SeeSeats.vue'
+import Logo from '../images/engglib.png'
 export default {
      name: 'Instruct',
      data () {
           return {
                studNo: '',
-               studReturned: null,
-               seat: '',
-               seatReturned: null
+               studReturned: null
           }
      },
-     components: { Seats, SeeSeats },
+     components: { Logo, SeeSeats },
      methods: {
           goToScanned () {
                /* Remove the dash, if any, in the scanned studNo before pushing */
                this.studNo = this.studNo.replace('-', '')
-               this.$router.push('/scanned/' + this.studNo + '/' + this.seat)
+               this.$router.push('/scanned/' + this.studNo)
           }
      },
      mounted () {
@@ -81,4 +80,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+#instruct-wrapper {
+     background-color: orange;
+     height:550px;
+}
+#instruct-wrapper .photo{
+     float: left;
+}
 </style>
