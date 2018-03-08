@@ -42,9 +42,7 @@
                <span v-if="studReturned.session === 1">
                     <h1> Time In </h1>
                     <stud-info :studObj="studReturned"></stud-info>
-                    
                          <seats :seat.sync="seat"></seats>
-                    
                     <!--{{seat}}-->
                </span>
                <span v-else-if="studReturned.session === 0">
