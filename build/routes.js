@@ -77,6 +77,8 @@ module.exports = (app) => {
 
 	app.post('/pickSeat', SeatController.post)
 
+	app.post('/checkFull', SeatController.checkFull)
+
   	app.post('/reports', ReportController.post)
 }
 //

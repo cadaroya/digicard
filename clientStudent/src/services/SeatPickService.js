@@ -43,5 +43,8 @@ import Api from '@/services/Api'
 export default {
      pickSeat (rid,seatNo) {
           return Api().post('pickSeat', rid, seatNo)
-     }
+     },
+     checkFull () {
+        return Api().post('checkFull')
+   }
 }

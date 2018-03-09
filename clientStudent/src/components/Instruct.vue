@@ -56,12 +56,14 @@
 /* eslint-disable */
 import SeeSeats from './SeeSeats.vue'
 import Logo from '../images/engglib.png'
+import SeatPickService from '../services/SeatPickService'
 export default {
      name: 'Instruct',
      data () {
           return {
                studNo: '',
-               studReturned: null
+               studReturned: null,
+               full: false
           }
      },
      components: { Logo, SeeSeats },
@@ -70,9 +72,18 @@ export default {
                /* Remove the dash, if any, in the scanned studNo before pushing */
                this.studNo = this.studNo.replace('-', '')
                this.$router.push('/scanned/' + this.studNo)
+          },
+          async checkFull () {
+                const resp = await SeatPickService.checkFull() 
+                if(resp == null){
+                    this.full = true
+                }
           }
      },
      mounted () {
+          this.checkFull()
+          console.log("FULL BA")
+          console.log(this.full)
           this.$refs.scanInput.focus()
      }
 }
