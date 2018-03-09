@@ -41,8 +41,9 @@
           <span v-if="studReturned">
                <span v-if="studReturned.session === 1">
                     <h1> Time In </h1>
-                    <stud-info :studObj="studReturned"></stud-info>
+                         <stud-info :studObj="studReturned"></stud-info>
                          <seats :seat.sync="seat"></seats>
+                         <button @click="confirmSeat">Confirm Seat</button>
                     <!--{{seat}}-->
                </span>
                <span v-else-if="studReturned.session === 0">
@@ -64,6 +65,7 @@
 import Seats from './Seats.vue'
 import StudInfo from './StudInfo.vue'
 import TimeInService from '../services/TimeInService'
+import SeatPickService from '../services/SeatPickService'
 /* import Seats from './Seats.vue' */
 
 export default {
@@ -83,6 +85,17 @@ export default {
                })
                console.log(response.data)
                this.studReturned = response.data
+          },
+          async confirmSeat () {
+               if (studReturned == null) {
+                    console.log('Student is null in confirmSeat')
+                    return
+               } else {
+                    const seatResponse = await SeatPickService.pickSeat({
+                         rid: studReturned.rid,
+                         seatNo: seat
+                    })
+               }
           }
      },
      async mounted () {
