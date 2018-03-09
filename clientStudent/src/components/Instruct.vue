@@ -47,7 +47,12 @@
           <p> Scan your ID with the provided barcode scanner! </p>
           <input type="text" @keyup.enter="goToScanned" name="studNo" ref="scanInput" v-model="studNo" placeholder="(Enter student number)"/>
           <br><br><br><br>
+          <span v-if="full == 0">
           <see-seats></see-seats>
+          </span>
+          <span v-else>
+              <p> No seats, sorry! </p>
+        </span>
           <br>
      </div>
 </template>
@@ -63,7 +68,8 @@ export default {
           return {
                studNo: '',
                studReturned: null,
-               full: false
+               full: 0,
+               seatList: null
           }
      },
      components: { Logo, SeeSeats },
@@ -74,16 +80,23 @@ export default {
                this.$router.push('/scanned/' + this.studNo)
           },
           async checkFull () {
+              try{
                 const resp = await SeatPickService.checkFull() 
-                if(resp == null){
-                    this.full = true
+                if((resp.data).length == 0){
+                    this.full = 1
+                    console.log("elow")
+                    console.log(this.full)
+                }else{
+                    this.seatList = resp.data
                 }
+              }catch(err){
+
+              }
+
           }
      },
      mounted () {
           this.checkFull()
-          console.log("FULL BA")
-          console.log(this.full)
           this.$refs.scanInput.focus()
      }
 }

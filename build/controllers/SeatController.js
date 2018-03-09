@@ -97,7 +97,7 @@ module.exports = {
               // Check if seat is taken
               const resp = await sequelize.query("SELECT * FROM report WHERE seatno = ? AND timeout IS NULL" , {replacements: [seat],type: sequelize.QueryTypes.SELECT})
               // If resp == null, its available (kasi walang nakatimein)
-              if(resp == null){
+              if(resp != null){
                 // Update Timein timestamp and seatno 
                 await sequelize.query("UPDATE report SET timein = NOW(), seatno = ? WHERE rid = ?" , { replacements: [seat,rid], type: sequelize.QueryTypes.UPDATE})
                 
@@ -120,7 +120,7 @@ module.exports = {
 
      async checkFull (req, res) {
         var full = null
-        full = await sequelize.query("SELECT * FROM seat WHERE AND seatno NOT IN (SELECT seatno FROM report WHERE timeout IS NULL)" , {type: sequelize.QueryTypes.SELECT})
+        full = await sequelize.query("SELECT * FROM seat WHERE seatno NOT IN (SELECT seatno FROM report WHERE timeout IS NULL)" , {type: sequelize.QueryTypes.SELECT})
      
         res.send(full)
       }
