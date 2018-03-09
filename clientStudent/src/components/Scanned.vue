@@ -74,7 +74,8 @@ export default {
      data () {
           return {
                studReturned: null,
-               seat: ''
+               seat: '',
+               rid: null
           }
      },
      components: { StudInfo , Seats },
@@ -85,15 +86,19 @@ export default {
                })
                console.log(response.data)
                this.studReturned = response.data
+               this.rid = this.studReturned.rid
           },
           async confirmSeat () {
-               if (studReturned == null) {
+               if (this.studReturned == null) {
                     console.log('Student is null in confirmSeat')
                     return
                } else {
+                    console.log("hello i am here")
+                    console.log(this.rid)
+                    console.log(this.seat)
                     const seatResponse = await SeatPickService.pickSeat({
-                         rid: studReturned.rid,
-                         seatNo: seat
+                         rid: this.rid,
+                         seatNo: this.seat
                     })
                }
           }

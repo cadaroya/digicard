@@ -52,7 +52,8 @@ module.exports = (sequelize, Sequelize) => {
           validated:    Sequelize.BOOLEAN,
           session:      Sequelize.BOOLEAN,
           freehours:    Sequelize.TIME(2),
-          credits:      Sequelize.FLOAT(7,2)
+          credits:      Sequelize.FLOAT(7,2),
+          preferred:           Sequelize.STRING(20)
      },
      {
           timestamps: false,

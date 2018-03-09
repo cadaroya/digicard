@@ -45,7 +45,7 @@ module.exports = {
   
     async post (req, res) {
           try {
-
+            console.log("HELLO I AM POSTINGGGGGGGGGGGGGGGGGGGG><><><><><><><><><><><><><")
             async function getAvailable(os){
               var seat = null
               var seat_os = await sequelize.query("SELECT * FROM seat WHERE os = ? AND seatno NOT IN (SELECT seatno FROM report WHERE timeout IS NULL)" , {replacements: [os],type: sequelize.QueryTypes.SELECT})
@@ -95,7 +95,7 @@ module.exports = {
             // Check if seat is still null
             if(seat != null){
               // Update Timein timestamp and seatno 
-              await sequelize.query("UPDATE report SET timein = NOW(), seatno = ? WHERE rid = ?" , { replacements: [rid,seat], type: sequelize.QueryTypes.UPDATE})
+              await sequelize.query("UPDATE report SET timein = NOW(), seatno = ? WHERE rid = ?" , { replacements: [seat,rid], type: sequelize.QueryTypes.UPDATE})
               
               // Search report with seatno (to be edited because of integration with timein[rid])
               studReport = await sequelize.query("SELECT * FROM student NATURAL JOIN report WHERE rid = ?" , {replacements: [rid],type: sequelize.QueryTypes.SELECT})

@@ -61,7 +61,7 @@ module.exports = {
               // If session == 0, time in
               if(stud.session == 0){
                 // Select timestamp
-                const timeIN = (await sequelize.query("SELECT NOW() AS time" , {type: sequelize.QueryTypes.SELECT}))[0].time
+                //const timeIN = (await sequelize.query("SELECT NOW() AS time" , {type: sequelize.QueryTypes.SELECT}))[0].time
 
                 /*
                 if(seat != null){
@@ -120,7 +120,7 @@ module.exports = {
                 rid: null,
                 sno: stud.sno,
                 freehours: stud.freehours,
-                timein: timeIN,
+                timein: null,
                 timeout: null,
                 amountdue: null,
                 seatNo: null
