@@ -102,7 +102,7 @@ module.exports = {
               studReport = studReport[0]
               res.send(studReport)
             }else{
-              res.send(null)
+              res.send("full")
             }
 
           } catch (error){

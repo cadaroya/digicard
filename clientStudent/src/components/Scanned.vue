@@ -42,21 +42,27 @@
                <span v-if="studReturned.session === 1">
                     <h1> Time In </h1>
                          <stud-info :studObj="studReturned"></stud-info>
-                         <seats :seat.sync="seat"></seats>
-                         <button @click="confirmSeat">Confirm Seat</button>
+                         <span v-if="noSeatsAvailable">
+                              <p> No Seats Available :( </p>
+                         </span>
+                         <span v-else>
+                              <seats :seat.sync="seat"></seats>
+                              <button @click="confirmSeat">Confirm Seat</button>
+                         </span>
                     <!--{{seat}}-->
                </span>
                <span v-else-if="studReturned.session === 0">
                     <h1> Time Out </h1>
                     <stud-info :studObj="studReturned"></stud-info>
                     <h1> Cost: </h1>
+                    <p> {{this.studReturned.amountdue}} </p>
+                    <li><router-link to='/'>(back to instruct screen)</router-link></li>
                </span>
           </span>
           <span v-else>
                <h1> Successfully Scanned ID </h1>
                <p>Student not found.</p>
           </span>
-          <li><router-link to='/'>(back to instruct screen)</router-link></li>
      </div>
 </template>
 
@@ -75,7 +81,8 @@ export default {
           return {
                studReturned: null,
                seat: '',
-               rid: null
+               rid: null,
+               noSeatsAvailable: false
           }
      },
      components: { StudInfo , Seats },
@@ -86,7 +93,14 @@ export default {
                })
                console.log(response.data)
                this.studReturned = response.data
-               this.rid = this.studReturned.rid
+               if (this.studReturned == null) {
+                    return
+               } else if (this.studReturned == "full") {
+                    noSeatsAvailable = true
+                    return
+               } else {
+                    this.rid = this.studReturned.rid
+               }
           },
           async confirmSeat () {
                if (this.studReturned == null) {
@@ -100,6 +114,7 @@ export default {
                          rid: this.rid,
                          seatNo: this.seat
                     })
+                    this.$router.push('/')
                }
           }
      },
@@ -114,10 +129,6 @@ export default {
 </script>
 
 <style scoped>
-#scanned-wrapper {
-
-}
-
 #scanned-wrapper .seatpicker {
      float: right;
 }
