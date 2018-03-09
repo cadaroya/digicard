@@ -28,7 +28,7 @@
 *     Code history:
 *     21/02/2018:   File was created                    Ocampo, Pauline
 *     22/02/2018:   Added "student not found" msg       Ocampo, Pauline
-*
+*     08/03/2018:   Added if else for Timein/Timeout    Cai, Jann Willem
 *
 *     Date created: 21 February 2018
 *     Development Group: Cai, Daroya, Ocampo

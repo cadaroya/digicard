@@ -28,7 +28,7 @@
 *     Code history:
 *     21/02/2018:   File was created                    Ocampo, Pauline
 *     22/02/2018:   Added dash stripper                 Ocampo, Pauline
-*
+*     08/03/2018:   Added Table and some styling        Cai, Jann Willem
 *
 *     Date created: 21 February 2018
 *     Development Group: Cai, Daroya, Ocampo
