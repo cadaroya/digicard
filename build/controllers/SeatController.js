@@ -45,7 +45,7 @@ module.exports = {
   
     async post (req, res) {
           try {
-
+            console.log("HELLO I AM POSTINGGGGGGGGGGGGGGGGGGGG><><><><><><><><><><><><><")
             async function getAvailable(os){
               var seat = null
               var seat_os = await sequelize.query("SELECT * FROM seat WHERE os = ? AND seatno NOT IN (SELECT seatno FROM report WHERE timeout IS NULL)" , {replacements: [os],type: sequelize.QueryTypes.SELECT})
@@ -94,20 +94,34 @@ module.exports = {
 
             // Check if seat is still null
             if(seat != null){
-              // Update Timein timestamp and seatno 
-              await sequelize.query("UPDATE report SET timein = NOW(), seatno = ? WHERE rid = ?" , { replacements: [rid,seat], type: sequelize.QueryTypes.UPDATE})
-              
-              // Search report with seatno (to be edited because of integration with timein[rid])
-              studReport = await sequelize.query("SELECT * FROM student NATURAL JOIN report WHERE rid = ?" , {replacements: [rid],type: sequelize.QueryTypes.SELECT})
-              studReport = studReport[0]
-              res.send(studReport)
+              // Check if seat is taken
+              const resp = await sequelize.query("SELECT * FROM report WHERE seatno = ? AND timeout IS NULL" , {replacements: [seat],type: sequelize.QueryTypes.SELECT})
+              // If resp == null, its available (kasi walang nakatimein)
+              if(resp != null){
+                // Update Timein timestamp and seatno 
+                await sequelize.query("UPDATE report SET timein = NOW(), seatno = ? WHERE rid = ?" , { replacements: [seat,rid], type: sequelize.QueryTypes.UPDATE})
+                
+                // Search report with seatno (to be edited because of integration with timein[rid])
+                studReport = await sequelize.query("SELECT * FROM student NATURAL JOIN report WHERE rid = ?" , {replacements: [rid],type: sequelize.QueryTypes.SELECT})
+                studReport = studReport[0]
+                res.send(studReport)
+              }else{
+                res.send("taken")
+              }
             }else{
-              res.send(null)
+              res.send("full")
             }
 
           } catch (error){
             res.send(error)
             console.log(error)
           }
-     }
+     },
+
+     async checkFull (req, res) {
+        var full = null
+        full = await sequelize.query("SELECT * FROM seat WHERE seatno NOT IN (SELECT seatno FROM report WHERE timeout IS NULL)" , {type: sequelize.QueryTypes.SELECT})
+     
+        res.send(full)
+      }
 }

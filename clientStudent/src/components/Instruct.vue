@@ -28,7 +28,7 @@
 *     Code history:
 *     21/02/2018:   File was created                    Ocampo, Pauline
 *     22/02/2018:   Added dash stripper                 Ocampo, Pauline
-*
+*     08/03/2018:   Added Table and some styling        Cai, Jann Willem
 *
 *     Date created: 21 February 2018
 *     Development Group: Cai, Daroya, Ocampo
@@ -47,7 +47,12 @@
           <p> Scan your ID with the provided barcode scanner! </p>
           <input type="text" @keyup.enter="goToScanned" name="studNo" ref="scanInput" v-model="studNo" placeholder="(Enter student number)"/>
           <br><br><br><br>
+          <span v-if="full == 0">
           <see-seats></see-seats>
+          </span>
+          <span v-else>
+              <p> No seats, sorry! </p>
+        </span>
           <br>
      </div>
 </template>
@@ -56,12 +61,15 @@
 /* eslint-disable */
 import SeeSeats from './SeeSeats.vue'
 import Logo from '../images/engglib.png'
+import SeatPickService from '../services/SeatPickService'
 export default {
      name: 'Instruct',
      data () {
           return {
                studNo: '',
-               studReturned: null
+               studReturned: null,
+               full: 0,
+               seatList: null
           }
      },
      components: { Logo, SeeSeats },
@@ -70,9 +78,25 @@ export default {
                /* Remove the dash, if any, in the scanned studNo before pushing */
                this.studNo = this.studNo.replace('-', '')
                this.$router.push('/scanned/' + this.studNo)
+          },
+          async checkFull () {
+              try{
+                const resp = await SeatPickService.checkFull() 
+                if((resp.data).length == 0){
+                    this.full = 1
+                    console.log("elow")
+                    console.log(this.full)
+                }else{
+                    this.seatList = resp.data
+                }
+              }catch(err){
+
+              }
+
           }
      },
      mounted () {
+          this.checkFull()
           this.$refs.scanInput.focus()
      }
 }

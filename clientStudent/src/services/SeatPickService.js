@@ -27,7 +27,7 @@
 *
 *     Code history:
 *     07/03/2018:   File was created                    Daroya, Carlos Adrian A
-*     
+*
 *
 *
 *     Date created: 07 March 2018
@@ -43,5 +43,8 @@ import Api from '@/services/Api'
 export default {
      pickSeat (rid,seatNo) {
           return Api().post('pickSeat', rid, seatNo)
-     }
+     },
+     checkFull () {
+        return Api().post('checkFull')
+   }
 }

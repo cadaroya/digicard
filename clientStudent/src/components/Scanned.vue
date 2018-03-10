@@ -28,7 +28,7 @@
 *     Code history:
 *     21/02/2018:   File was created                    Ocampo, Pauline
 *     22/02/2018:   Added "student not found" msg       Ocampo, Pauline
-*
+*     08/03/2018:   Added if else for Timein/Timeout    Cai, Jann Willem
 *
 *     Date created: 21 February 2018
 *     Development Group: Cai, Daroya, Ocampo
@@ -41,21 +41,28 @@
           <span v-if="studReturned">
                <span v-if="studReturned.session === 1">
                     <h1> Time In </h1>
-                    <stud-info :studObj="studReturned"></stud-info>
-                         <seats :seat.sync="seat"></seats>
+                         <stud-info :studObj="studReturned"></stud-info>
+                         <span v-if="noSeatsAvailable">
+                              <p> No Seats Available :( </p>
+                         </span>
+                         <span v-else>
+                              <seats :seat.sync="seat"></seats>
+                              <button @click="confirmSeat">Confirm Seat</button>
+                         </span>
                     <!--{{seat}}-->
                </span>
                <span v-else-if="studReturned.session === 0">
                     <h1> Time Out </h1>
                     <stud-info :studObj="studReturned"></stud-info>
                     <h1> Cost: </h1>
+                    <p> {{this.studReturned.amountdue}} </p>
+                    <li><router-link to='/'>(back to instruct screen)</router-link></li>
                </span>
           </span>
           <span v-else>
                <h1> Successfully Scanned ID </h1>
                <p>Student not found.</p>
           </span>
-          <li><router-link to='/'>(back to instruct screen)</router-link></li>
      </div>
 </template>
 
@@ -64,6 +71,7 @@
 import Seats from './Seats.vue'
 import StudInfo from './StudInfo.vue'
 import TimeInService from '../services/TimeInService'
+import SeatPickService from '../services/SeatPickService'
 /* import Seats from './Seats.vue' */
 
 export default {
@@ -72,7 +80,9 @@ export default {
      data () {
           return {
                studReturned: null,
-               seat: ''
+               seat: '',
+               rid: null,
+               noSeatsAvailable: false
           }
      },
      components: { StudInfo , Seats },
@@ -83,6 +93,29 @@ export default {
                })
                console.log(response.data)
                this.studReturned = response.data
+               if (this.studReturned == null) {
+                    return
+               } else if (this.studReturned == "full") {
+                    noSeatsAvailable = true
+                    return
+               } else {
+                    this.rid = this.studReturned.rid
+               }
+          },
+          async confirmSeat () {
+               if (this.studReturned == null) {
+                    console.log('Student is null in confirmSeat')
+                    return
+               } else {
+                    console.log("hello i am here")
+                    console.log(this.rid)
+                    console.log(this.seat)
+                    const seatResponse = await SeatPickService.pickSeat({
+                         rid: this.rid,
+                         seatNo: this.seat
+                    })
+                    this.$router.push('/')
+               }
           }
      },
      async mounted () {
@@ -96,10 +129,6 @@ export default {
 </script>
 
 <style scoped>
-#scanned-wrapper {
-
-}
-
 #scanned-wrapper .seatpicker {
      float: right;
 }

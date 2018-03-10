@@ -26,6 +26,7 @@
 *     of the Philippines, Diliman for the AY 2017-2018
 *
 *     Code history:
+<<<<<<< HEAD
 *     06/03/2018:   File was created                    Cai, Jann Willem
 *
 *
@@ -36,6 +37,16 @@
 *     Showing seats
 -->
 
+=======
+*     07/03/2018:   File was created                    Cai, Jann Willem
+*
+*     Date created: 07 March 2018
+*     Development Group: Cai, Daroya, Ocampo
+*
+*     File purpose:
+*     See Seat Availability Table
+-->
+>>>>>>> 927c585fa47a43943a3e2169ac3f56ba326a39ba
 <template>
      <div id="see-seats-wrapper">
           <div class = "computer-wrapper">
