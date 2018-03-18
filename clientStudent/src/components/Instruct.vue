@@ -48,12 +48,13 @@
           <p> Scan your ID with the provided barcode scanner! </p>
           <input type="text" @keyup.enter="goToScanned" name="studNo" ref="scanInput" v-model="studNo" placeholder="(Enter student number)"/>
           <br><br><br><br>
+          <span>{{seatList}}</span>
           <span v-if="full == 0">
-          <see-seats></see-seats>
+               <see-seats></see-seats>
           </span>
           <span v-else>
-              <p> No seats, sorry! </p>
-        </span>
+               <p> No seats, sorry! </p>
+          </span>
           <br>
      </div>
 </template>
@@ -81,21 +82,20 @@ export default {
                this.$router.push('/scanned/' + this.studNo)
           },
           async checkFull () {
-              try{
-                const resp = await SeatPickService.checkFull() 
-                console.log("the data im looking for is here..")
-                console.log((resp.data))
-                if((resp.data).length == 0){
-                    this.full = 1
-                    console.log("elow")
-                    
-                    console.log(this.full)
-                }else{
-                    this.seatList = resp.data
-                }
-              }catch(err){
+               try{
+                    const resp = await SeatPickService.checkFull() 
+                    console.log("the data im looking for is here..")
+                    console.log((resp.data))
+                    if((resp.data).length == 0){
+                         this.full = 1
+                         console.log("elow")
+                         console.log(this.full)
+                    } else {
+                         this.seatList = resp.data
+                    }
+               } catch(err) {
 
-              }
+               }
 
           }
      },
@@ -110,8 +110,7 @@ export default {
 <style scoped>
 
 #instruct-wrapper {
-     background-color: orange;
-     height:550px;
+     
 }
 #instruct-wrapper .photo{
      float: left;

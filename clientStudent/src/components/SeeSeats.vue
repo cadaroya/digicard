@@ -27,6 +27,7 @@
 *
 *     Code history:
 *     07/03/2018:   File was created                    Cai, Jann Willem
+*     18/03/2018:   Changed to make table from database Cai, Jann Willem
 *
 *     Date created: 07 March 2018
 *     Development Group: Cai, Daroya, Ocampo
@@ -37,23 +38,25 @@
 <template>
      <div id="see-seats-wrapper">
           <div class = "computer-wrapper">
-               <div v-for="seat in seats" v-bind:key="seat">
+               <div v-for="seat in seatList" v-bind:key="seat">
+                    <!--
                     <div v-if="seat === 0">
                          <div class = "computer unavailable">
                               X <br>
                               {{seat}}
                          </div>
                     </div>
-                    <div v-else-if="seat <= 30">
+                    -->
+                    <div v-if="seat.os == 'mac'">
                          <div class = "computer mac">
                               Mac <br>
-                              {{seat}}
+                              {{seat.seatno}}
                          </div>
                     </div>
-                    <div v-else-if="seat > 30">
+                    <div v-else-if="seat.os == 'windows'">
                          <div class = "computer windows">
                               Windows <br>
-                              {{seat}}
+                              {{seat.seatno}}
                          </div>
                     </div>
                </div>
@@ -62,22 +65,50 @@
 </template>
 
 <script>
+import SeatPickService from '../services/SeatPickService'
 /* eslint-disable */
      export default {
           props: ['selected'],
           data () {
                return {
+                    /*
                     seats: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,
                          20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38],
-                    seat: ''
+                    seat: '',
+                    */
+                    full: 0,
+                    seatList: null
                }
+          },
+          methods: {
+               async getSeatInfo () {
+                    try{
+                         const resp = await SeatPickService.checkFull() 
+                         console.log("the data im looking for is here..")
+                         console.log((resp.data))
+                         if((resp.data).length == 0){
+                              this.full = 1
+                              console.log("elow")
+                              console.log(this.full)
+                         } else {
+                              this.seatList = resp.data
+                         }
+                    } catch(err) {
+
+                    }
+               }
+          },
+          mounted () {
+               this.getSeatInfo()
           }
      }
 </script>
 
 <style scoped>
 #see-seats-wrapper .computer-wrapper {
-     padding-top: 20px;
+     padding-top: 10px;
+     background-color: orange;
+     height: 26em;
 }
 
 #see-seats-wrapper .computer {
