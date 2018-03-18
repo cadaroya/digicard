@@ -30,6 +30,7 @@
 *     16/02/2018: 	TimeIn,Timeout cases	                    Daroya, Carlos Adrian A.
 *     21/02/2018: 	Null Checking       	                    Daroya, Carlos Adrian A.
 *     06/03/2018: 	Reflect change from student model         Daroya, Carlos Adrian A.
+*     18/03/2018:   now returns available seats               Daroya, Carlos Adrian A.
 *
 *
 *     Date created: 16 February 2018
@@ -123,7 +124,7 @@ module.exports = {
                 timein: null,
                 timeout: null,
                 amountdue: null,
-                seatNo: null
+                seatno: 0
               }    
 
               report.create(data)
@@ -172,6 +173,8 @@ module.exports = {
               }
             }
 
+            const seats = await sequelize.query("SELECT * FROM seat WHERE seatno NOT IN (SELECT seatno FROM report WHERE timeout IS NULL)" , {type: sequelize.QueryTypes.SELECT})
+            studReport = [studReport, seats]
             res.send(studReport)
           } catch (error){
             res.send(error)

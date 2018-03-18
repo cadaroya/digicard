@@ -26,9 +26,10 @@
 *     of the Philippines, Diliman for the AY 2017-2018
 *
 *     Code history:
-*     21/02/2018:   File was created                    Ocampo, Pauline
-*     22/02/2018:   Added "student not found" msg       Ocampo, Pauline
-*     08/03/2018:   Added if else for Timein/Timeout    Cai, Jann Willem
+*     21/02/2018:   File was created                                Ocampo, Pauline
+*     22/02/2018:   Added "student not found" msg                   Ocampo, Pauline
+*     08/03/2018:   Added if else for Timein/Timeout                Cai, Jann Willem
+*     18/03/2018:   Added back-end response for available seats     Daroya, Carlos Adrian A.
 *
 *     Date created: 21 February 2018
 *     Development Group: Cai, Daroya, Ocampo
@@ -82,7 +83,8 @@ export default {
                studReturned: null,
                seat: '',
                rid: null,
-               noSeatsAvailable: false
+               noSeatsAvailable: false,
+               availableSeats: null
           }
      },
      components: { StudInfo , Seats },
@@ -91,8 +93,16 @@ export default {
                const response = await TimeInService.timein({
                     studNo: this.studNo
                })
-               console.log(response.data)
-               this.studReturned = response.data
+               console.log("hey")
+               this.studReturned = (response.data)[0]
+               this.availableSeats = (response.data)[1]
+               var x = this.availableSeats
+               console.log("available seats: ")
+               for(var i = 0; i < x.length; i++){
+                   console.log(x[i].seatno)
+               }
+               console.log("--------")
+
                if (this.studReturned == null) {
                     return
                } else if (this.studReturned == "full") {

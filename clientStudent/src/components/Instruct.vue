@@ -26,9 +26,10 @@
 *     of the Philippines, Diliman for the AY 2017-2018
 *
 *     Code history:
-*     21/02/2018:   File was created                    Ocampo, Pauline
-*     22/02/2018:   Added dash stripper                 Ocampo, Pauline
-*     08/03/2018:   Added Table and some styling        Cai, Jann Willem
+*     21/02/2018:   File was created                                Ocampo, Pauline
+*     22/02/2018:   Added dash stripper                             Ocampo, Pauline
+*     08/03/2018:   Added Table and some styling                    Cai, Jann Willem
+*     18/03/2018:   Added back-end response for available seats     Daroya, Carlos Adrian A.
 *
 *     Date created: 21 February 2018
 *     Development Group: Cai, Daroya, Ocampo
@@ -82,9 +83,12 @@ export default {
           async checkFull () {
               try{
                 const resp = await SeatPickService.checkFull() 
+                console.log("the data im looking for is here..")
+                console.log((resp.data))
                 if((resp.data).length == 0){
                     this.full = 1
                     console.log("elow")
+                    
                     console.log(this.full)
                 }else{
                     this.seatList = resp.data
