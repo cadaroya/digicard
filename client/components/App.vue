@@ -41,24 +41,26 @@
 *-->
 
 <template>
-     <div id="app" class="app-wrapper">
-          <app-navbar></app-navbar>
-          <router-view></router-view>
-      </div>
+    <div id="app" class="app-wrapper">
+        <app-navbar></app-navbar>
+        <router-view></router-view>
+    </div>
 </template>
 
 <script>
-    import NavBar from './NavBar.vue'
-          export default {
-               components: {
-                    'app-navbar': NavBar
-          }
-     }
+import NavBar from './NavBar.vue'
+        export default {
+            components: {
+                'app-navbar': NavBar
+        }
+    }
 </script>
 
 <style scoped>
-     #app {
-          font-family: Arial, Helvetica, sans-serif;
-          font-size: 17px;
-     }
+    #app {
+        /* Default font properties, unless overriden in components */
+        color: #121824;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 17px;
+    }
 </style>

@@ -31,6 +31,7 @@
 *     08/02/2018: 	Initial layout                      Daroya, Carlos Adrian A.
 *     08/02/2018: 	Load reports from DB            	Daroya, Carlos Adrian A.
 *     22/02/2018:   Added <hr> line 63                	Daroya, Carlos Adrian A.
+*     19/03/2018:   Added basic styling                 Ocampo, Pauline L.
 *
 * 
 *
@@ -43,32 +44,28 @@
 -->
 
 <template>
-     <div class = "page">
-          <div title="Reports">
-               <h1>REPORTS</h1>
-               <div
-                    v-for="report in reports"
-                    :key="report.rid">
-
-                    <h4> Report ID:  {{report.rid}} <br> </h4>
-                    <h4> StudentNo:  {{report.sno}}  <br></h4>
-                    <h4> Freehours: {{report.freehours}}  <br></h4>
-                    <h4> Timein:  {{report.timein}}  <br></h4>
-                    <h4> Timeout: {{report.timeout}}  <br></h4>
-                    <h4> Amount Due: 
-                         <!--<input v-model="report.amountdue" placeholder="Type the amount here" /> -->
-                         <change-credits :report = "report"></change-credits>
-                    </h4>
-                    <h4> SeatNo:  {{report.seatno}}  <br></h4>
-                    <hr>
-
-               </div>
-                
-               <button> 
-                    <router-link to="/home"> Home </router-link>
-               </button>  
-          </div>
-     </div>
+    <div id='reports-wrapper'>
+        <table>
+            <thead>
+                <tr>
+                    <th>Report ID</th>
+                    <th>Student Number</th>
+                    <th>Time In</th>
+                    <th>Time Out</th>
+                    <th>Amount Due</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="report in reports" :key="report.rid">
+                    <td>{{report.rid}}</td>
+                    <td>{{report.sno}}</td>
+                    <td>{{report.timein}}</td>
+                    <td>{{report.timeout}}</td>
+                    <td><change-credits :report = "report"></change-credits></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </template>
 
 <script>
@@ -77,22 +74,41 @@ import AuthenticationService from '../services/AuthenticationService'
 import ChangeCredits from 'components/ChangeCredits.vue'
 
 export default{
-     components: {
-          ChangeCredits
-     },
-     data () {
-          return {
-               // hoursDisp: this.reports.amountdue,
-               reports: null
-          }
-     },
-     // The moment it's mounted, you do a request for all the reports
-     async mounted () {
-          try{
-               this.reports = (await ReportService.index()).data
-          } catch (error) {
-               console.error(error)
-          }
-     }
+    components: {
+        ChangeCredits
+    },
+    data () {
+        return {
+            // hoursDisp: this.reports.amountdue,
+            reports: null
+        }
+    },
+    // The moment it's mounted, you do a request for all the reports
+    async mounted () {
+        try{
+            this.reports = (await ReportService.index()).data
+        } catch (error) {
+            console.error(error)
+        }
+    }
 }
 </script>
+
+<style scoped>
+    #reports-wrapper table {
+        border-collapse: collapse;
+        /* Center table */
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+    #reports-wrapper th, td {
+        padding: 2px 10px;
+    }
+    #reports-wrapper th {
+        font-size: 1.4em;
+    }
+    #reports-wrapper tr:nth-child(even) {
+        background-color:  #f3f8fe;
+    }
+</style>

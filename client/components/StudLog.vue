@@ -24,74 +24,78 @@
 *     Solamo of the Department of Computer
 *     Science, College of Engineering, University
 *     of the Philippines, Diliman for the AY 2017-2018
-
-
+*
+*
 *     Code history:
 *     08/02/2018: 	File was created                    Ocampo, Pauline
 *     08/02/2018: 	Initial Layout                      Ocampo, Pauline
 *     08/02/2018: 	Catching values from Student.vue    Ocampo, Pauline
+*     09/03/2018:   Added basic styling                 Ocampo, Pauline L.
 *
 * 
 *
 *     Date created: 1 February 2018
 *     Development Group: Cai, Daroya, Ocampo
 *    
-
+*
 *     File purpose:
 *     HTML view component (displayed in Student.vue)
 *     Holds student information
 -->
 
 <template>
-     <div>
-          <table>
-               <thead>
-                    <tr>
-                         <th>Date</th>
-                         <th>Seat</th>
-                         <th>Timein</th>
-                         <th>Timeout</th>
-                         <th>Free Hours</th>
-                    </tr>
-               </thead>
-               <tbody>
-                    <!-- Key is supposed to be a unique identifier, 
-                    I just added an arbitrary value to silence the warning. :)
-                    Replace the value with the primary key once db is set up-->
-                    <tr v-for="row in log" :key="row.date">
-                         <th>{{row.date}}</th>
-                         <th>{{row.seat}}</th>
-                         <th>{{row.timein}}</th>
-                         <th>{{row.timeout}}</th>
-                         <th>{{row.freehours}}</th>
-                    </tr>
-               </tbody>
-          </table>
-     </div>
+    <div id='studlog-wrapper'>
+        <table>
+            <thead>
+                <tr>
+                        <th>RID</th>
+                        <th>Time In</th>
+                        <th>Time Out</th>
+                        <th>Seat Number</th>
+                        <th>Amount Due</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <!--
+                        <td>{{log.rid}}</td>
+                        <td>{{log.timein}}</td>
+                        <td>{{log.timeout}}</td>
+                        <td>{{log.seatno}}</td>
+                        <td>{{log.amountdue}}</td>
+                    -->
+                        <td> placeholder rid </td>
+                        <td> placeholder timein </td>
+                        <td> placeholder timeout </td>
+                        <td> placeholder seatno </td>
+                        <td> placeholder amtdue </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </template>
 
 
 <script>
-export default{
-     props: ['studNo'],
-     data: function() {
-          return {
-               log: null
-               /*[
+    export default {
+        props: ['studLogObj'],
+        data: function() {
+            return {
+                log: this.studLogObj
+                /*[
                     {date: '23/11/17', seat: 12, timein: '12:00', timeout: '14:00', freehours: '14:50'},
                     {date: '23/10/17', seat: 14, timein: '10:00', timeout: '11:00', freehours: '15:50'}
-               ]*/
-          }
-     },
-
-     // Stud log
-     async mounted () {
-          try{
-               //this.log = (await ReportService.log()).data
-               //console.log(this.log)
-          } catch (error) {
-               console.error(error)
-          }
-     }
-}
+                ]*/
+            }
+        }
+    }
 </script>
+
+<style scoped>
+    #studlog-wrapper table {
+        border-collapse: collapse
+    }
+    #studlog-wrapper table, th, td {
+        border: 1px solid green;
+    }
+</style>

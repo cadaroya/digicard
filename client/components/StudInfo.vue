@@ -96,10 +96,7 @@
      #studinfo-wrapper table {
           background-color: #f3f8fe;
           color: #4179f7;
-          margin-bottom: 0px;
-          margin-left: auto;
-          margin-right: auto;
-          margin-top: 0px;
+          margin: 0px;
           padding: 5px;
      }
      #studinfo-wrapper p {

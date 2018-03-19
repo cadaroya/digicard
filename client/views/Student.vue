@@ -30,6 +30,7 @@
 *     08/02/2018:   Connected to backend                Daroya, Carlos Adrian A.
 *     21/02/2018:   Changed response to 1D              Daroya, Carlos Adrian A.
 *     07/03/2018:   Added basic styling                 Ocampo, Pauline L.
+*     19/03/2018:   Added student info box styling      Ocampo, Pauline L.
 *
 *
 *     Date created: 1 February 2018
@@ -40,13 +41,15 @@
 -->
 
 <template>
-     <div>
-          <span v-if="stud"><stud-info :studObj="stud"></stud-info></span>
-          <span v-else><p> Student information not found </p></span>
-          <br>
-          <hr>
-          <span v-if="studLog"><stud-log :studNo="$route.params.studNo"></stud-log></span>
-          <span v-else><p> No logs available </p></span>
+     <div id="student-wrapper">
+            <div id="student-wrapper-left">
+                <span v-if="stud"><stud-info :studObj="stud"></stud-info></span>
+                <span v-else><p> Student information not found </p></span>
+            </div>
+            <div id="student-wrapper-right">
+                <span v-if="studLog"><stud-log :studLogObj="studLog"></stud-log></span>
+                <span v-else><p> No logs available </p></span>
+            </div>
      </div>
 </template>
 
@@ -99,3 +102,21 @@
           }
      }
 </script>
+
+<style scoped>
+    #student-wrapper {
+        overflow: hidden;
+    }
+    #student-wrapper > div {
+        display: inline-block;
+        float: left;
+        min-height: 400px;
+        padding: 1%;
+    }
+    #student-wrapper-left {
+        width: 38%;
+    }
+    #student-wrapper-right {
+        width: 58%;
+    }
+</style>
