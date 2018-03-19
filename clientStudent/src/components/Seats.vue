@@ -100,7 +100,8 @@ import SeatPickService from '../services/SeatPickService'
 </script>
 
 <style scoped>
-     #see-seats-wrapper .computer-wrapper {
+     
+     #seats-wrapper .computer-wrapper {
           padding-top: 10px;
           background-color: orange;
           height: 26em;

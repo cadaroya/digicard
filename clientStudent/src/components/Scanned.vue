@@ -42,15 +42,19 @@
           <span v-if="studReturned">
                <span v-if="studReturned.session === 1">
                     <h1> Time In </h1>
-                         <stud-info :studObj="studReturned"></stud-info>
-                         <span v-if="noSeatsAvailable">
-                              <p> No Seats Available :( </p>
-                         </span>
-                         <span v-else>
-                              <seats :seat.sync="seat"></seats>
-                              <p> scanned: {{seat}} </p>
-                              <button @click="confirmSeat">Confirm Seat</button>
-                         </span>
+                         <div id="scanned-wrapper-left">
+                              <stud-info :studObj="studReturned"></stud-info>
+                         </div>
+                         <div id="scanned-wrapper-right">
+                              <span v-if="noSeatsAvailable">
+                                   <p> No Seats Available :( </p>
+                              </span>
+                              <span v-else>
+                                   <seats :seat.sync="seat"></seats>
+                                   <p> scanned: {{seat}} </p>
+                                   <button @click="confirmSeat">Confirm Seat</button>
+                              </span>
+                         </div>
                     <!--{{seat}}-->
                </span>
                <span v-else-if="studReturned.session === 0">
@@ -140,7 +144,19 @@ export default {
 </script>
 
 <style scoped>
-#scanned-wrapper .seatpicker {
-     float: right;
-}
+     #scanned-wrapper {
+          overflow: hidden;
+     }
+     #scanned-wrapper > div {
+          display: inline-block;
+          float: left;
+          min-height: 400px;
+          padding: 1%;
+     }
+     #scanned-wrapper-left {
+          width: 10%;
+     }
+     #scanned-wrapper-right {
+          width: 40%;
+     }
 </style>
