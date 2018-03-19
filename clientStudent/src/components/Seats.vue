@@ -37,30 +37,97 @@
 
 <template>
      <div id="seats-wrapper">
-          <select :value="seat" @change="$emit('update:seat', $event.target.value)">
-               <option disabled value="">Please select one</option>
-               <option v-for="seat in seats"  v-bind:key="seat">
-                    {{seat}}
-               </option>
-          </select>
+          <p> Seatsvue: {{seat}} </p>
+          <div class="computer-wrapper">
+               <div v-for="computer in seatList" v-bind:key="computer.seatno">
+                    <a v-on:click="updateParent(computer.seatno)">
+                         <div v-if="computer.os == 'mac'">
+                                   <div class = "computer mac">
+                                        Mac <br>
+                                        {{computer.seatno}}
+                                   </div>
+                         </div>
+                         <div v-else-if="computer.os == 'windows'">
+                              <div class = "computer windows">
+                                   Windows <br>
+                                   {{computer.seatno}}
+                              </div>
+                         </div>
+                    </a>
+               </div>
+          </div>
      </div>
 </template>
 
 <script>
 /* eslint-disable */
+import SeatPickService from '../services/SeatPickService'
      export default{
-          props: ['selected'],
           data () {
                return{
-                    seats: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,
-                         20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38],
-                    seat: ''
+                    seat: '',
+                    full: 0,
+                    seatList: null
                }
+          },
+          methods: {
+               async getSeatInfo () {
+                    try{
+                         const resp = await SeatPickService.checkFull() 
+                         console.log("the data im looking for is here..")
+                         console.log((resp.data))
+                         if((resp.data).length == 0){
+                              this.full = 1
+                              console.log("elow")
+                              console.log(this.full)
+                         } else {
+                              this.seatList = resp.data
+                         }
+                    } catch(err) {
+
+                    }
+               },
+               updateParent(seatno) {
+                    this.seat = seatno
+                    this.$emit('update:seat', seatno)
+               }
+          },
+          mounted () {
+               this.getSeatInfo()
           }
      }
+
 </script>
 
 <style scoped>
+     #see-seats-wrapper .computer-wrapper {
+          padding-top: 10px;
+          background-color: orange;
+          height: 26em;
+     }
+     #seats-wrapper .computer {
+          font-size: 20px;
+          text-align: center;
+          display:inline-block;
+          padding-top: 5px;
+          position: relative;
+          margin: 5px;
+          float:left;
+          width: 110px;
+          height: 50px;
+          border: 1px solid black;
+     }
+
+     #seats-wrapper .computer.windows {
+          background-color: lightblue;
+     }
+     #seats-wrapper .computer.mac {
+          background-color: white; 
+     }
+     #seats-wrapper .computer.unavailable {
+          background-color: #DC143C; 
+     }
+
      #seats-wrapper .seats-list a {
           color: #e9f1f7;
           background-color: #4179f7;

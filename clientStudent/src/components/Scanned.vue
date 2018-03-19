@@ -48,6 +48,7 @@
                          </span>
                          <span v-else>
                               <seats :seat.sync="seat"></seats>
+                              <p> scanned: {{seat}} </p>
                               <button @click="confirmSeat">Confirm Seat</button>
                          </span>
                     <!--{{seat}}-->
