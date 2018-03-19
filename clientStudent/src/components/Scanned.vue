@@ -51,7 +51,6 @@
                               </span>
                               <span v-else>
                                    <seats :seat.sync="seat"></seats>
-                                   <p> scanned: {{seat}} </p>
                                    <button @click="confirmSeat">Confirm Seat</button>
                               </span>
                          </div>
@@ -148,15 +147,15 @@ export default {
           overflow: hidden;
      }
      #scanned-wrapper > div {
-          display: inline-block;
-          float: left;
           min-height: 400px;
           padding: 1%;
      }
      #scanned-wrapper-left {
-          width: 10%;
+          float: left;
+          width: 30%;
      }
      #scanned-wrapper-right {
-          width: 40%;
+          float: right;
+          width: 70%;
      }
 </style>

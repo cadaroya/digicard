@@ -37,7 +37,6 @@
 
 <template>
      <div id="seats-wrapper">
-          <p> Seatsvue: {{seat}} </p>
           <div class="computer-wrapper">
                <div v-for="computer in seatList" v-bind:key="computer.seatno">
                     <a v-on:click="updateParent(computer.seatno)">

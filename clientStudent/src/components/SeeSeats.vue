@@ -100,22 +100,25 @@ import SeatPickService from '../services/SeatPickService'
 
 <style scoped>
 #see-seats-wrapper .computer-wrapper {
-     padding-top: 10px;
+     padding-top: 1em;
      background-color: orange;
-     height: 26em;
+     margin-top: 6em;
+     margin-left: 6em;
+     margin-right: 6em;
+     height: 29em;
 }
 
 #see-seats-wrapper .computer {
-     font-size: 20px;
+     font-size: 1.25em;
      text-align: center;
      display:inline-block;
-     padding-top: 5px;
+     padding-top: 1em;
      position: relative;
-     margin: 5px;
+     margin: 1em;
      float:left;
-     width: 110px;
-     height: 50px;
-     border: 1px solid black;
+     width: 6em;
+     height: 3em;
+     border: 0.1em solid black;
 }
 
 #see-seats-wrapper .computer.windows {

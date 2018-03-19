@@ -40,15 +40,19 @@
 
 <template>
      <div id ="instruct-wrapper">
-          <div class = "photo" >
+          <div class = "photo">
                <img src="../images/engglib.png"/>
           </div>
           <br><br>
-          <h1> Digital Pink Card System </h1>
-          <p> Scan your ID with the provided barcode scanner! </p>
-          <input type="text" @keyup.enter="goToScanned" name="studNo" ref="scanInput" v-model="studNo" placeholder="(Enter student number)"/>
+          <div class = "input">
+               <h1> Digital Pink Card System </h1>
+               <p> Scan your ID with the provided barcode scanner! </p>
+               <input type="text" @keyup.enter="goToScanned" name="studNo" ref="scanInput" v-model="studNo" placeholder="(Enter student number)"/>
+          </div>
+          <div class = "photo">
+               <img src="../images/penguin.png" height="150" width="150"/>
+          </div>
           <br><br><br><br>
-          <span>{{seatList}}</span>
           <span v-if="full == 0">
                <see-seats></see-seats>
           </span>
@@ -62,7 +66,8 @@
 <script>
 /* eslint-disable */
 import SeeSeats from './SeeSeats.vue'
-import Logo from '../images/engglib.png'
+import LogoPhoto from '../images/engglib.png'
+import PenguinPhoto from '../images/penguin.png'
 import SeatPickService from '../services/SeatPickService'
 export default {
      name: 'Instruct',
@@ -74,7 +79,7 @@ export default {
                seatList: null
           }
      },
-     components: { Logo, SeeSeats },
+     components: { LogoPhoto, PenguinPhoto, SeeSeats },
      methods: {
           goToScanned () {
                /* Remove the dash, if any, in the scanned studNo before pushing */
@@ -112,7 +117,14 @@ export default {
 #instruct-wrapper {
      
 }
-#instruct-wrapper .photo{
+#instruct-wrapper .photo {
+     min-height: 13em;
+     width: 33%;
+     float: left;
+}
+#instruct-wrapper .input {
+     min-height: 13em;
+     width: 33%;
      float: left;
 }
 </style>
