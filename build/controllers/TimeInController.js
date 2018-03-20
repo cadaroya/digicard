@@ -117,6 +117,8 @@ module.exports = {
                 */
 
               // timeIN = null, then create method for confirm seat sa frontend (send rid). remove timeIN select sa taas
+               const full = await sequelize.query("SELECT * FROM seat WHERE seatno NOT IN (SELECT seatno FROM report WHERE timeout IS NULL)" , {type: sequelize.QueryTypes.SELECT})
+
                const data = {
                 rid: null,
                 sno: stud.sno,
@@ -126,14 +128,17 @@ module.exports = {
                 amountdue: null,
                 seatno: 0
               }    
-
-              report.create(data)
-
+              if(full = null){
+                studReport = "full"
+              }else{
+                
                 // Update student session to 1
                 await sequelize.query("UPDATE student SET session = 1 WHERE sno = ?" , { replacements: [search], type: sequelize.QueryTypes.UPDATE})
 
                 studReport = (await sequelize.query("SELECT * FROM student A JOIN report B ON A.sno = ? WHERE rid = (SELECT max(rid) FROM report WHERE sno = ?)" , { replacements: [search,search], type: sequelize.QueryTypes.SELECT}))
                 studReport = studReport[0]
+                report.create(data)
+              }
               // If session == 1, time out
               } else{
                 
