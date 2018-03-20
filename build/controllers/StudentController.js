@@ -61,7 +61,7 @@ module.exports = {
                     }
                })
                
-               studLog = await report.find({
+               studLog = await report.findAll({
                     where: {
                          sno: search
                     }
