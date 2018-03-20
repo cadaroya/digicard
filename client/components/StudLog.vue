@@ -31,6 +31,7 @@
 *     08/02/2018: 	Initial Layout                      Ocampo, Pauline
 *     08/02/2018: 	Catching values from Student.vue    Ocampo, Pauline
 *     09/03/2018:   Added basic styling                 Ocampo, Pauline L.
+*     21/03/2018:   Displays reports                    Ocampo, Pauline L.
 *
 * 
 *
@@ -56,19 +57,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <!--
-                        <td>{{log.rid}}</td>
-                        <td>{{log.timein}}</td>
-                        <td>{{log.timeout}}</td>
-                        <td>{{log.seatno}}</td>
-                        <td>{{log.amountdue}}</td>
-                    -->
-                        <td> placeholder rid </td>
-                        <td> placeholder timein </td>
-                        <td> placeholder timeout </td>
-                        <td> placeholder seatno </td>
-                        <td> placeholder amtdue </td>
+                <tr v-for="report in log" :key="report.rid">
+                        <td>{{report.rid}}</td>
+                        <td>{{report.timein}}</td>
+                        <td>{{report.timeout}}</td>
+                        <td>{{report.seatno}}</td>
+                        <td>{{report.amountdue}}</td>
                 </tr>
             </tbody>
         </table>
