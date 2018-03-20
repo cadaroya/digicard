@@ -128,10 +128,16 @@ module.exports = {
                 amountdue: null,
                 seatno: 0
               }    
-              if(full = null){
+              if(full == null){
+
                 studReport = "full"
+                console.log("----------------------------------------------------------")
+                console.log(full)
+                console.log("------------------------------------------------------------")
               }else{
-                
+                console.log("----------------------------------------------------------")
+                console.log(full)
+                console.log("------------------------------------------------------------")
                 // Update student session to 1
                 await sequelize.query("UPDATE student SET session = 1 WHERE sno = ?" , { replacements: [search], type: sequelize.QueryTypes.UPDATE})
 
