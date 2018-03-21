@@ -39,20 +39,24 @@
      <div id="seats-wrapper">
           <div class="computer-wrapper">
                <div v-for="computer in seatList" v-bind:key="computer.seatno">
-                    <a v-on:click="updateParent(computer.seatno)">
-                         <div v-if="computer.os == 'mac'">
-                                   <div class = "computer mac">
-                                        Mac <br>
+                    <div class = "seats-list">
+                         <a
+                         v-on:click = "updateParent(computer.seatno)"
+                         v-bind:class = "{active: seat == computer.seatno}">
+                              <div v-if="computer.os == 'mac'">
+                                        <div class = "computer mac">
+                                             Mac <br>
+                                             {{computer.seatno}}
+                                        </div>
+                              </div>
+                              <div v-else-if="computer.os == 'windows'">
+                                   <div class = "computer windows">
+                                        Windows <br>
                                         {{computer.seatno}}
                                    </div>
-                         </div>
-                         <div v-else-if="computer.os == 'windows'">
-                              <div class = "computer windows">
-                                   Windows <br>
-                                   {{computer.seatno}}
                               </div>
-                         </div>
-                    </a>
+                         </a>
+                    </div>
                </div>
           </div>
      </div>
@@ -129,17 +133,15 @@ import SeatPickService from '../services/SeatPickService'
      }
 
      #seats-wrapper .seats-list a {
-          color: #e9f1f7;
-          background-color: #4179f7;
           float: left;
-          font-family: Arial, Helvetica, sans-serif;
-          font-weight: lighter;
-          font-size: 20px;
-          /* Padding value following was essentially trial and error w/ height... */
-          padding: 24px 17px;
-          text-decoration: none;
+          padding: 0.5em 0.5em;
      }
      #seats-wrapper .seats-list a:hover {
-          background-color: #2660e8
+          background-color: blue;
+     }
+     #seats-wrapper .active {
+          float: left;
+          padding: 0.5em 0.5em;
+          background-color: blue;
      }
 </style>
