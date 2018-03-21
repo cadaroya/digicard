@@ -29,6 +29,7 @@
 *     08/02/2018:   File Generated                    Daroya, Carlos Adrian A.
 *     20/02/2018:   Changed to .vue file              Cai, Jann Willem B. 
 *     07/03/2018:   Added basic styling               Ocampo, Pauline L.
+*     21/03/2018:   Added default table styles        Ocampo, Pauline L.
 *
 *
 *
@@ -41,26 +42,47 @@
 *-->
 
 <template>
-    <div id="app" class="app-wrapper">
-        <app-navbar></app-navbar>
-        <router-view></router-view>
-    </div>
+     <div id="app" class="app-wrapper">
+          <app-navbar></app-navbar>
+          <router-view></router-view>
+     </div>
 </template>
 
 <script>
-import NavBar from './NavBar.vue'
-        export default {
-            components: {
-                'app-navbar': NavBar
-        }
-    }
+     import NavBar from './NavBar.vue'
+          export default {
+               components: {
+                    'app-navbar': NavBar
+          }
+     }
 </script>
 
-<style scoped>
-    #app {
-        /* Default font properties, unless overriden in components */
-        color: #121824;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 17px;
-    }
+<style>
+     #app {
+          /* Default font properties, unless overriden in components */
+          color: #121824;
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: 17px;
+     }
+     
+     /* Set a default style for any logs */
+     .records-table {
+          border-collapse: collapse;
+          /* Center table */
+          margin-left: auto;
+          margin-right: auto;
+          text-align: center;
+     }
+
+     .records-table th, td {
+          padding: 2px 10px;
+     }
+
+     .records-table th {
+          font-size: 1.4em;
+     }
+
+     .records-table tr:nth-child(odd) {
+          background-color:  #f3f8fe;
+     }
 </style>

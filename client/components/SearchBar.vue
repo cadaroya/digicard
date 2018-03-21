@@ -29,6 +29,7 @@
 *     08/02/2018:   File Created                       Ocampo, Pauline
 *     20/02/2018:   Changed to .vue file               Cai, Jann Willem B.
 *     07/03/2018:   Added basic styling                Ocampo, Pauline L.
+*     21/03/2018:   Added search on Enter-press        Ocampo, Pauline L.
 *
 *
 *
@@ -42,51 +43,26 @@
 
 <template>
      <div id='searchbar-wrapper'>
-          <input v-model="searchStr" placeholder="Enter Student Number" />
-          <button v-on:click="goToStudent" > Search </button>
+          <input v-model="searchStr" @keyup.enter="goToStudent" placeholder="Enter Student Number" />
+          <button v-on:click="goToStudent"> Search </button>
      </div>
 </template>
 
-
 <script>
-import StudentService from '../services/StudentService'
+     import StudentService from '../services/StudentService'
 
-export default {
-     data: function() {
-          return {
-               searchStr: ''
-          }
-     },
-     methods: {
-          async goToStudent() {
-               //try {
-                    this.$router.push('/student/' + this.searchStr);
-
-                    /*
-                    // this.$router.push('/student');
-                    const response = (await StudentService.index({
-                              search: this.searchStr
-                    }, this.searchStr)).data
-                    console.log(response)
-
-                    // You can call stud.sno, stud.first_name, etc
-                    const stud = response[0]
-                    // const log = response[1]
-
-                    console.log(stud)
-                    // console.log(log)
-
-                    console.log('sending stud')
-                    this.$emit('foundStud', stud)
-                         
-               } catch(error){
-                    // console.log(error)
-                    console.log("An error occurred when searching the student " + this.searchStr + ". Please try again.")
+     export default {
+          data: function() {
+               return {
+                    searchStr: ''
                }
-               */  
+          },
+          methods: {
+               async goToStudent() {
+                    this.$router.push('/student/' + this.searchStr);
+               }
           }
      }
-}
 </script>
 
 <style scoped>
@@ -98,6 +74,7 @@ export default {
           padding: 50px 0px;
           text-align: center;
      }
+
      #searchbar-wrapper button {
           background-color: #4179f7;
           border: none;
@@ -110,9 +87,11 @@ export default {
           right: 30px;
           width: 80px;
      }
+
      #searchbar-wrapper button:hover {
           background-color: #2660e8
      }
+
      #searchbar-wrapper input {
           border: #f9f9f9;
           box-shadow: 0px 0px 30px 6px #eaeaea;
@@ -122,6 +101,7 @@ export default {
           padding-left: 3%;
           width: 55%;
      }
+     
      #searchbar-wrapper ::placeholder{
           color: #78aeee;
      }

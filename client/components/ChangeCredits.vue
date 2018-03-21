@@ -27,7 +27,8 @@
 
 *     Code history:
 *     16/02/2018:   File created                      Cai, Jann Willem B.
-*     20/02/2018:   Changed to .vue file              Cai, Jann Willem B. 
+*     20/02/2018:   Changed to .vue file              Cai, Jann Willem B.
+*     21/03/2018:   Cleaned up code                   Ocampo, Pauline L. 
 *
 *
 *
@@ -52,7 +53,6 @@
      export default {
           data: function() {
                return {
-                    //report: this.report,
                     amountdue: this.report.amountdue
                }
           },
@@ -64,6 +64,3 @@
           props: ['report']
      }
 </script>
-
-<style scoped>
-</style>

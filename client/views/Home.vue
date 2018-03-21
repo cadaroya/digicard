@@ -31,6 +31,7 @@
 *     08/02/2018: 	Routes                              Ocampo, Pauline
 *     08/02/2018: 	Added SearchBar comp                Ocampo, Pauline
 *     07/03/2018:   Added basic styling                 Ocampo, Pauline L.
+*     21/03/2018:   Cleaned up code                     Ocampo, Pauline L.
 *
 *
 *
@@ -44,7 +45,6 @@
 
 <template>
      <div class="page">
-          <!-- <search-bar @foundStud="goToStud($event)"></search-bar> -->
           <search-bar></search-bar>
      </div>
 </template>
@@ -55,13 +55,6 @@
           components: {
                SearchBar
           }
-          /*,
-          methods: {
-               goToStud(stud) {
-                    this.$router.push('/student/' + stud.sno)
-               }
-          }
-          */
      }
 </script>
 

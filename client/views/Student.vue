@@ -31,6 +31,7 @@
 *     21/02/2018:   Changed response to 1D              Daroya, Carlos Adrian A.
 *     07/03/2018:   Added basic styling                 Ocampo, Pauline L.
 *     19/03/2018:   Added student info box styling      Ocampo, Pauline L.
+*     21/03/2018:   Fixed code spacing                  Ocampo, Pauline L.
 *
 *
 *     Date created: 1 February 2018
@@ -42,14 +43,14 @@
 
 <template>
      <div id="student-wrapper">
-            <div id="student-wrapper-left">
-                <span v-if="stud"><stud-info :studObj="stud"></stud-info></span>
-                <span v-else><p> Student information not found </p></span>
-            </div>
-            <div id="student-wrapper-right">
-                <span v-if="studLog"><stud-log :studLogObj="studLog"></stud-log></span>
-                <span v-else><p> No logs available </p></span>
-            </div>
+          <div id="student-wrapper-left">
+               <span v-if="stud"><stud-info :studObj="stud"></stud-info></span>
+               <span v-else><p> Student information not found </p></span>
+          </div>
+          <div id="student-wrapper-right">
+               <span v-if="stud && studLog"><stud-log :studLogObj="studLog"></stud-log></span>
+               <span v-else><p> No logs available </p></span>
+          </div>
      </div>
 </template>
 
@@ -74,7 +75,7 @@
                          //this.$router.push('/student/' + this.searchStr);
                          // this.$router.push('/student');
                          const response = (await StudentService.index({
-                             search: this.searchStr
+                         search: this.searchStr
                          }, this.searchStr)).data
                          // You can call stud.sno, stud.first_name, etc
                          this.stud = response[0]
@@ -104,19 +105,22 @@
 </script>
 
 <style scoped>
-    #student-wrapper {
-        overflow: hidden;
-    }
-    #student-wrapper > div {
-        display: inline-block;
-        float: left;
-        min-height: 400px;
-        padding: 1%;
-    }
-    #student-wrapper-left {
-        width: 38%;
-    }
-    #student-wrapper-right {
-        width: 58%;
-    }
+     #student-wrapper {
+          overflow: hidden;
+     }
+
+     #student-wrapper > div {
+          float: left;
+          min-height: 400px;
+          overflow: auto;
+          padding: 1%;
+     }
+
+     #student-wrapper-left {
+          width: 38%;
+     }
+     
+     #student-wrapper-right {
+          width: 58%;
+     }
 </style>

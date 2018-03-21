@@ -46,7 +46,7 @@
 
 <template>
     <div id='studlog-wrapper'>
-        <table>
+        <table class='records-table'>
             <thead>
                 <tr>
                         <th>RID</th>
@@ -69,27 +69,13 @@
     </div>
 </template>
 
-
 <script>
-    export default {
-        props: ['studLogObj'],
-        data: function() {
-            return {
-                log: this.studLogObj
-                /*[
-                    {date: '23/11/17', seat: 12, timein: '12:00', timeout: '14:00', freehours: '14:50'},
-                    {date: '23/10/17', seat: 14, timein: '10:00', timeout: '11:00', freehours: '15:50'}
-                ]*/
-            }
-        }
-    }
+     export default {
+          props: ['studLogObj'],
+          data: function() {
+               return {
+                    log: this.studLogObj
+               }
+          }
+     }
 </script>
-
-<style scoped>
-    #studlog-wrapper table {
-        border-collapse: collapse
-    }
-    #studlog-wrapper table, th, td {
-        border: 1px solid green;
-    }
-</style>

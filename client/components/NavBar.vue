@@ -29,6 +29,7 @@
 *     08/02/2018:   File Created                        Ocampo, Pauline
 *     20/02/2018:   Changed to .vue file                Cai, Jann Willem B.
 *     07/03/2018:   Added basic styling                 Ocampo, Pauline L.
+*     21/03/2018:   Added overflow property             Ocampo, Pauline L.
 *
 *
 *
@@ -50,22 +51,22 @@
      </div>
 </template>
 
-<script>
-</script>
-
 <style scoped>
      #navbar-wrapper {
           background-color: #4179f7;
           box-shadow: 5px 18px 18px 1px #eaeaea;
           height: 71px;
           margin: 40px 0px;
+          overflow: hidden;
           padding: 0px;
      }
+
      #navbar-wrapper .navbar-list {
           list-style-type: none;
           margin: 0px;
           padding: 0px;
      }
+
      #navbar-wrapper .navbar-list a {
           color: #e9f1f7;
           background-color: #4179f7;
@@ -77,6 +78,7 @@
           padding: 24px 17px;
           text-decoration: none;
      }
+     
      #navbar-wrapper .navbar-list a:hover {
           background-color: #2660e8
      }

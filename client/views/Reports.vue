@@ -29,9 +29,10 @@
 *     Code history:
 *     08/02/2018: 	File was created                    Ocampo, Pauline
 *     08/02/2018: 	Initial layout                      Daroya, Carlos Adrian A.
-*     08/02/2018: 	Load reports from DB            	Daroya, Carlos Adrian A.
-*     22/02/2018:   Added <hr> line 63                	Daroya, Carlos Adrian A.
+*     08/02/2018: 	Load reports from DB                Daroya, Carlos Adrian A.
+*     22/02/2018:   Added <hr> line 63                  Daroya, Carlos Adrian A.
 *     19/03/2018:   Added basic styling                 Ocampo, Pauline L.
+*     21/03/2018:   Changed styling to use default      Ocampo, Pauline L.
 *
 * 
 *
@@ -44,71 +45,51 @@
 -->
 
 <template>
-    <div id='reports-wrapper'>
-        <table>
-            <thead>
-                <tr>
-                    <th>Report ID</th>
-                    <th>Student Number</th>
-                    <th>Time In</th>
-                    <th>Time Out</th>
-                    <th>Amount Due</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="report in reports" :key="report.rid">
-                    <td>{{report.rid}}</td>
-                    <td>{{report.sno}}</td>
-                    <td>{{report.timein}}</td>
-                    <td>{{report.timeout}}</td>
-                    <td><change-credits :report = "report"></change-credits></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+     <div id='reports-wrapper'>
+          <table class='records-table'>
+               <thead>
+                    <tr>
+                         <th>Report ID</th>
+                         <th>Student Number</th>
+                         <th>Time In</th>
+                         <th>Time Out</th>
+                         <th>Amount Due</th>
+                    </tr>
+               </thead>
+               <tbody>
+                    <tr v-for="report in reports" :key="report.rid">
+                         <td>{{report.rid}}</td>
+                         <td>{{report.sno}}</td>
+                         <td>{{report.timein}}</td>
+                         <td>{{report.timeout}}</td>
+                         <td><change-credits :report = "report"></change-credits></td>
+                    </tr>
+               </tbody>
+          </table>
+     </div>
 </template>
 
 <script>
-import ReportService from '../services/ReportService'
-import AuthenticationService from '../services/AuthenticationService'
-import ChangeCredits from 'components/ChangeCredits.vue'
+     import ReportService from '../services/ReportService'
+     import AuthenticationService from '../services/AuthenticationService'
+     import ChangeCredits from 'components/ChangeCredits.vue'
 
-export default{
-    components: {
-        ChangeCredits
-    },
-    data () {
-        return {
-            // hoursDisp: this.reports.amountdue,
-            reports: null
-        }
-    },
-    // The moment it's mounted, you do a request for all the reports
-    async mounted () {
-        try{
-            this.reports = (await ReportService.index()).data
-        } catch (error) {
-            console.error(error)
-        }
-    }
-}
+     export default {
+          components: {
+               ChangeCredits
+          },
+          data () {
+               return {
+                    reports: null
+               }
+          },
+          // The moment it's mounted, you do a request for all the reports
+          async mounted () {
+               try{
+                    this.reports = (await ReportService.index()).data
+               } catch (error) {
+                    console.error(error)
+               }
+          }
+     }
 </script>
-
-<style scoped>
-    #reports-wrapper table {
-        border-collapse: collapse;
-        /* Center table */
-        margin-left: auto;
-        margin-right: auto;
-        text-align: center;
-    }
-    #reports-wrapper th, td {
-        padding: 2px 10px;
-    }
-    #reports-wrapper th {
-        font-size: 1.4em;
-    }
-    #reports-wrapper tr:nth-child(even) {
-        background-color:  #f3f8fe;
-    }
-</style>
