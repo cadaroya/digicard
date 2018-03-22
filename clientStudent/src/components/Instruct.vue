@@ -76,7 +76,8 @@ export default {
                studNo: '',
                studReturned: null,
                full: 0,
-               seatList: null
+               seatList: null,
+               currentstudents: null
           }
      },
      components: { LogoPhoto, PenguinPhoto, SeeSeats },
@@ -84,19 +85,32 @@ export default {
           goToScanned () {
                /* Remove the dash, if any, in the scanned studNo before pushing */
                this.studNo = this.studNo.replace('-', '')
-               this.$router.push('/scanned/' + this.studNo)
+               /* if the seats are full */
+               if (this.full == 1) {
+                    var count, length = this.currentstudents.length
+                    for (count = 0; count < length; count++){
+                         if (this.currentstudents[count].sno == this.studNo){
+                              this.$router.push('/scanned/' + this.studNo);
+                         }
+                    }
+                    
+               } else if (this.full == 0) {
+                    this.$router.push('/scanned/' + this.studNo);
+               }
           },
           async checkFull () {
                try{
                     const resp = await SeatPickService.checkFull() 
                     console.log("the data im looking for is here..")
                     console.log((resp.data))
-                    if((resp.data).length == 0){
+                    console.log((resp.data)[0].length)
+                    if((resp.data)[0].length == 0){
                          this.full = 1
+                         this.currentstudents = (resp.data)[1]
                          console.log("elow")
                          console.log(this.full)
                     } else {
-                         this.seatList = resp.data
+                         this.seatList = (resp.data)[0]
                     }
                } catch(err) {
 

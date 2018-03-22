@@ -42,18 +42,18 @@
           <span v-if="studReturned">
                <span v-if="studReturned.session === 1">
                     <h1> Time In </h1>
-                         <div id="scanned-wrapper-left">
-                              <stud-info :studObj="studReturned"></stud-info>
-                         </div>
-                         <div id="scanned-wrapper-right">
-                              <span v-if="noSeatsAvailable">
-                                   <p> No Seats Available :( </p>
-                              </span>
-                              <span v-else>
-                                   <seats :seat.sync="seat"></seats>
-                                   <button @click="confirmSeat">Confirm Seat</button>
-                              </span>
-                         </div>
+                    <div id="scanned-wrapper-left">
+                         <stud-info :studObj="studReturned"></stud-info>
+                    </div>
+                    <div id="scanned-wrapper-right">
+                         <span v-if="noSeatsAvailable">
+                              <p> No Seats Available :( </p>
+                         </span>
+                         <span v-else>
+                              <seats :seat.sync="seat"></seats>
+                              <button @click="confirmSeat">Confirm Seat</button>
+                         </span>
+                    </div>
                     <!--{{seat}}-->
                </span>
                <span v-else-if="studReturned.session === 0">

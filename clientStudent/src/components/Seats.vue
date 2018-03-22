@@ -40,9 +40,8 @@
           <div class="computer-wrapper">
                <div v-for="computer in seatList" v-bind:key="computer.seatno">
                     <div class = "seats-list">
-                         <a
-                         v-on:click = "updateParent(computer.seatno)"
-                         v-bind:class = "{active: seat == computer.seatno}">
+                         <a v-on:click = "updateParent(computer.seatno)"
+                            v-bind:class = "{active: seat == computer.seatno}">
                               <div v-if="computer.os == 'mac'">
                                         <div class = "computer mac">
                                              Mac <br>
@@ -79,12 +78,13 @@ import SeatPickService from '../services/SeatPickService'
                          const resp = await SeatPickService.checkFull() 
                          console.log("the data im looking for is here..")
                          console.log((resp.data))
-                         if((resp.data).length == 0){
+                         console.log((resp.data)[0].length)
+                         if((resp.data)[0].length == 0){
                               this.full = 1
                               console.log("elow")
                               console.log(this.full)
                          } else {
-                              this.seatList = resp.data
+                              this.seatList = (resp.data)[0]
                          }
                     } catch(err) {
 
