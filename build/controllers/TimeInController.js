@@ -116,35 +116,34 @@ module.exports = {
                 }
                 */
 
-              // timeIN = null, then create method for confirm seat sa frontend (send rid). remove timeIN select sa taas
-               const full = await sequelize.query("SELECT * FROM seat WHERE seatno NOT IN (SELECT seatno FROM report WHERE timeout IS NULL)" , {type: sequelize.QueryTypes.SELECT})
+                // timeIN = null, then create method for confirm seat sa frontend (send rid). remove timeIN select sa taas
+                const full = await sequelize.query("SELECT * FROM seat WHERE seatno NOT IN (SELECT seatno FROM report WHERE timeout IS NULL)" , {type: sequelize.QueryTypes.SELECT})
 
-               const data = {
-                rid: null,
-                sno: stud.sno,
-                freehours: stud.freehours,
-                timein: null,
-                timeout: null,
-                amountdue: null,
-                seatno: 0
-              }    
-              if(full == null){
+                const data = {
+                  rid: null,
+                  sno: stud.sno,
+                  freehours: stud.freehours,
+                  timein: null,
+                  timeout: null,
+                  amountdue: null,
+                  seatno: 0
+                }
+                  
+                if(full.length == 0){
 
-                studReport = "full"
-                console.log("----------------------------------------------------------")
-                console.log(full)
-                console.log("------------------------------------------------------------")
-              }else{
-                console.log("----------------------------------------------------------")
-                console.log(full)
-                console.log("------------------------------------------------------------")
-                // Update student session to 1
-                await sequelize.query("UPDATE student SET session = 1 WHERE sno = ?" , { replacements: [search], type: sequelize.QueryTypes.UPDATE})
+                  studReport = "full"
 
-                studReport = (await sequelize.query("SELECT * FROM student A JOIN report B ON A.sno = ? WHERE rid = (SELECT max(rid) FROM report WHERE sno = ?)" , { replacements: [search,search], type: sequelize.QueryTypes.SELECT}))
-                studReport = studReport[0]
-                report.create(data)
-              }
+                }else{
+                  report.create(data) 
+                  // Update student session to 1
+                  await sequelize.query("UPDATE student SET session = 1 WHERE sno = ?" , { replacements: [search], type: sequelize.QueryTypes.UPDATE})
+
+                  studReport = (await sequelize.query("SELECT * FROM student A LEFT JOIN report B ON A.sno = ? WHERE rid = (SELECT max(rid) FROM report WHERE sno = ?)" , { replacements: [search,search], type: sequelize.QueryTypes.SELECT}))
+                  console.log(studReport)
+                  
+                  studReport = studReport[0]
+                  
+                }
               // If session == 1, time out
               } else{
                 

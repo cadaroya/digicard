@@ -45,7 +45,6 @@ module.exports = {
   
     async post (req, res) {
           try {
-            console.log("HELLO I AM POSTINGGGGGGGGGGGGGGGGGGGG><><><><><><><><><><><><><")
             async function getAvailable(os){
               var seat = null
               var seat_os = await sequelize.query("SELECT * FROM seat WHERE os = ? AND seatno NOT IN (SELECT seatno FROM report WHERE timeout IS NULL)" , {replacements: [os],type: sequelize.QueryTypes.SELECT})
