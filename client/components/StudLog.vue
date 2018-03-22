@@ -32,6 +32,7 @@
 *     08/02/2018: 	Catching values from Student.vue    Ocampo, Pauline
 *     09/03/2018:   Added basic styling                 Ocampo, Pauline L.
 *     21/03/2018:   Displays reports                    Ocampo, Pauline L.
+*     22/03/2018:   Added formatISOString()             Ocampo, Pauline L.
 *
 * 
 *
@@ -59,8 +60,8 @@
             <tbody>
                 <tr v-for="report in log" :key="report.rid">
                         <td>{{report.rid}}</td>
-                        <td>{{report.timein}}</td>
-                        <td>{{report.timeout}}</td>
+                        <td>{{formatISOString(report.timein)}}</td>
+                        <td>{{formatISOString(report.timeout)}}</td>
                         <td>{{report.seatno}}</td>
                         <td>{{report.amountdue}}</td>
                 </tr>
@@ -76,6 +77,46 @@
                return {
                     log: this.studLogObj
                }
+          },
+          methods: {
+               /*   formatISOString
+                    22 March 2018
+                    Formats a date/time string in ISO format into a format for display
+
+                    args: isoString (date/time string in ISO format)
+                    returns: string formatted for display (or blank string if invalid)
+                    reqd tables: none
+               */
+              formatISOString(isoString) {
+                    var MONTH_NAMES = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                    var dateObj = new Date(isoString);
+
+                    if (isoString == null) {
+                         return ''
+                    }
+
+                    var formatted = '';
+                    formatted += MONTH_NAMES[dateObj.getMonth()];
+                    formatted += ' ';
+                    formatted += dateObj.getDate();
+                    formatted += ', ';
+                    formatted += dateObj.getFullYear();
+                    formatted += ' ';
+
+                    if (dateObj.getHours() < 10) {
+                         formatted += '0'
+                    }
+                    formatted += dateObj.getHours();
+                    
+                    formatted += ':';
+                    
+                    if (dateObj.getMinutes() < 10) {
+                         formatted += '0';
+                    }
+                    formatted += dateObj.getMinutes();
+
+                    return formatted;
+              }
           }
      }
 </script>

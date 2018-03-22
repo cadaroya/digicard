@@ -33,6 +33,7 @@
 *     22/02/2018:   Added <hr> line 63                  Daroya, Carlos Adrian A.
 *     19/03/2018:   Added basic styling                 Ocampo, Pauline L.
 *     21/03/2018:   Changed styling to use default      Ocampo, Pauline L.
+*     22/03/2018:   Added formatISOString()             Ocampo, Pauline L.
 *
 * 
 *
@@ -60,8 +61,8 @@
                     <tr v-for="report in reports" :key="report.rid">
                          <td>{{report.rid}}</td>
                          <td>{{report.sno}}</td>
-                         <td>{{report.timein}}</td>
-                         <td>{{report.timeout}}</td>
+                         <td>{{formatISOString(report.timein)}}</td>
+                         <td>{{formatISOString(report.timeout)}}</td>
                          <td><change-credits :report = "report"></change-credits></td>
                     </tr>
                </tbody>
@@ -83,7 +84,47 @@
                     reports: null
                }
           },
-          // The moment it's mounted, you do a request for all the reports
+          methods: {
+               /*   formatISOString
+                    22 March 2018
+                    Formats a date/time string in ISO format into a format for display
+
+                    args: isoString (date/time string in ISO format)
+                    returns: string formatted for display (or blank string if invalid)
+                    reqd tables: none
+               */
+               formatISOString(isoString) {
+                    var MONTH_NAMES = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                    var dateObj = new Date(isoString);
+
+                    if (isoString == null) {
+                         return ''
+                    }
+
+                    var formatted = '';
+                    formatted += MONTH_NAMES[dateObj.getMonth()];
+                    formatted += ' ';
+                    formatted += dateObj.getDate();
+                    formatted += ', ';
+                    formatted += dateObj.getFullYear();
+                    formatted += ' ';
+
+                    if (dateObj.getHours() < 10) {
+                         formatted += '0'
+                    }
+                    formatted += dateObj.getHours();
+                    
+                    formatted += ':';
+                    
+                    if (dateObj.getMinutes() < 10) {
+                         formatted += '0';
+                    }
+                    formatted += dateObj.getMinutes();
+
+                    return formatted;
+              }
+          },
+          /* The moment it's mounted, you do a request for all the reports */
           async mounted () {
                try{
                     this.reports = (await ReportService.index()).data
