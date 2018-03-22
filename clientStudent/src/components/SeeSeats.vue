@@ -80,12 +80,13 @@ import SeatPickService from '../services/SeatPickService'
                          const resp = await SeatPickService.checkFull() 
                          console.log("the data im looking for is here..")
                          console.log((resp.data))
-                         if((resp.data).length == 0){
+                         console.log((resp.data)[0].length)
+                         if((resp.data)[0].length == 0){
                               this.full = 1
                               console.log("elow")
                               console.log(this.full)
                          } else {
-                              this.seatList = resp.data
+                              this.seatList = (resp.data)[0]
                          }
                     } catch(err) {
 

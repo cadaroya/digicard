@@ -120,7 +120,7 @@ module.exports = {
      async checkFull (req, res) {
         var full = null
         full = await sequelize.query("SELECT * FROM seat WHERE seatno NOT IN (SELECT seatno FROM report WHERE timeout IS NULL)" , {type: sequelize.QueryTypes.SELECT})
-     
-        res.send(full)
+        currentstudents = await sequelize.query("SELECT sno FROM report WHERE timeout IS NULL", {type: sequelize.QueryTypes.SELECT})
+        res.send([full, currentstudents])
       }
 }
