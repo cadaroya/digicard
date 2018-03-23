@@ -64,7 +64,14 @@
                </tr>
                <tr>
                     <th>FREE HRS</th>
-                    <td>{{freehrs}}</td>
+                    <td>
+                         <span v-if="this.freehrs == null">
+                              null
+                         </span>
+                         <span v-else-if="this.freehrs != null">
+                              {{freehrs}}
+                         </span>
+                    </td>
                </tr>
           </table>
      </div>
