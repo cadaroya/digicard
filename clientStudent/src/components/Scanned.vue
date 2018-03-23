@@ -67,6 +67,7 @@
           <span v-else>
                <h1> Successfully Scanned ID </h1>
                <p>Student not found.</p>
+               <li><router-link to='/'>(back to instruct screen)</router-link></li>
           </span>
      </div>
 </template>
