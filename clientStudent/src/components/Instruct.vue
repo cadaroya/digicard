@@ -30,6 +30,7 @@
 *     22/02/2018:   Added dash stripper                             Ocampo, Pauline
 *     08/03/2018:   Added Table and some styling                    Cai, Jann Willem
 *     18/03/2018:   Added back-end response for available seats     Daroya, Carlos Adrian A.
+*     19/03/2018:   Added penguin.png                               Cai, Jann Willem
 *     23/03/2018:   Clear textbox on incorrect input                Cai, Jann Willem
 *
 *     Date created: 21 February 2018

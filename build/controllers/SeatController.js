@@ -29,7 +29,7 @@
 *     07/03/2018: 	File Created                                       Daroya, Carlos Adrian A.
 *     18/03/2018: 	Check if there are no available seats              Daroya, Carlos Adrian A.
 *     22/03/2018: 	CheckFull function for homepage                    Daroya, Carlos Adrian A.
-*
+*     22/03/2018:   Added in CheckFull to return current students      Cai, Jann Willem B.
 *
 *     Date created: 07 March 2018
 *     Development Group: Cai, Daroya, Ocampo

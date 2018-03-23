@@ -27,6 +27,10 @@
 *
 *     Code history:
 *     07/03/2018:   File was created                    Ocampo, Pauline
+*     19/03/2018:   Sync to Scanned.vue                 Cai, Jann Willem B.
+*     19/03/2018:   Changed getSeatInfo() a bit         Cai, Jann Willem B.
+*     20/03/2018:   Added styling                       Cai, Jann Willem B.
+*     21/03/2018:   Added indicator on seat picked      Cai, Jann Willem B.
 *
 *     Date created: 07 March 2018
 *     Development Group: Cai, Daroya, Ocampo

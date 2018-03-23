@@ -30,6 +30,7 @@
 *     22/02/2018:   Added "student not found" msg                   Ocampo, Pauline
 *     08/03/2018:   Added if else for Timein/Timeout                Cai, Jann Willem
 *     18/03/2018:   Added back-end response for available seats     Daroya, Carlos Adrian A.
+*     19/03/2018:   Sync to Seats.vue                               Cai, Jann Willem B.
 *     23/03/2018:   Disabled confirm button if no seat selected     Ocampo, Pauline L.
 *
 *     Date created: 21 February 2018

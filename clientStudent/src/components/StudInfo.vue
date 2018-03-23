@@ -27,6 +27,7 @@
 *
 *     Code history:
 *     21/02/2018:   File was created                    Ocampo, Pauline
+*     23/03/2018:   Added if-else statement on freehrs  Cai, Jann Willem
 *     23/03/2018:   Added no free hrs remaining msg     Ocampo, Pauline L.
 *
 *

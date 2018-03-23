@@ -28,7 +28,8 @@
 *     Code history:
 *     07/03/2018:   File was created                    Cai, Jann Willem
 *     18/03/2018:   Changed to make table from database Cai, Jann Willem
-*
+*     19/03/2018:   Changed getSeatInfo() a bit         Cai, Jann Willem B.
+
 *     Date created: 07 March 2018
 *     Development Group: Cai, Daroya, Ocampo
 *
