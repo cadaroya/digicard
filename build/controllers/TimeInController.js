@@ -31,6 +31,8 @@
 *     21/02/2018: 	Null Checking       	                    Daroya, Carlos Adrian A.
 *     06/03/2018: 	Reflect change from student model         Daroya, Carlos Adrian A.
 *     18/03/2018:   now returns available seats               Daroya, Carlos Adrian A.
+*     22/03/2018:   create report before join                 Daroya, Carlos Adrian A.
+*     23/03/2018:   await in report.create(data)              Daroya, Carlos Adrian A.
 *
 *
 *     Date created: 16 February 2018
@@ -170,7 +172,13 @@ module.exports = {
                 const resp = (await sequelize.query("SELECT TIMESTAMPDIFF(SECOND,timein,timeout) AS timediff FROM report WHERE rid = ?", {replacements: [studReport.rid], type: sequelize.QueryTypes.SELECT }))[0]
                 const timediff = resp.timediff
                 const freehours = studLog.freehours
-                const amountdue = timediff/60/60*20
+                var amountdue = timediff/60/60*20
+
+                // IF freehours greater than 0, cost 0
+                if(freehours[0] != '-'){
+                  amountdue = 0
+                }
+                
                 // Update timediff, amountdue, (seatno) for REPORT
                 await sequelize.query("UPDATE report SET amountdue = ? WHERE rid = ?" , { replacements: [amountdue,studReport.rid], type: sequelize.QueryTypes.UPDATE})
 
