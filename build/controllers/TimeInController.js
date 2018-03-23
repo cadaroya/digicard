@@ -134,7 +134,7 @@ module.exports = {
                   studReport = "full"
 
                 }else{
-                  report.create(data) 
+                  await report.create(data) 
                   // Update student session to 1
                   await sequelize.query("UPDATE student SET session = 1 WHERE sno = ?" , { replacements: [search], type: sequelize.QueryTypes.UPDATE})
 
