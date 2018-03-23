@@ -30,6 +30,7 @@
 *     22/02/2018:   Added "student not found" msg                   Ocampo, Pauline
 *     08/03/2018:   Added if else for Timein/Timeout                Cai, Jann Willem
 *     18/03/2018:   Added back-end response for available seats     Daroya, Carlos Adrian A.
+*     23/03/2018:   Disabled confirm button if no seat selected     Ocampo, Pauline L.
 *
 *     Date created: 21 February 2018
 *     Development Group: Cai, Daroya, Ocampo
@@ -51,10 +52,9 @@
                          </span>
                          <span v-else>
                               <seats :seat.sync="seat"></seats>
-                              <button @click="confirmSeat">Confirm Seat</button>
+                              <button @click="confirmSeat" :disabled="seat == ''">Confirm Seat</button>
                          </span>
                     </div>
-                    <!--{{seat}}-->
                </span>
                <span v-else-if="studReturned.session === 0">
                     <h1> Time Out </h1>
@@ -119,6 +119,8 @@ export default {
           async confirmSeat () {
                if (this.studReturned == null) {
                     console.log('Student is null in confirmSeat')
+                    return
+               } else if (this.seat == '') {
                     return
                } else {
                     console.log("hello i am here")

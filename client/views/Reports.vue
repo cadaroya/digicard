@@ -34,6 +34,7 @@
 *     19/03/2018:   Added basic styling                 Ocampo, Pauline L.
 *     21/03/2018:   Changed styling to use default      Ocampo, Pauline L.
 *     22/03/2018:   Added formatISOString()             Ocampo, Pauline L.
+*     23/03/2018:   Edited layout                       Ocampo, Pauline L.
 *
 * 
 *
@@ -63,7 +64,8 @@
                          <td>{{report.sno}}</td>
                          <td>{{formatISOString(report.timein)}}</td>
                          <td>{{formatISOString(report.timeout)}}</td>
-                         <td><change-credits :report = "report"></change-credits></td>
+                         <td>{{report.amountdue}}</td>
+                         <!--<td><change-credits :report = "report"></change-credits></td>-->
                     </tr>
                </tbody>
           </table>
