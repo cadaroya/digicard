@@ -30,6 +30,7 @@
 *     22/02/2018:   Added dash stripper                             Ocampo, Pauline
 *     08/03/2018:   Added Table and some styling                    Cai, Jann Willem
 *     18/03/2018:   Added back-end response for available seats     Daroya, Carlos Adrian A.
+*     23/03/2018:   Clear textbox on incorrect input                Cai, Jann Willem
 *
 *     Date created: 21 February 2018
 *     Development Group: Cai, Daroya, Ocampo
@@ -84,15 +85,19 @@ export default {
      methods: {
           goToScanned () {
                /* Remove the dash, if any, in the scanned studNo before pushing */
-               this.studNo = this.studNo.replace('-', '')
+               this.studNo = this.studNo.replace('-', '');
                /* if the seats are full */
                if (this.full == 1) {
-                    var count, length = this.currentstudents.length
+                    /* Check if student number is logged in */
+                    var count, length = this.currentstudents.length;
                     for (count = 0; count < length; count++){
                          if (this.currentstudents[count].sno == this.studNo){
+                              /* Log out the student */
                               this.$router.push('/scanned/' + this.studNo);
+                              return;
                          }
                     }
+                    this.studNo = '';
                     
                } else if (this.full == 0) {
                     this.$router.push('/scanned/' + this.studNo);
