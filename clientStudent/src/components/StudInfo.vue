@@ -27,6 +27,7 @@
 *
 *     Code history:
 *     21/02/2018:   File was created                    Ocampo, Pauline
+*     23/03/2018:   Added no free hrs remaining msg     Ocampo, Pauline L.
 *
 *
 *     Date created: 21 February 2018
@@ -65,8 +66,8 @@
                <tr>
                     <th>FREE HRS</th>
                     <td>
-                         <span v-if="this.freehrs == null">
-                              null
+                         <span v-if="this.freehrs == null || this.freehrs.startsWith('-') || this.freehrs == '00:00:00'">
+                              No free hours remaining.
                          </span>
                          <span v-else-if="this.freehrs != null">
                               {{freehrs}}

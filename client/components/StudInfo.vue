@@ -30,6 +30,7 @@
 *     08/02/2018:   Passing of student info to views        Ocampo, Pauline
 *     20/02/2018:   Changed to .vue file                    Cai, Jann Willem B.
 *     07/03/2018:   Added basic styling                     Ocampo, Pauline L.
+*     23/03/2018:   Added no free hrs remaining msg         Ocampo, Pauline L.
 *
 *
 *
@@ -70,7 +71,14 @@
                </tr>
                <tr>
                     <th>FREE HOURS</th>
-                    <td>{{remHours}}</td>
+                    <td>
+                         <p v-if="remHours == null || remHours.startsWith('-') || remHours == '00:00:00'">
+                              No free hours remaining.
+                         </p>
+                         <p v-else>
+                              {{remHours}}
+                         </p>
+                    </td>
                </tr>
           </table>
      </div>
@@ -105,11 +113,11 @@
      #studinfo-wrapper th {
           font-weight: normal;
           text-align: left;
-          width: 70%;
+          width: 60%;
      }
      #studinfo-wrapper td {
           text-align: right;
           padding: 5px;
-          width: 30%;
+          width: 40%;
      }
 </style>

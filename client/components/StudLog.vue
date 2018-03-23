@@ -33,6 +33,7 @@
 *     09/03/2018:   Added basic styling                 Ocampo, Pauline L.
 *     21/03/2018:   Displays reports                    Ocampo, Pauline L.
 *     22/03/2018:   Added formatISOString()             Ocampo, Pauline L.
+*     23/03/2018:   Added no free hrs remaining msg     Ocampo, Pauline L.
 *
 * 
 *
@@ -63,7 +64,7 @@
                         <td>{{formatISOString(report.timein)}}</td>
                         <td>{{formatISOString(report.timeout)}}</td>
                         <td>{{report.seatno}}</td>
-                        <td>{{report.amountdue}}</td>
+                        <td><p v-if="report.amountdue != null">₱{{report.amountdue}}.00</p></td>
                 </tr>
             </tbody>
         </table>

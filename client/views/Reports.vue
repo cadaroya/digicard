@@ -64,7 +64,7 @@
                          <td>{{report.sno}}</td>
                          <td>{{formatISOString(report.timein)}}</td>
                          <td>{{formatISOString(report.timeout)}}</td>
-                         <td>{{report.amountdue}}</td>
+                         <td><p v-if="report.amountdue != null">₱{{report.amountdue}}.00</p></td>
                          <!--<td><change-credits :report = "report"></change-credits></td>-->
                     </tr>
                </tbody>

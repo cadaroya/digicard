@@ -60,13 +60,14 @@
                     <h1> Time Out </h1>
                     <stud-info :studObj="studReturned"></stud-info>
                     <h1> Cost: </h1>
-                    <p> {{this.studReturned.amountdue}} </p>
+                    <p>₱{{this.studReturned.amountdue}}.00</p>
                     <li><router-link to='/'>(back to instruct screen)</router-link></li>
                </span>
           </span>
           <span v-else>
                <h1> Successfully Scanned ID </h1>
                <p>Student not found.</p>
+               <li><router-link to='/'>(back to instruct screen)</router-link></li>
           </span>
      </div>
 </template>
