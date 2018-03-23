@@ -26,13 +26,14 @@
 
 
 *     Code history:
-*     16/02/2018: 	File Created	                            Daroya, Carlos Adrian A.
-*     16/02/2018: 	TimeIn,Timeout cases	                    Daroya, Carlos Adrian A.
-*     21/02/2018: 	Null Checking       	                    Daroya, Carlos Adrian A.
-*     06/03/2018: 	Reflect change from student model         Daroya, Carlos Adrian A.
-*     18/03/2018:   now returns available seats               Daroya, Carlos Adrian A.
-*     22/03/2018:   create report before join                 Daroya, Carlos Adrian A.
-*     23/03/2018:   await in report.create(data)              Daroya, Carlos Adrian A.
+*     16/02/2018:   File Created                               Daroya, Carlos Adrian A.
+*     16/02/2018:   TimeIn,Timeout cases                       Daroya, Carlos Adrian A.
+*     21/02/2018:   Null Checking                              Daroya, Carlos Adrian A.
+*     06/03/2018:   Reflect change from student model          Daroya, Carlos Adrian A.
+*     18/03/2018:   now returns available seats                Daroya, Carlos Adrian A.
+*     22/03/2018:   create report before join                  Daroya, Carlos Adrian A.
+*     23/03/2018:   await in report.create(data)               Daroya, Carlos Adrian A.
+*     23/03/2018:   Fix spacing and indentation                Cai, Jann Willem B.      
 *
 *
 *     Date created: 16 February 2018
@@ -47,156 +48,156 @@ const {student} = require('../models')
 const {report} = require('../models')
 
 module.exports = {
-    async post (req, res) {
+     async post (req, res) {
           try {
-            // Initialize null variables
-            const search = req.body.studNo
-            var stud = null
-            var studReport = null
+               /* Initialize null variables */
+               const search = req.body.studNo
+               var stud = null
+               var studReport = null
 
-            stud = await student.find({
-              where: {
-                   sno: search
-              }
-            })
+               stud = await student.find({
+                    where: {
+                               sno: search
+                    }
+               })
 
-            if(stud != null){
-              // If session == 0, time in
-              if(stud.session == 0){
-                // Select timestamp
-                //const timeIN = (await sequelize.query("SELECT NOW() AS time" , {type: sequelize.QueryTypes.SELECT}))[0].time
+               if(stud != null){
+                    /* If session == 0, time in */
+                    if(stud.session == 0){
+                         // Select timestamp
+                         //const timeIN = (await sequelize.query("SELECT NOW() AS time" , {type: sequelize.QueryTypes.SELECT}))[0].time
 
-                /*
-                if(seat != null){
-                  // Create Report (timein only)
-                  const data = {
-                    rid: null,
-                    sno: stud.sno,
-                    freehours: stud.freehours,
-                    timein: timeIN,
-                    timeout: null,
-                    amountdue: null,
-                    seatNo: seat
-                  }
-                }
-                else{
-                  // Create Report (timein only)
-                  // Randomize if seat == null
-                  if(stud.preference.localeCompare(windows) == 0){
-                    // Retrieve seats with windows os && AVAILABLE
-                    const seat_windows = await sequelize.query("SELECT * FROM seat LEFT JOIN USING seatno report WHERE os = ? AND timeout IS NOT NULL" , {replacements: [windows],type: sequelize.QueryTypes.SELECT})
-                    // Randomize from AVAILABLE windows computers
-                    const max = seat_windows.length - 1
-                    const min = 0
-                    seat = Math.floor(Math.random() * (max - min + 1)) + min
-                      
-                    // Get the i*th element (seat) from seat_windows
-                    seat = seat_windows[seat].seatno
-                  }
-                  else{
-                    // Retrieve seats with mac os && AVAILABLE
-                    const seat_mac = await sequelize.query("SELECT * FROM seat LEFT JOIN USING seatno report WHERE os = ? AND timeout IS NOT NULL" , {replacements: [mac],type: sequelize.QueryTypes.SELECT})
-                    // Randomize from AVAILABLE mac computers
-                    const max = seat_mac.length - 1
-                    const min = 0
-                    seat = Math.floor(Math.random() * (max - min + 1)) + min
-                      
-                    // Get the i*th element (seat) from seat_mac
-                    seat = seat_mac[seat].seatno
-                    
-                  }
-                  // Create report with random seatno
-                  const data = {
-                    rid: null,
-                    sno: stud.sno,
-                    freehours: stud.freehours,
-                    timein: timeIN,
-                    timeout: null,
-                    amountdue: null,
-                    seatNo: seat
-                  }                  
-                }
-                */
+                         /*
+                         if(seat != null){
+                              // Create Report (timein only)
+                              const data = {
+                                   rid: null,
+                                   sno: stud.sno,
+                                   freehours: stud.freehours,
+                                   timein: timeIN,
+                                   timeout: null,
+                                   amountdue: null,
+                                   seatNo: seat
+                              }
+                         }
+                         else{
+                              // Create Report (timein only)
+                              // Randomize if seat == null
+                              if(stud.preference.localeCompare(windows) == 0){
+                                   // Retrieve seats with windows os && AVAILABLE
+                                   const seat_windows = await sequelize.query("SELECT * FROM seat LEFT JOIN USING seatno report WHERE os = ? AND timeout IS NOT NULL" , {replacements: [windows],type: sequelize.QueryTypes.SELECT})
+                                   // Randomize from AVAILABLE windows computers
+                                   const max = seat_windows.length - 1
+                                   const min = 0
+                                   seat = Math.floor(Math.random() * (max - min + 1)) + min
+                                        
+                                   // Get the i*th element (seat) from seat_windows
+                                   seat = seat_windows[seat].seatno
+                              }
+                              else{
+                                   // Retrieve seats with mac os && AVAILABLE
+                                   const seat_mac = await sequelize.query("SELECT * FROM seat LEFT JOIN USING seatno report WHERE os = ? AND timeout IS NOT NULL" , {replacements: [mac],type: sequelize.QueryTypes.SELECT})
+                                   // Randomize from AVAILABLE mac computers
+                                   const max = seat_mac.length - 1
+                                   const min = 0
+                                   seat = Math.floor(Math.random() * (max - min + 1)) + min
+                                        
+                                   // Get the i*th element (seat) from seat_mac
+                                   seat = seat_mac[seat].seatno
+                                   
+                              }
+                              // Create report with random seatno
+                              const data = {
+                                   rid: null,
+                                   sno: stud.sno,
+                                   freehours: stud.freehours,
+                                   timein: timeIN,
+                                   timeout: null,
+                                   amountdue: null,
+                                   seatNo: seat
+                              }                  
+                         }
+                         */
 
-                // timeIN = null, then create method for confirm seat sa frontend (send rid). remove timeIN select sa taas
-                const full = await sequelize.query("SELECT * FROM seat WHERE seatno NOT IN (SELECT seatno FROM report WHERE timeout IS NULL)" , {type: sequelize.QueryTypes.SELECT})
+                         /* timeIN = null, then create method for confirm seat sa frontend (send rid). remove timeIN select sa taas */
+                         const full = await sequelize.query("SELECT * FROM seat WHERE seatno NOT IN (SELECT seatno FROM report WHERE timeout IS NULL)" , {type: sequelize.QueryTypes.SELECT})
 
-                const data = {
-                  rid: null,
-                  sno: stud.sno,
-                  freehours: stud.freehours,
-                  timein: null,
-                  timeout: null,
-                  amountdue: null,
-                  seatno: 0
-                }
-                  
-                if(full.length == 0){
-
-                  studReport = "full"
-
-                }else{
-                  await report.create(data) 
-                  // Update student session to 1
-                  await sequelize.query("UPDATE student SET session = 1 WHERE sno = ?" , { replacements: [search], type: sequelize.QueryTypes.UPDATE})
-
-                  studReport = (await sequelize.query("SELECT * FROM student A LEFT JOIN report B ON A.sno = ? WHERE rid = (SELECT max(rid) FROM report WHERE sno = ?)" , { replacements: [search,search], type: sequelize.QueryTypes.SELECT}))
-                  console.log(studReport)
-                  
-                  studReport = studReport[0]
-                  
-                }
-              // If session == 1, time out
-              } else{
-                
-                // Update student session, seatno, freehours
-                await sequelize.query("UPDATE student SET session = 0 WHERE sno = ?" , { replacements: [search], type: sequelize.QueryTypes.UPDATE})
-
-                // Retrieve Latest (Report!) of student
-                studReport = await sequelize.query("SELECT * FROM report WHERE rid = (SELECT max(rid) FROM report WHERE sno = ?)" , { replacements: [search], type: sequelize.QueryTypes.SELECT})
-                studReport = studReport[0]
-
-                // Student
-                studLog = await student.find({
-                  where: {
-                       sno: search
-                  }
-                })
-
-                
-               
-                // Update Report: timeout
-                await sequelize.query("UPDATE report SET timeout = NOW() WHERE rid = ?" , { replacements: [studReport.rid], type: sequelize.QueryTypes.UPDATE})
-
-                // Calculate timediff in hours
-                const resp = (await sequelize.query("SELECT TIMESTAMPDIFF(SECOND,timein,timeout) AS timediff FROM report WHERE rid = ?", {replacements: [studReport.rid], type: sequelize.QueryTypes.SELECT }))[0]
-                const timediff = resp.timediff
-                const freehours = studLog.freehours
-                var amountdue = timediff/60/60*20
-
-                // IF freehours greater than 0, cost 0
-                if(freehours[0] != '-'){
-                  amountdue = 0
-                }
-                
-                // Update timediff, amountdue, (seatno) for REPORT
-                await sequelize.query("UPDATE report SET amountdue = ? WHERE rid = ?" , { replacements: [amountdue,studReport.rid], type: sequelize.QueryTypes.UPDATE})
-
-                // Update timediff, (seatno) for STUDENT 
-                await sequelize.query("UPDATE student SET freehours = TIMEDIFF(?,SEC_TO_TIME(?)) WHERE sno = ?" , { replacements: [freehours,timediff,search], type: sequelize.QueryTypes.UPDATE})
+                         const data = {
+                              rid: null,
+                              sno: stud.sno,
+                              freehours: stud.freehours,
+                              timein: null,
+                              timeout: null,
+                              amountdue: null,
+                              seatno: 0
+                         }
                               
-                // Find Student
-                studReport = await sequelize.query("SELECT * FROM student A JOIN report B ON A.sno = ? WHERE rid = ?" , { replacements: [search,studReport.rid], type: sequelize.QueryTypes.SELECT})
-                studReport = studReport[0]
-              }
-            }
+                         if(full.length == 0){
 
-            const seats = await sequelize.query("SELECT * FROM seat WHERE seatno NOT IN (SELECT seatno FROM report WHERE timeout IS NULL)" , {type: sequelize.QueryTypes.SELECT})
-            studReport = [studReport, seats]
-            res.send(studReport)
+                              studReport = "full"
+
+                         }else{
+                              await report.create(data) 
+                              /* Update student session to 1 */
+                              await sequelize.query("UPDATE student SET session = 1 WHERE sno = ?" , { replacements: [search], type: sequelize.QueryTypes.UPDATE})
+
+                              studReport = (await sequelize.query("SELECT * FROM student A LEFT JOIN report B ON A.sno = ? WHERE rid = (SELECT max(rid) FROM report WHERE sno = ?)" , { replacements: [search,search], type: sequelize.QueryTypes.SELECT}))
+                              console.log(studReport)
+                              
+                              studReport = studReport[0]
+                              
+                         }
+                    /* If session == 1, time out */
+                    } else{
+                         
+                         /* Update student session, seatno, freehours */
+                         await sequelize.query("UPDATE student SET session = 0 WHERE sno = ?" , { replacements: [search], type: sequelize.QueryTypes.UPDATE})
+
+                         /* Retrieve Latest (Report!) of student */
+                         studReport = await sequelize.query("SELECT * FROM report WHERE rid = (SELECT max(rid) FROM report WHERE sno = ?)" , { replacements: [search], type: sequelize.QueryTypes.SELECT})
+                         studReport = studReport[0]
+
+                         /* Student */
+                         studLog = await student.find({
+                              where: {
+                                         sno: search
+                              }
+                         })
+
+                         
+                     
+                         /* Update Report: timeout */
+                         await sequelize.query("UPDATE report SET timeout = NOW() WHERE rid = ?" , { replacements: [studReport.rid], type: sequelize.QueryTypes.UPDATE})
+
+                         /* Calculate timediff in hours */
+                         const resp = (await sequelize.query("SELECT TIMESTAMPDIFF(SECOND,timein,timeout) AS timediff FROM report WHERE rid = ?", {replacements: [studReport.rid], type: sequelize.QueryTypes.SELECT }))[0]
+                         const timediff = resp.timediff
+                         const freehours = studLog.freehours
+                         var amountdue = timediff/60/60*20
+
+                         /* IF freehours greater than 0, cost 0 */
+                         if(freehours[0] != '-'){
+                              amountdue = 0
+                         }
+                         
+                         /* Update timediff, amountdue, (seatno) for REPORT */
+                         await sequelize.query("UPDATE report SET amountdue = ? WHERE rid = ?" , { replacements: [amountdue,studReport.rid], type: sequelize.QueryTypes.UPDATE})
+
+                         /* Update timediff, (seatno) for STUDENT */
+                         await sequelize.query("UPDATE student SET freehours = TIMEDIFF(?,SEC_TO_TIME(?)) WHERE sno = ?" , { replacements: [freehours,timediff,search], type: sequelize.QueryTypes.UPDATE})
+                                                            
+                         /* Find Student */
+                         studReport = await sequelize.query("SELECT * FROM student A JOIN report B ON A.sno = ? WHERE rid = ?" , { replacements: [search,studReport.rid], type: sequelize.QueryTypes.SELECT})
+                         studReport = studReport[0]
+                    }
+               }
+
+               const seats = await sequelize.query("SELECT * FROM seat WHERE seatno NOT IN (SELECT seatno FROM report WHERE timeout IS NULL)" , {type: sequelize.QueryTypes.SELECT})
+               studReport = [studReport, seats]
+               res.send(studReport)
           } catch (error){
-            res.send(error)
-            console.log(error)
+               res.send(error)
+               console.log(error)
           }
      }
 }
