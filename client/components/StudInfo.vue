@@ -72,7 +72,7 @@
                <tr>
                     <th>FREE HOURS</th>
                     <td>
-                         <p v-if="remHours != null || remHours.startsWith('-') || remHours == '00:00:00'">
+                         <p v-if="remHours == null || remHours.startsWith('-') || remHours == '00:00:00'">
                               No free hours remaining.
                          </p>
                          <p v-else>
