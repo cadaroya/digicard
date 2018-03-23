@@ -26,7 +26,9 @@
 
 
 *     Code history:
-*     07/03/2018: 	File Created               Daroya, Carlos Adrian A.
+*     07/03/2018: 	File Created                                       Daroya, Carlos Adrian A.
+*     18/03/2018: 	Check if there are no available seats              Daroya, Carlos Adrian A.
+*     22/03/2018: 	CheckFull function for homepage                    Daroya, Carlos Adrian A.
 *
 *
 *     Date created: 07 March 2018
