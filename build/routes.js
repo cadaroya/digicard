@@ -34,6 +34,7 @@
 *     16/02/2018:   TimeInOut POST route					Daroya, Carlos Adrian A.
 *     16/02/2018:   pickSeat route						  	Daroya, Carlos Adrian A.
 *     22/03/2018:   checkFull route						  	Daroya, Carlos Adrian A.
+*     08/04/2018:   filter route						  	Daroya, Carlos Adrian A.
 *   
 *
 *

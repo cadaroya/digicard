@@ -30,6 +30,7 @@
 *     20/02/2018:   Changed to .vue file              Cai, Jann Willem B. 
 *     07/03/2018:   Added basic styling               Ocampo, Pauline L.
 *     21/03/2018:   Added default table styles        Ocampo, Pauline L.
+*     08/04/2018:   CSS for Filter dropdown           Daroya, Carlos Adrian A.
 *
 *
 *

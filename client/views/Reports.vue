@@ -30,11 +30,13 @@
 *     08/02/2018: 	File was created                    Ocampo, Pauline
 *     08/02/2018: 	Initial layout                      Daroya, Carlos Adrian A.
 *     08/02/2018: 	Load reports from DB                Daroya, Carlos Adrian A.
-*     22/02/2018:   Added <hr> line 63                  Daroya, Carlos Adrian A.
+*     22/02/2018:   Added <hr>                 Daroya, Carlos Adrian A.
 *     19/03/2018:   Added basic styling                 Ocampo, Pauline L.
 *     21/03/2018:   Changed styling to use default      Ocampo, Pauline L.
 *     22/03/2018:   Added formatISOString()             Ocampo, Pauline L.
 *     23/03/2018:   Edited layout                       Ocampo, Pauline L.
+*     08/04/2018:   Added Filter dropdown & fxns        Daroya, Carlos Adrian A.
+*     09/04/2018:   Added datepicker                    Daroya, Carlos Adrian A.
 *
 * 
 *
@@ -47,7 +49,8 @@
 -->
 
 <template>
-     <div id='reports-wrapper'>       
+     <div id='reports-wrapper'>    
+         <datepicker format="dd MM yyyy"></datepicker>  
           <table class='records-table'>
                <thead>
                     <tr>
@@ -97,9 +100,11 @@
      import ReportService from '../services/ReportService'
      import AuthenticationService from '../services/AuthenticationService'
      import ChangeCredits from 'components/ChangeCredits.vue'
+     import Datepicker from 'vuejs-datepicker';
      export default {
           components: {
-               ChangeCredits
+               ChangeCredits,
+               Datepicker
           },
           data () {
                return {

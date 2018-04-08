@@ -29,6 +29,7 @@
 *     06/02/2018: 	File Created	                Cai, Jann Willem
 *     06/02/2018: 	Fixed index for GET             Daroya, Carlos Adrian A.
 *     08/02/2018: 	Added log (tbd)                 Daroya, Carlos Adrian A.
+*     08/04/2018: 	Filter GET request              Daroya, Carlos Adrian A.
 
 *
 *
