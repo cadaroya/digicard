@@ -78,5 +78,51 @@ module.exports = {
                error: 'An error has occurred trying to create report.'
                })
           }
-     }
+     },
+
+
+     async filter (req, res){
+        try {
+             const type = req.params.type
+             var date = req.params.date
+             var response = null
+             console.log("IM IN!")
+             console.log(type)
+             console.log(date)
+             date = "2018-03-22T10:20:30Z"
+             var real_date = new Date(date)
+             console.log(real_date)
+             console.log(real_date.getYear())
+             console.log(real_date.add(1, 'days'))
+
+             if(type.localeCompare("all") == 0){
+                response = await report.findAll()
+             }else if(type.localeCompare("recent") == 0){
+                response = await report.findAll({
+                    order: [
+                        ['timein', 'DESC']
+                    ]
+                })
+             }else{
+                response = await report.findAll({
+                    where: {timein: {[$gte]: real_date,
+                            $and: [
+                                {
+                                    timein: {[$lte]: (real_date).add(1, 'days')}
+                                }
+                            ]}},
+                    order: [
+                        ['timein', 'DESC']
+                    ]
+                })
+             }
+             res.send(response)
+             //const rep = report.create(req.body)
+             // res.send(rep)
+        } catch (err) {
+             res.status(400).send({
+             error: 'An error has occurred trying to create report.'
+             })
+        }
+   }
 }

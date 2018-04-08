@@ -85,4 +85,52 @@
      .records-table tr:nth-child(odd) {
           background-color:  #f3f8fe;
      }
+
+     /*Drop down stuff*/
+    .dropdown {
+        position: relative;
+        display: inline-block;
+        background-color: #3498DB;
+        
+    }
+
+    .dropdown:hover, .dropdown:focus {
+        background-color: #2980B9;
+    }
+
+    .dropdown__header {
+    cursor: pointer;
+    line-height: 50px;
+    padding-left: 10px;
+    padding-right: 50px;
+    position: relative;
+    text-overflow: ellipsis;
+    }
+
+    .dropdown__header.is-active + .dropdown__content {
+    height: auto;
+    opacity: 1;
+    visibility: visible;
+    background-color: rgb(113, 193, 247);
+    }
+    .dropdown__content {
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+    padding: 15px 10px;
+    transition: opacity 0.3s;
+    visibility: hidden;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    min-width: 160px;
+    background-color: #3498DB;
+    z-index: 1;
+    position: absolute;
+    text-align: left;
+
+    }
+
+    .ddowncontent:hover, .ddowncontent:focus{
+        background-color: #2980B9;
+        
+    }
 </style>

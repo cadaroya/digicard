@@ -71,6 +71,8 @@ module.exports = (app) => {
 
   	app.get('/reports', ReportController.index)
 
+	app.get('/filter/:type/:date', ReportController.filter)
+
 	//app.get('/reports', ReportController.log)
 	  
 	app.post('/timein', TimeInController.post)

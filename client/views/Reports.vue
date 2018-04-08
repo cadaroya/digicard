@@ -47,9 +47,30 @@
 -->
 
 <template>
-     <div id='reports-wrapper'>
+     <div id='reports-wrapper'>       
           <table class='records-table'>
                <thead>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th>
+                            <div class="dropdown">
+                                    <div class="dropdown__header" @click="toggleDropdown($event)">
+                                        <span>Filter by ...</span> 
+
+                                    </div>
+                                    
+                                    <div class="dropdown__content">
+                                        <div class="ddowncontent" @click="sortByAll"> All </div>
+                                        <div class="ddowncontent" @click="sortByRecent"> Most Recent </div>
+                                        <div class="ddowncontent" @click="sortByDate"> By date .. </div>
+ 
+                                    </div>
+                            </div>
+                        </th>
+                    </tr>
                     <tr>
                          <th>Report ID</th>
                          <th>Student Number</th>
@@ -76,14 +97,15 @@
      import ReportService from '../services/ReportService'
      import AuthenticationService from '../services/AuthenticationService'
      import ChangeCredits from 'components/ChangeCredits.vue'
-
      export default {
           components: {
                ChangeCredits
           },
           data () {
                return {
-                    reports: null
+                    reports: null,
+                    option: "all",
+
                }
           },
           methods: {
@@ -124,7 +146,36 @@
                     formatted += dateObj.getMinutes();
 
                     return formatted;
-              }
+              },
+              toggleDropdown (event) {
+                event.currentTarget.classList.toggle('is-active')
+              },
+
+              async sortByAll(){
+                  // Update Stuff
+                  console.log("hello")
+                  this.reports = (await ReportService.sortBy({
+                      option: "all",
+                      date: null
+                  })).data
+
+                  console.log(this.reports)
+              },
+              async sortByRecent(){
+                  // Update Stuff
+                  this.reports = (await ReportService.sortBy({
+                      option: "recent",
+                      date: null
+                  })).data
+              },
+              async sortByDate(){
+                  // Update Stuff
+                  var sdate = null
+                  this.reports = (await ReportService.sortBy({
+                      option: "date",
+                      date: sdate
+                  })).data
+              },
           },
           /* The moment it's mounted, you do a request for all the reports */
           async mounted () {
