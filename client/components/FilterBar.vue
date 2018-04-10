@@ -1,7 +1,24 @@
+<!--
+     10 Apr 2018 created file
+     10 Apr 2018 made filterbar
+-->
+
 <template>
      <div id='filterbar-wrapper'>
-          <datepicker format="dd MM yyyy"></datepicker>
-          HELLO
+          <span v-if="isOpen===false">
+               <span style="cursor:pointer" v-on:click="openBar()">&#9661; Filter</span>
+          </span>
+          <div id='filterbar'>
+               <span v-if="isOpen===true">
+                    <div class = "objects">
+                         Start date: <datepicker format="dd MMM yyyy" @selected=""></datepicker>
+                         <br>
+                         End date: <datepicker format="dd MMM yyyy"></datepicker>
+                         <button> Submit </button>
+                    </div>
+                    <span style="cursor:pointer" v-on:click="closeBar()">&#9651; Close</span>
+               </span>
+          </div>
      </div>
 </template>
 
@@ -12,13 +29,28 @@
      export default {
           data: function() {
                return {
-                    reports: null
+                    isOpen: false
                }
           },
           components: {
                Datepicker
           },
+          props : ['reports'],
           methods: {
+               async openBar() {
+                    document.getElementById("filterbar-wrapper").style.paddingBottom = "1%";
+                    document.getElementById("filterbar").style.height = "25%";
+                    this.isOpen = true;
+                    /*console.log(this.isOpen)*/
+               },
+               async closeBar() {
+                    document.getElementById("filterbar-wrapper").style.paddingBottom = "0";
+                    document.getElementById("filterbar").style.height = "0";
+                    this.isOpen = false;
+                    /*console.log(this.isOpen)*/
+               },
+
+               /* sorting stuff */
                async sortByAll(){
                     // Update Stuff
                     console.log("hello")
@@ -49,17 +81,22 @@
 
 <style scoped>
      #filterbar-wrapper {
+          z-index: 1;
+          padding-left: 10%;
+          padding-right: 10%;
+          
      }
-
-     #filterbar-wrapper button {
+     #filterbar {
+          height: 0;
+          width: 100%;
+          z-index: 1;
+          /*overflow-x: hidden;*/
+          transition: 1s;
      }
-
-     #filterbar-wrapper button:hover {
-     }
-
-     #filterbar-wrapper input {
-     }
-     
-     #filterbar-wrapper ::placeholder{
+     #filterbar .objects {
+          background-color: lightblue;
+          padding-top: 2%;
+          padding-bottom: 2%;
+          padding-left: 5%;
      }
 </style>
