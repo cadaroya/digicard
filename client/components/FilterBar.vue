@@ -1,6 +1,7 @@
 <!--
      10 Apr 2018 created file
      10 Apr 2018 made filterbar
+     10 Apr 2018 updated filterbar
 -->
 
 <template>
@@ -10,13 +11,55 @@
           </span>
           <div id='filterbar'>
                <span v-if="isOpen===true">
-                    <div class = "objects">
-                         Start date: <datepicker format="dd MMM yyyy" @selected=""></datepicker>
-                         <br>
-                         End date: <datepicker format="dd MMM yyyy"></datepicker>
-                         <button> Submit </button>
-                    </div>
                     <span style="cursor:pointer" v-on:click="closeBar()">&#9651; Close</span>
+                    <div class = "objects">
+                         <div class = "left">
+                              Sort by:<br>
+                              <input   
+                                   type="radio"
+                                   id="sortByAll"
+                                   value="sortByAll"
+                                   v-model="picked"
+                                   v-on:change="sortByAll()">
+                                   sortByAll
+                              </input><br>
+                              <input    
+                                   type="radio"
+                                   id="sortByRecent"
+                                   value="sortByRecent"
+                                   v-model="picked"
+                                   v-on:change="sortByRecent()">
+                                   sortByRecent
+                              </input><br>
+                              <input
+                                   type="radio"
+                                   id="sortByDate"
+                                   value="sortByDate"
+                                   v-model="picked"
+                                   v-on:change="sortByDate()">
+                                   sortByDate
+                              </input>
+                              <!--<br>
+                              <br><br>
+                              <button> Submit </button>-->
+                         </div>
+                         <div class = "right">
+                              Start date:
+                              <datepicker
+                                   :value="startdate"
+                                   format="dd MMM yyyy"
+                                   @selected="function1()">                                   
+                              </datepicker>
+                              <br>
+                              End date:
+                              <datepicker
+                                   :value="enddate"
+                                   format="dd MMM yyyy">
+                              </datepicker>
+                              <br>
+                              
+                         </div>
+                    </div>
                </span>
           </div>
      </div>
@@ -29,13 +72,16 @@
      export default {
           data: function() {
                return {
-                    isOpen: false
+                    reports: '',
+                    isOpen: false,
+                    picked: null,
+                    startdate: null,
+                    enddate: null
                }
           },
           components: {
                Datepicker
           },
-          props : ['reports'],
           methods: {
                async openBar() {
                     document.getElementById("filterbar-wrapper").style.paddingBottom = "1%";
@@ -49,7 +95,15 @@
                     this.isOpen = false;
                     /*console.log(this.isOpen)*/
                },
+               async function1() {
+                    console.log("HELLO STARTDATE")
+                    console.log(this.startdate)
+                    this.enddate = this.startdate
+               },
 
+               async function2() {
+                    await console.log(this.picked)
+               },
                /* sorting stuff */
                async sortByAll(){
                     // Update Stuff
@@ -59,6 +113,7 @@
                          date: null
                     })).data
                     console.log(this.reports)
+                    updateParent()
                },
                async sortByRecent(){
                     // Update Stuff
@@ -66,14 +121,22 @@
                          option: "recent",
                          date: null
                     })).data
+                    console.log(this.reports)
+                    updateParent()
                },
                async sortByDate(){
                     // Update Stuff
-                    var sdate = null
+                    var sdate = this.startdate
                     this.reports = (await ReportService.sortBy({
                          option: "date",
                          date: sdate
                     })).data
+                    console.log(this.reports)
+                    updateParent()
+               },
+               updateParent() {
+                    returnreport = this.reports
+                    this.$emit(returnreport);
                }
           }
      }
@@ -94,9 +157,20 @@
           transition: 1s;
      }
      #filterbar .objects {
+          min-height: 25vh;
           background-color: lightblue;
           padding-top: 2%;
           padding-bottom: 2%;
           padding-left: 5%;
+          padding-right: 5%;
      }
+     #filterbar .objects .left {
+          float: left;
+          width: 50%;
+     }
+     #filterbar .objects .right {
+          float: right;
+          width: 50%;
+     }
+
 </style>

@@ -50,7 +50,7 @@
 
 <template>
 	<div id='reports-wrapper'>    
-		<filter-bar :reports="reports"></filter-bar>
+		<filter-bar :reports.sync="reports"></filter-bar>
 		<table class='records-table'>
 			<thead>
 				<!--
@@ -154,7 +154,8 @@
 				formatted += dateObj.getMinutes();
 
 				return formatted;
-		   	},
+		   	}
+		   	/*
 			toggleDropdown (event) {
 				event.currentTarget.classList.toggle('is-active')
 		    	},
@@ -182,7 +183,7 @@
 					option: "date",
 					date: sdate
 			   	})).data
-		    	}
+		    	}*/
 		},
 		/* The moment it's mounted, you do a request for all the reports */
 		async mounted () {
