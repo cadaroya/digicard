@@ -29,7 +29,9 @@
 *     07/03/2018:   File was created                    Cai, Jann Willem
 *     18/03/2018:   Changed to make table from database Cai, Jann Willem
 *     19/03/2018:   Changed getSeatInfo() a bit         Cai, Jann Willem B.
-
+*     13/04/2018:   Edited stylesheet                   Ocampo, Pauline L.
+*
+*
 *     Date created: 07 March 2018
 *     Development Group: Cai, Daroya, Ocampo
 *
@@ -39,7 +41,7 @@
 <template>
      <div id="see-seats-wrapper">
           <div class = "computer-wrapper">
-               <p> Available Seats </p>
+               <h2> Available Seats </h2>
                <div v-for="seat in seatList" v-bind:key="seat.seatno">
                     <div v-if="seat.os == 'mac'">
                          <div class = "computer mac">
@@ -101,10 +103,16 @@ import SeatPickService from '../services/SeatPickService'
 </script>
 
 <style scoped>
+#see-seats-wrapper {
+     background-color: #FFFFFF;
+     border-radius: 6px;
+}
+
 #see-seats-wrapper .computer-wrapper {
+     border-radius: 6px;
      padding-top: 1em;
-     background-color: orange;
-     margin-top: 6em;
+     background-color: #FFFFFF;
+     margin-top: 0em;
      margin-left: 6em;
      margin-right: 6em;
      height: 29em;

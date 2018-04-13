@@ -31,6 +31,8 @@
 *     19/03/2018:   Changed getSeatInfo() a bit         Cai, Jann Willem B.
 *     20/03/2018:   Added styling                       Cai, Jann Willem B.
 *     21/03/2018:   Added indicator on seat picked      Cai, Jann Willem B.
+*     14/04/2018:   Edited stylesheet                   Ocampo, Pauline L.
+*
 *
 *     Date created: 07 March 2018
 *     Development Group: Cai, Daroya, Ocampo
@@ -42,6 +44,7 @@
 <template>
      <div id="seats-wrapper">
           <div class="computer-wrapper">
+          <p> Click on a seat below, then click confirm. </p>
                <div v-for="computer in seatList" v-bind:key="computer.seatno">
                     <div class = "seats-list">
                          <a v-on:click = "updateParent(computer.seatno)"
@@ -107,10 +110,13 @@ import SeatPickService from '../services/SeatPickService'
 </script>
 
 <style scoped>
-     
+     #seats-wrapper {
+       padding: 10px;
+     }
      #seats-wrapper .computer-wrapper {
+          border-radius: 6px;
           padding-top: 10px;
-          background-color: orange;
+          background-color: #FFFFFF;
           height: 26em;
      }
      #seats-wrapper .computer {

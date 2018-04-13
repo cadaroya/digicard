@@ -1,5 +1,4 @@
-<!--
-*     Digital Pink Card - All rights reserved
+<!--  Digital Pink Card - All rights reserved
 *     Copyright (C) 2018
 *     Written by:
 *     Cai, Jann Willem
@@ -25,44 +24,56 @@
 *     Science, College of Engineering, University
 *     of the Philippines, Diliman for the AY 2017-2018
 *
+*
 *     Code history:
-*     21/02/2018:   File was created                    Daroya, Carlos
-*     22/02/2018:   Edited style sheet                  Ocampo, Pauline
-*     13/04/2018:   Edited style sheet                  Ocampo, Pauline L.
+*     08/02/2018:   File Created                        Ocampo, Pauline
+*     13/04/2018:   Edited style sheet, renamed file    Ocampo, Pauline L.
 *
 *
-*     Date created: 21 February 2018
+*
+*     Date created: 13 April 2018
 *     Development Group: Cai, Daroya, Ocampo
 *
+*
 *     File purpose:
-*     The view showing students instructions on how to time in / time out
--->
+*     HTML view component for student view header
+*-->
 
 <template>
-     <div id="app">
-          <div id="app-header-wrapper">
-               <app-header></app-header>
-          </div>
-          <div id="router-view-wrapper">
-               <router-view/>
+     <div id="header-wrapper">
+          <img src="../images/engglib.png"/>
+          <div id="text-part">
+               <h1> Digital Pink Card System </h1>
           </div>
      </div>
 </template>
 
 <script>
 /* eslint-disable */
-     export default {
-          name: 'App'
-     }
 </script>
 
-<style>
-     #app {
-          background-color: orange;
-          text-align: center;
-          padding: 10px;
-          color: #121824;
-          font-family: Arial, Helvetica, sans-serif;
-          font-size: 17px;
+<style scoped>
+     #header-wrapper {
+          width: 100%;
+          height: 130px;
+          text-align: left;
+          padding: 0px;
+          margin: 0px;
+          overflow: hidden;
+     }
+
+     #header-wrapper #text-part {
+          align-items: center;
+          display: flex;
+          float: left;
+          height: 100%;
+     }
+
+     #header-wrapper img {
+          display: inline-block;
+          max-width: 100%;
+          max-height: 100%;
+          height: auto;
+          float: left;
      }
 </style>

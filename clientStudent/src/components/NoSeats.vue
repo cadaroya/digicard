@@ -26,43 +26,40 @@
 *     of the Philippines, Diliman for the AY 2017-2018
 *
 *     Code history:
-*     21/02/2018:   File was created                    Daroya, Carlos
-*     22/02/2018:   Edited style sheet                  Ocampo, Pauline
-*     13/04/2018:   Edited style sheet                  Ocampo, Pauline L.
+*     13/04/2018:   File was created                    Ocampo, Pauline L.
 *
 *
-*     Date created: 21 February 2018
+*
+*     Date created: 13 April 2018
 *     Development Group: Cai, Daroya, Ocampo
 *
 *     File purpose:
-*     The view showing students instructions on how to time in / time out
+*     Display "no seats" message
 -->
 
 <template>
-     <div id="app">
-          <div id="app-header-wrapper">
-               <app-header></app-header>
-          </div>
-          <div id="router-view-wrapper">
-               <router-view/>
-          </div>
+     <div id="no-seats-wrapper">
+          <h2>No more seats available. :(</h2>
      </div>
 </template>
 
 <script>
 /* eslint-disable */
-     export default {
-          name: 'App'
-     }
 </script>
 
-<style>
-     #app {
-          background-color: orange;
-          text-align: center;
-          padding: 10px;
-          color: #121824;
-          font-family: Arial, Helvetica, sans-serif;
-          font-size: 17px;
-     }
+<style scoped>
+#no-seats-wrapper {
+     background-color: #FFFFFF;
+     border-radius: 6px;
+}
+
+#no-seats-wrapper .computer-wrapper {
+     border-radius: 6px;
+     padding-top: 1em;
+     background-color: #FFFFFF;
+     margin-top: 0em;
+     margin-left: 6em;
+     margin-right: 6em;
+     height: 29em;
+}
 </style>

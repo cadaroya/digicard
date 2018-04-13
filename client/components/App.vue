@@ -31,6 +31,7 @@
 *     07/03/2018:   Added basic styling               Ocampo, Pauline L.
 *     21/03/2018:   Added default table styles        Ocampo, Pauline L.
 *     08/04/2018:   CSS for Filter dropdown           Daroya, Carlos Adrian A.
+*     13/04/2018:   Renamed nav bar component in code Ocampo, Pauline L.
 *
 *
 *
@@ -44,16 +45,16 @@
 
 <template>
      <div id="app" class="app-wrapper">
-          <app-navbar></app-navbar>
+          <nav-bar></nav-bar>
           <router-view></router-view>
      </div>
 </template>
 
 <script>
-     import NavBar from './NavBar.vue'
-          export default {
-               components: {
-                    'app-navbar': NavBar
+    import NavBar from './NavBar.vue'
+     export default {
+          components: {
+              NavBar
           }
      }
 </script>

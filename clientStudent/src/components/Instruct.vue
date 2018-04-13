@@ -32,6 +32,8 @@
 *     18/03/2018:   Added back-end response for available seats     Daroya, Carlos Adrian A.
 *     19/03/2018:   Added penguin.png                               Cai, Jann Willem
 *     23/03/2018:   Clear textbox on incorrect input                Cai, Jann Willem
+*     13/04/2018:   Edited style sheet                              Ocampo, Pauline L.
+*
 *
 *     Date created: 21 February 2018
 *     Development Group: Cai, Daroya, Ocampo
@@ -42,35 +44,33 @@
 
 <template>
      <div id ="instruct-wrapper">
-          <div class = "photo">
-               <img src="../images/engglib.png"/>
-          </div>
+          <app-header></app-header>
           <br><br>
-          <div class = "input">
-               <h1> Digital Pink Card System </h1>
-               <p> Scan your ID with the provided barcode scanner! </p>
-               <input type="text" @keyup.enter="goToScanned" name="studNo" ref="scanInput" v-model="studNo" placeholder="(Enter student number)"/>
-          </div>
-          <div class = "photo">
-               <img src="../images/penguin.png" height="150" width="150"/>
+          <div id = "input-section">
+               <p>To book a computer, scan your ID with the provided barcode scanner.</p>
+               <input type="text" @keyup.enter="goToScanned" name="studNo" ref="scanInput" v-model="studNo" placeholder="Scan your ID"/>
           </div>
           <br><br><br><br>
-          <span v-if="full == 0">
-               <see-seats></see-seats>
-          </span>
-          <span v-else>
-               <p> No seats, sorry! </p>
-          </span>
+          <div id="seats-section">
+               <span v-if="full == 0">
+                    <see-seats></see-seats>
+               </span>
+               <span v-else>
+                    <no-seats></no-seats>
+               </span>
+          </div>
           <br>
      </div>
 </template>
 
 <script>
 /* eslint-disable */
+import NoSeats from './NoSeats.vue'
 import SeeSeats from './SeeSeats.vue'
 import LogoPhoto from '../images/engglib.png'
 import PenguinPhoto from '../images/penguin.png'
 import SeatPickService from '../services/SeatPickService'
+import AppHeader from './AppHeader.vue'
 export default {
      name: 'Instruct',
      data () {
@@ -82,7 +82,7 @@ export default {
                currentstudents: null
           }
      },
-     components: { LogoPhoto, PenguinPhoto, SeeSeats },
+     components: { LogoPhoto, PenguinPhoto, SeeSeats, AppHeader, NoSeats },
      methods: {
           goToScanned () {
                /* Remove the dash, if any, in the scanned studNo before pushing */
@@ -131,20 +131,31 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+     #instruct-wrapper #input-section {
+          padding: 0px;
+          margin-bottom: 0px;
+          margin-left: auto;
+          margin-right: auto;
+          margin-top: 0px;
+          width: 50%
+     }
 
-#instruct-wrapper {
-     
-}
-#instruct-wrapper .photo {
-     min-height: 13em;
-     width: 33%;
-     float: left;
-}
-#instruct-wrapper .input {
-     min-height: 13em;
-     width: 33%;
-     float: left;
-}
+     #instruct-wrapper #input-section p {
+          text-align: center;
+     }
+
+     #instruct-wrapper #seats-section {
+          border-radius: 6px;
+          margin: 0 5%;
+     }
+
+     #instruct-wrapper #input-section input[type=text] {
+          border: none;
+          border-radius: 6px;
+          padding: 14px 20px;
+          width: 60%;
+          text-align: center;
+          font-size: 1.5em;
+     }
 </style>

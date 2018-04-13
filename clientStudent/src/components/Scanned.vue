@@ -32,6 +32,7 @@
 *     18/03/2018:   Added back-end response for available seats     Daroya, Carlos Adrian A.
 *     19/03/2018:   Sync to Seats.vue                               Cai, Jann Willem B.
 *     23/03/2018:   Disabled confirm button if no seat selected     Ocampo, Pauline L.
+*     13/04/2018:   Edited style sheet                              Ocampo, Pauline L.
 *
 *     Date created: 21 February 2018
 *     Development Group: Cai, Daroya, Ocampo
@@ -147,19 +148,31 @@ export default {
 </script>
 
 <style scoped>
-     #scanned-wrapper {
-          overflow: hidden;
-     }
      #scanned-wrapper > div {
           min-height: 400px;
           padding: 1%;
      }
      #scanned-wrapper-left {
           float: left;
-          width: 30%;
+          width: 40%;
      }
      #scanned-wrapper-right {
           float: right;
-          width: 70%;
+          width: 60%;
+     }
+     button {
+          background-color: green;
+          border: none;
+          border-radius: 6px;
+          color: white;
+          margin: 10px;
+          padding: 15px;
+          font-size: 1.2em;
+     }
+     button:hover {
+          background-color: lightgreen;
+     }
+     button:disabled {
+          background-color: grey;
      }
 </style>

@@ -29,6 +29,7 @@
 *     21/02/2018:   File was created                    Ocampo, Pauline
 *     23/03/2018:   Added if-else statement on freehrs  Cai, Jann Willem
 *     23/03/2018:   Added no free hrs remaining msg     Ocampo, Pauline L.
+*     13/04/2018:   Edited style sheet                  Ocampo, Pauline L.
 *
 *
 *     Date created: 21 February 2018
@@ -104,6 +105,7 @@
      }
      table, th, td {
           padding: 20px 10px;
+          background-color: #FEFEFE;
           border-collapse: collapse;
           border-style: solid;
           border-width: 1px;
@@ -111,6 +113,13 @@
           text-align: center;
           color: black;
      }
+     #stud-info-wrapper th {
+          text-align: left;
+     }
+     #stud-info-wrapper td {
+          text-align: right;
+     }
+
      p.active-marker {
           color: green;
      }
