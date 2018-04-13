@@ -126,7 +126,7 @@ import SeatPickService from '../services/SeatPickService'
           padding-top: 5px;
           position: relative;
           margin: 5px;
-          float:left;
+          float: left;
           width: 110px;
           height: 50px;
           border: 1px solid black;

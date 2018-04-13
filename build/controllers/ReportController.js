@@ -96,13 +96,27 @@ module.exports = {
              // Note that date will be changed soon
              // 8 Hours is added because of time differences
              // 
-             date = "22 03 2018"
-             date = moment(date, 'DD MM YYYY').add(8, 'hours')
+             console.log("\nlul\n")
+
+             var xdate = new Date(date)
+             // DD MM YYYY
+             var string = String(xdate.getDate())+ " " + String(xdate.getMonth()+1)+ " " + String(xdate.getFullYear())
+             console.log(string)
+
+
+             
+             date = moment(string, 'DD MM YYYY').add(8, 'hours')
              fdate = moment(date).add(1, 'days')
+
+             console.log(date)
+             console.log(fdate)
 
              // Format is changed
              date.format("YYYY-MM-DD HH:mm:ss")
              fdate.format("YYYY-MM-DD HH:mm:ss")
+
+             console.log(date)
+             console.log(fdate)
 
              if(type.localeCompare("all") == 0){
                 response = await report.findAll()
@@ -127,6 +141,8 @@ module.exports = {
                     ]
                 })
              }
+
+             
              res.send(response)
 
         } catch (err) {

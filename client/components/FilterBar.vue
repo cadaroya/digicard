@@ -21,7 +21,7 @@
                                    value="sortByAll"
                                    v-model="picked"
                                    v-on:change="sortByAll()">
-                                   sortByAll
+                                   All
                               </input><br>
                               <input    
                                    type="radio"
@@ -29,7 +29,7 @@
                                    value="sortByRecent"
                                    v-model="picked"
                                    v-on:change="sortByRecent()">
-                                   sortByRecent
+                                   Recent
                               </input><br>
                               <input
                                    type="radio"
@@ -37,27 +37,30 @@
                                    value="sortByDate"
                                    v-model="picked"
                                    v-on:change="sortByDate()">
-                                   sortByDate
+                                   On Date ...
                               </input>
                               <!--<br>
                               <br><br>
                               <button> Submit </button>-->
                          </div>
                          <div class = "right">
+                             <span v-if="picked==='sortByDate'">
                               Start date:
                               <datepicker
-                                   :value="startdate"
                                    format="dd MMM yyyy"
-                                   @selected="function1()">                                   
+                                   v-model="startdate"
+                                   @input="function1()">                                   
                               </datepicker>
+                              <!--
                               <br>
                               End date:
                               <datepicker
-                                   :value="enddate"
+                                   v-model ="enddate"
                                    format="dd MMM yyyy">
                               </datepicker>
                               <br>
-                              
+                              -->
+                             </span>
                          </div>
                     </div>
                </span>
@@ -99,10 +102,15 @@
                     console.log("HELLO STARTDATE")
                     console.log(this.startdate)
                     this.enddate = this.startdate
+                    this.sortByDate()
                },
 
                async function2() {
                     await console.log(this.picked)
+               },
+               updateParent() {
+                    var returnreport = this.reports
+                    this.$emit('update:reports', returnreport);
                },
                /* sorting stuff */
                async sortByAll(){
@@ -113,7 +121,7 @@
                          date: null
                     })).data
                     console.log(this.reports)
-                    updateParent()
+                    this.updateParent()
                },
                async sortByRecent(){
                     // Update Stuff
@@ -122,22 +130,21 @@
                          date: null
                     })).data
                     console.log(this.reports)
-                    updateParent()
+                    this.updateParent()
                },
                async sortByDate(){
                     // Update Stuff
-                    var sdate = this.startdate
+                    var currdate = this.startdate
+                    console.log("ETO \n")
+                    console.log(currdate)
+                    
                     this.reports = (await ReportService.sortBy({
                          option: "date",
-                         date: sdate
+                         date: currdate
                     })).data
-                    console.log(this.reports)
-                    updateParent()
-               },
-               updateParent() {
-                    returnreport = this.reports
-                    this.$emit(returnreport);
+                    this.updateParent()
                }
+               
           }
      }
 </script>

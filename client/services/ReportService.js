@@ -58,6 +58,7 @@ export default {
      sortBy (search) {
         const date = search.date
         const type = search.option
+        console.log("LAST!")
         console.log(date,type)
         return Api().get(`filter/${type}/${date}`, {
             params: {
