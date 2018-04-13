@@ -32,7 +32,7 @@
 *     18/03/2018:   Added back-end response for available seats     Daroya, Carlos Adrian A.
 *     19/03/2018:   Sync to Seats.vue                               Cai, Jann Willem B.
 *     23/03/2018:   Disabled confirm button if no seat selected     Ocampo, Pauline L.
-*     13/04/2018:   Edited style sheet                              Ocampo, Pauline L.
+*     13/04/2018:   Edited style sheet, added auto-time-out         Ocampo, Pauline L.
 *
 *     Date created: 21 February 2018
 *     Development Group: Cai, Daroya, Ocampo
@@ -45,10 +45,10 @@
           <span v-if="studReturned">
                <span v-if="studReturned.session === 1">
                     <h1> Time In </h1>
-                    <div id="scanned-wrapper-left">
+                    <div class="scanned-wrapper-left">
                          <stud-info :studObj="studReturned"></stud-info>
                     </div>
-                    <div id="scanned-wrapper-right">
+                    <div class="scanned-wrapper-right">
                          <span v-if="noSeatsAvailable">
                               <p> No Seats Available :( </p>
                          </span>
@@ -60,14 +60,17 @@
                </span>
                <span v-else-if="studReturned.session === 0">
                     <h1> Time Out </h1>
-                    <stud-info :studObj="studReturned"></stud-info>
-                    <h1> Cost: </h1>
-                    <p>₱{{this.studReturned.amountdue}}.00</p>
-                    <li><router-link to='/'>(back to instruct screen)</router-link></li>
+                    <div class="scanned-wrapper-left">
+                         <stud-info :studObj="studReturned"></stud-info>
+                    </div>
+                    <div class="scanned-wrapper-right">
+                         <h1> Cost: </h1>
+                         <p>₱{{this.studReturned.amountdue}}.00</p>
+                    </div>
                </span>
           </span>
           <span v-else>
-               <h1> Successfully Scanned ID </h1>
+               <h1> Scanned Unidentified ID </h1>
                <p>Student not found.</p>
                <li><router-link to='/'>(back to instruct screen)</router-link></li>
           </span>
@@ -135,11 +138,22 @@ export default {
                     })
                     this.$router.push('/')
                }
+          },
+          backToHome() {
+               this.$router.push('/');
           }
      },
      async mounted () {
           try {
-               this.timein()
+               await this.timein()
+
+               if (this.studReturned != null) {
+                    if (this.studReturned.session == 0) {
+                         /* Time out; */
+                         /* Go back to home page after 8 seconds */
+                         setTimeout(this.backToHome, (8 * 1000));
+                    }
+               }
           } catch (error) {
                console.error(error)
           }
@@ -152,11 +166,11 @@ export default {
           min-height: 400px;
           padding: 1%;
      }
-     #scanned-wrapper-left {
+     .scanned-wrapper-left {
           float: left;
           width: 40%;
      }
-     #scanned-wrapper-right {
+     .scanned-wrapper-right {
           float: right;
           width: 60%;
      }
