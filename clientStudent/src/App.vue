@@ -40,9 +40,6 @@
 
 <template>
      <div id="app">
-          <div id="app-header-wrapper">
-               <app-header></app-header>
-          </div>
           <div id="router-view-wrapper">
                <router-view/>
           </div>
