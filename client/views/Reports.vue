@@ -50,7 +50,8 @@
 
 <template>
 	<div id='reports-wrapper'>    
-		<filter-bar :reports.sync="reports"></filter-bar>
+		<filter-bar :reports.sync="reports" :amountdue.sync="amountdue"></filter-bar>
+		TOTAL: ₱{{amountdue}}.00
 		<table class='records-table'>
 			<thead>
 				<!--
@@ -113,7 +114,7 @@
 			return {
 				reports: null,
 				option: "all",
-
+				amountdue: 0
 			}
 		},
 		methods: {
@@ -188,7 +189,8 @@
 		/* The moment it's mounted, you do a request for all the reports */
 		async mounted () {
 			try{
-				this.reports = (await ReportService.index()).data
+				this.reports = (await ReportService.index()).data;
+				
 			} catch (error) {
 				console.error(error)
 			}

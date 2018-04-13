@@ -79,7 +79,8 @@
                     isOpen: false,
                     picked: null,
                     startdate: null,
-                    enddate: null
+                    enddate: null,
+                    amountdue: 0
                }
           },
           components: {
@@ -109,8 +110,15 @@
                     await console.log(this.picked)
                },
                updateParent() {
-                    var returnreport = this.reports
+                    var returnreport = this.reports;
+                    var i = 0;
+                    console.log(this.amountdue)
+				    for (i = 0; i < this.reports.length; i++) {
+                        this.amountdue += (this.reports)[i].amountdue;
+				    }
                     this.$emit('update:reports', returnreport);
+                    this.$emit('update:amountdue', this.amountdue)
+                    this.amountdue = 0
                },
                /* sorting stuff */
                async sortByAll(){
