@@ -32,6 +32,7 @@
 *     20/03/2018:   Added styling                       Cai, Jann Willem B.
 *     21/03/2018:   Added indicator on seat picked      Cai, Jann Willem B.
 *     14/04/2018:   Edited stylesheet                   Ocampo, Pauline L.
+*     22/04/2018:   Added scroll overflow               Ocampo, Pauline L.
 *
 *
 *     Date created: 07 March 2018
@@ -117,7 +118,7 @@ import SeatPickService from '../services/SeatPickService'
           border-radius: 6px;
           padding-top: 10px;
           background-color: #FFFFFF;
-          height: 26em;
+          /* height: 26em; */
      }
      #seats-wrapper .computer {
           font-size: 20px;

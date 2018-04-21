@@ -30,6 +30,7 @@
 *     18/03/2018:   Changed to make table from database Cai, Jann Willem
 *     19/03/2018:   Changed getSeatInfo() a bit         Cai, Jann Willem B.
 *     13/04/2018:   Edited stylesheet                   Ocampo, Pauline L.
+*     22/04/2018:   Added scroll overflow               Ocampo, Pauline L.
 *
 *
 *     Date created: 07 March 2018
@@ -115,7 +116,8 @@ import SeatPickService from '../services/SeatPickService'
      margin-top: 0em;
      margin-left: 6em;
      margin-right: 6em;
-     height: 50em;
+     height: 40em;
+     overflow: scroll;
 }
 
 #see-seats-wrapper .computer {

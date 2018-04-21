@@ -33,6 +33,7 @@
 *     19/03/2018:   Sync to Seats.vue                               Cai, Jann Willem B.
 *     23/03/2018:   Disabled confirm button if no seat selected     Ocampo, Pauline L.
 *     13/04/2018:   Edited style sheet, added auto-time-out         Ocampo, Pauline L.
+*     22/04/2018:   Added scroll overflow                           Ocampo, Pauline L.
 *
 *     Date created: 21 February 2018
 *     Development Group: Cai, Daroya, Ocampo
@@ -53,8 +54,12 @@
                               <p> No Seats Available :( </p>
                          </span>
                          <span v-else>
-                              <seats :seat.sync="seat"></seats>
-                              <button @click="confirmSeat" :disabled="seat == ''">Confirm Seat</button>
+                              <div class="main-section">
+                                   <seats :seat.sync="seat"></seats>
+                              </div>
+                              <div class="button-section">
+                                   <button @click="confirmSeat" :disabled="seat == ''">Confirm Seat</button>
+                              </div>
                          </span>
                     </div>
                </span>
@@ -64,8 +69,10 @@
                          <stud-info :studObj="studReturned"></stud-info>
                     </div>
                     <div class="scanned-wrapper-right">
-                         <h1> Cost: </h1>
-                         <p>₱{{this.studReturned.amountdue}}.00</p>
+                         <div class="main-section">
+                              <h1> Cost: </h1>
+                              <p>₱{{this.studReturned.amountdue}}.00</p>
+                         </div>
                     </div>
                </span>
           </span>
@@ -174,6 +181,14 @@ export default {
           float: right;
           width: 60%;
      }
+     .scanned-wrapper-right .main-section {
+          border-radius: 6px;
+          padding-top: 10px;
+          background-color: #FFFFFF;
+          height: 26em;
+          overflow: scroll;
+     }
+
      button {
           background-color: green;
           border: none;
