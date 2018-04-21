@@ -82,6 +82,9 @@ module.exports = (app) => {
 
 	app.post('/checkFull', SeatController.checkFull)
 
-  	app.post('/reports', ReportController.post)
+	app.post('/reports', ReportController.post)
+
+	app.post('/createStudent', StudentController.create)
+	
 }
 //

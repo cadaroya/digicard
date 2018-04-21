@@ -58,6 +58,9 @@ export default {
      },
      post (student) {
           return Api().post('student', student)
+     },
+     create(student){
+         return Api().post('createStudent', student)
      }
 }
 
