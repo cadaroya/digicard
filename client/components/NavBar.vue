@@ -44,8 +44,9 @@
 <template>
      <div id="navbar-wrapper">
           <ul class="navbar-list">
-               <li><router-link to='/home'>Home</router-link></li>
+               <li><router-link to='/home'> Home </router-link></li>
                <li><router-link to="/reports"> Reports </router-link></li>
+               <li><router-link to="/addstudent"> Add Student </router-link></li>
                <li><router-link to='/'>"Log Out"</router-link></li>
           </ul>
      </div>

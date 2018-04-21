@@ -109,7 +109,7 @@
                async function2() {
                     await console.log(this.picked)
                },
-               updateParent() {
+               async updateParent() {
                     var returnreport = this.reports;
                     var i = 0;
                     console.log(this.amountdue)
@@ -151,8 +151,14 @@
                          date: currdate
                     })).data
                     this.updateParent()
+               }    
+          },
+          async mounted(){
+               try{
+                    this.updateParent()
+               } catch (error) {
+                    console.error(error)
                }
-               
           }
      }
 </script>

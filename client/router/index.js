@@ -50,6 +50,7 @@ import Register from '../views/Register'
 import Reports from '../views/Reports'
 import SignUp from '../views/SignUp'
 import Student from '../views/Student'
+import AddStudent from '../views/AddStudent'
 Vue.use(Router)
 
 export default new Router({
@@ -60,6 +61,7 @@ export default new Router({
           { path: '/register', component: Register },
           { path: '/reports', component: Reports },
           { path: '/signup', component: SignUp },
-          { path: '/student/:studNo', component: Student}
+          { path: '/student/:studNo', component: Student},
+          { path: '/addstudent', component: AddStudent}
      ]
 })

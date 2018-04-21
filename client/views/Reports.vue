@@ -156,35 +156,6 @@
 
 				return formatted;
 		   	}
-		   	/*
-			toggleDropdown (event) {
-				event.currentTarget.classList.toggle('is-active')
-		    	},
-
-		    	async sortByAll(){
-			   	// Update Stuff
-			   	console.log("hello")
-			   	this.reports = (await ReportService.sortBy({
-					option: "all",
-				  	date: null
-			   	})).data
-			   	console.log(this.reports)
-		    	},
-		    	async sortByRecent(){
-			  	// Update Stuff
-			  	this.reports = (await ReportService.sortBy({
-					option: "recent",
-				 	date: null
-			   	})).data
-		   	},
-		    	async sortByDate(){
-			   	// Update Stuff
-			  	var sdate = null
-			  	this.reports = (await ReportService.sortBy({
-					option: "date",
-					date: sdate
-			   	})).data
-		    	}*/
 		},
 		/* The moment it's mounted, you do a request for all the reports */
 		async mounted () {
