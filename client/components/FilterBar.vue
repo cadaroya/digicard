@@ -109,13 +109,12 @@
                async function2() {
                     await console.log(this.picked)
                },
-               async updateParent() {
+               updateParent() {
                     var returnreport = this.reports;
                     var i = 0;
-                    console.log(this.amountdue)
-				    for (i = 0; i < this.reports.length; i++) {
-                        this.amountdue += (this.reports)[i].amountdue;
-				    }
+				for (i = 0; i < returnreport.length; i++) {
+                         this.amountdue += (returnreport)[i].amountdue;
+				}
                     this.$emit('update:reports', returnreport);
                     this.$emit('update:amountdue', this.amountdue)
                     this.amountdue = 0
@@ -155,6 +154,7 @@
           },
           async mounted(){
                try{
+                    this.reports = (await ReportService.index()).data;
                     this.updateParent()
                } catch (error) {
                     console.error(error)

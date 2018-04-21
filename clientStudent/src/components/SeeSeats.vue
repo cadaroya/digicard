@@ -115,7 +115,7 @@ import SeatPickService from '../services/SeatPickService'
      margin-top: 0em;
      margin-left: 6em;
      margin-right: 6em;
-     height: 29em;
+     height: 50em;
 }
 
 #see-seats-wrapper .computer {
