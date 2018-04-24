@@ -79,8 +79,9 @@ module.exports = {
 
      async create (req, res) {
         try {
-            const lib = await student.create(req.body)
-            res.send(lib.toJSON())
+            console.log(req.body)
+            const stud = await student.create(req.body)
+            res.send(stud.toJSON())
        } catch (err){
             res.status(400).send({
                  error: 'Error occurred while creating the student.'

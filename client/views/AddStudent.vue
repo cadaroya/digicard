@@ -18,8 +18,8 @@
 			</select>
 			<br><br>
 		Preferred OS:<br>
-			<input type="radio" value="Windows" v-model="preferred_os"> Windows <br>
-			<input type="radio" value="Mac" v-model="preferred_os"> Mac <br><br>
+			<input type="radio" value="windows" v-model="preferred_os"> Windows <br>
+			<input type="radio" value="mac" v-model="preferred_os"> Mac <br><br>
 		<button v-on:click="addStudent"> Add Student </button>
 		<!--
 			{{sno}}
@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import StudentService from '../services/StudentService'
 	export default {
 		data () {
 			return {
@@ -61,7 +62,23 @@
 		},
 		methods: {
 			async addStudent(){
-				console.log("backend na ata toh hahaha")
+				const response = (await StudentService.create({
+					sno: this.sno,
+					last_name: this.last_name,
+					first_name: this.first_name,
+					middle_name: this.middle_name,
+					course: this.course,
+					college: this.college,
+					freehours: '20:00:00.00',
+					validated: 1,
+					session: 0,
+					credits: null,
+					preferred: this.preferred_os
+	
+				})).data
+
+				console.log(response)
+				
 			} 
 		}
 	}
