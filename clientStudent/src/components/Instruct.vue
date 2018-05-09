@@ -85,8 +85,9 @@ export default {
      components: { LogoPhoto, PenguinPhoto, SeeSeats, AppHeader, NoSeats },
      methods: {
           goToScanned () {
-               /* Remove the dash, if any, in the scanned studNo before pushing */
-               this.studNo = this.studNo.replace('-', '');
+               /* Remove all non-numeric characters (the dash and asterisks)
+               if any, in the scanned studNo before pushing */
+               this.studNo = this.studNo.replace(/\D/g, '');
                /* if the seats are full */
                if (this.full == 1) {
                     /* Check if student number is logged in */
